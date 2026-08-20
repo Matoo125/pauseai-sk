@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PauseAI Slovensko — Zastavme preteky v superinteligencii</title>
+<meta name="description" content="Občianska iniciatíva za dočasné pozastavenie vývoja najnebezpečnejších AI systémov. Pridaj sa, podpíš výzvu, over si riziká umelej inteligencie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE0;
+    --paper-raised:#F7F5EC;
+    --ink:#17160F;
+    --muted:#6B6656;
+    --siren:#D0271F;
+    --siren-dark:#A31E17;
+    --amber:#EFA100;
+    --navy:#17263A;
+    --navy-light:#24405A;
+    --line: rgba(23,22,15,0.14);
+    --max-w: 1120px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin:0;
+    color:var(--ink);
+  }
+  p{ margin:0; }
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+  button{ font-family:inherit; cursor:pointer; }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--siren-dark);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--siren);
+    border-radius:50%;
+    flex:none;
+    animation: blink 2.2s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow::before{ animation:none; }
+  }
+  @keyframes blink{
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.25; }
+  }
+
+  /* hazard stripe divider — structural signature: warning tape between sections */
+  .stripe{
+    height:10px;
+    width:100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--navy),
+      var(--navy) 16px,
+      var(--amber) 16px,
+      var(--amber) 32px
+    );
+  }
+
+  /* ===== HEADER ===== */
+  header{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:15px;
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .logo .mark{
+    width:14px; height:14px;
+    background:var(--siren);
+    border-radius:50%;
+    flex:none;
+  }
+  .logo b{ font-weight:600; }
+  .header-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    font-weight:500;
+    text-decoration:none;
+    padding:9px 16px;
+    border:1.5px solid var(--ink);
+    background:transparent;
+    white-space:nowrap;
+  }
+  .header-cta:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ===== HERO ===== */
+  .hero{
+    padding:72px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 68px);
+    line-height:0.98;
+    margin-top:18px;
+  }
+  .hero h1 .hl{ color:var(--siren); }
+  .hero-sub{
+    margin-top:22px;
+    max-width:52ch;
+    font-size:18px;
+    color:#3a3729;
+  }
+  .hero-ctas{
+    margin-top:32px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:0.02em;
+    text-decoration:none;
+    padding:14px 22px;
+    display:inline-block;
+    border:1.5px solid var(--ink);
+    transition: transform .15s ease;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .btn-primary{
+    background:var(--siren);
+    border-color:var(--siren);
+    color:#fff;
+  }
+  .btn-primary:hover{ background:var(--siren-dark); border-color:var(--siren-dark); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  .hero-note{
+    margin-top:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  /* siren pulse — signature visual element */
+  .siren-wrap{
+    position:relative;
+    aspect-ratio:1/1;
+    max-width:360px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .ring{
+    position:absolute;
+    border:2px solid var(--siren);
+    border-radius:50%;
+    opacity:0;
+    animation: pulse 3.6s ease-out infinite;
+  }
+  .ring:nth-child(2){ animation-delay:1.2s; }
+  .ring:nth-child(3){ animation-delay:2.4s; }
+  @keyframes pulse{
+    0%{ width:60px; height:60px; opacity:0.9; }
+    80%{ opacity:0; }
+    100%{ width:340px; height:340px; opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ring{ animation:none; opacity:0.35; width:200px; height:200px; }
+  }
+  .siren-core{
+    position:relative;
+    width:96px; height:96px;
+    background:var(--navy);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+    box-shadow: 0 8px 24px rgba(23,38,58,0.35);
+  }
+  .siren-core svg{ width:34px; height:34px; }
+
+  /* ===== MISSION BAND ===== */
+  .mission{
+    background:var(--navy);
+    color:#EFEEE6;
+    padding:56px 0;
+  }
+  .mission .eyebrow{ color:var(--amber); }
+  .mission .eyebrow::before{ background:var(--amber); }
+  .mission-inner{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .mission h2{
+    color:#fff;
+    font-size:clamp(26px, 3.4vw, 36px);
+    margin-top:14px;
+    line-height:1.08;
+  }
+  .mission p{
+    font-size:16.5px;
+    color:#C9CDD4;
+    margin-top:8px;
+  }
+  .mission p + p{ margin-top:14px; }
+
+  /* ===== STEPS ===== */
+  .steps{ padding:72px 0; }
+  .section-head{ max-width:60ch; margin-bottom:40px; }
+  .section-head h2{
+    font-size:clamp(26px, 3.4vw, 34px);
+    margin-top:14px;
+  }
+  .steps-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .step{
+    background:var(--paper-raised);
+    padding:28px 24px 30px;
+  }
+  .step-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--siren);
+    font-weight:500;
+    letter-spacing:0.06em;
+  }
+  .step h3{
+    font-size:19px;
+    margin-top:14px;
+    line-height:1.15;
+  }
+  .step p{
+    margin-top:10px;
+    font-size:14.5px;
+    color:var(--muted);
+  }
+
+  /* ===== WHY NOW ===== */
+  .why{ padding:0 0 76px; }
+  .why-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:28px;
+    margin-top:8px;
+  }
+  .why-item{ padding-top:16px; border-top:2px solid var(--ink); }
+  .why-item h3{
+    font-size:15.5px;
+    letter-spacing:0.01em;
+  }
+  .why-item p{
+    margin-top:8px;
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  /* ===== SIGNUP ===== */
+  .signup{
+    background:var(--ink);
+    color:var(--paper);
+    padding:72px 0;
+  }
+  .signup .eyebrow{ color:var(--amber); }
+  .signup .eyebrow::before{ background:var(--amber); }
+  .signup-inner{
+    max-width:640px;
+  }
+  .signup h2{
+    color:#fff;
+    font-size:clamp(28px, 4vw, 42px);
+    margin-top:14px;
+    line-height:1.05;
+  }
+  .signup p{
+    margin-top:16px;
+    color:#C7C4B6;
+    font-size:16px;
+    max-width:52ch;
+  }
+  .signup-form{
+    margin-top:32px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .signup-form input[type=email]{
+    flex:1 1 260px;
+    padding:14px 16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    background:#26251C;
+    border:1.5px solid #47453A;
+    color:#fff;
+  }
+  .signup-form input[type=email]::placeholder{ color:#8B8878; }
+  .signup-form input[type=email]:focus{
+    outline:none;
+    border-color:var(--siren);
+  }
+  .signup-form .btn-primary{ flex:none; }
+  .signup-status{
+    margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--amber);
+    min-height:18px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--navy);
+    color:#9BA6B3;
+    padding:40px 0;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+    align-items:center;
+  }
+  .footer-inner .logo{ color:#EFEEE6; }
+  .footer-links{
+    display:flex;
+    gap:22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    flex-wrap:wrap;
+  }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:#fff; }
+  .footer-fine{
+    margin-top:22px;
+    font-size:12.5px;
+    color:#6E7C8C;
+    max-width:70ch;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 860px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .hero{ padding-top:44px; }
+    .siren-wrap{ order:-1; max-width:220px; }
+    .mission-inner{ grid-template-columns:1fr; }
+    .steps-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr 1fr; }
+    .footer-inner{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (max-width: 480px){
+    .why-grid{ grid-template-columns:1fr; }
+    .header-cta{ padding:8px 12px; font-size:12px; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--siren);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap header-inner">
+      <div class="logo"><span class="mark"></span>PAUSE<b>AI</b>&nbsp;SK</div>
+      <a class="header-cta" href="#pridaj-sa">Pridaj sa</a>
+    </div>
+  </header>
+
+  <div class="stripe"></div>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Občianska výstraha — AI riziká</span>
+        <h1>Zastavme<br>preteky v<br><span class="hl">superinteligencii.</span></h1>
+        <p class="hero-sub">PauseAI Slovensko presadzuje dočasné pozastavenie vývoja najsilnejších AI systémov — kým nebudeme vedieť, že ich vieme postaviť bezpečne a pod demokratickou kontrolou.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#pridaj-sa">Podpíš výzvu</a>
+          <a class="btn btn-ghost" href="#kroky">Prečo je to potrebné</a>
+        </div>
+        <p class="hero-note">Súčasť medzinárodného hnutia PauseAI, založeného 2023 v Holandsku.</p>
+      </div>
+      <div class="siren-wrap" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="siren-core">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="5" width="4" height="14" rx="1" fill="#EFA100"/>
+            <rect x="14" y="5" width="4" height="14" rx="1" fill="#EFA100"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <section class="mission">
+    <div class="wrap mission-inner">
+      <div>
+        <span class="eyebrow">Poslanie</span>
+        <h2>Nejde o strach z technológií.<br>Ide o zodpovednosť.</h2>
+      </div>
+      <div>
+        <p>Spoločnosti, ktoré stoja za najpokročilejšími AI systémami, samy priznávajú, že nevedia zaručiť ich bezpečnosť — a napriek tomu pokračujú v pretekoch o čoraz výkonnejšie modely.</p>
+        <p>Žiadame, aby sa o najnebezpečnejších AI systémoch rozhodovalo verejne a zodpovedne, s dostatkom času na rozmyslenie — nie v tichu firemných laboratórií pod tlakom konkurencie.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="kroky">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Tri konkrétne kroky</span>
+        <h2>Čo presne žiadame</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">STUPEŇ 01</span>
+          <h3>Medzinárodná agentúra pre bezpečnosť AI</h3>
+          <p>Podobná Medzinárodnej agentúre pre atómovú energiu — dohliadajúca na vývoj najsilnejších systémov naprieč krajinami.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">STUPEŇ 02</span>
+          <h3>Trénovanie len s garantovanou bezpečnosťou</h3>
+          <p>Najvýkonnejšie modely by sa mali trénovať iba vtedy, ak je ich bezpečnosť vopred overiteľná.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">STUPEŇ 03</span>
+          <h3>Nasadenie len po overení</h3>
+          <p>Modely by sa mali dostať k verejnosti až po dôkladnom overení, že nepredstavujú nebezpečné schopnosti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:28px;">
+        <span class="eyebrow">Prečo teraz</span>
+        <h2>Riziká, ktoré nás spájajú</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Existenčné riziko</h3>
+          <p>Poprední výskumníci varujú, že strata kontroly nad pokročilou AI patrí medzi civilizačné riziká.</p>
+        </div>
+        <div class="why-item">
+          <h3>Strata práce</h3>
+          <p>Automatizácia môže rýchlo zasiahnuť milióny pozícií bez toho, aby bola spoločnosť pripravená.</p>
+        </div>
+        <div class="why-item">
+          <h3>Ohrozenie demokracie</h3>
+          <p>Dezinformácie a masová manipulácia môžu podkopať dôveru vo verejnú diskusiu a voľby.</p>
+        </div>
+        <div class="why-item">
+          <h3>Koncentrácia moci</h3>
+          <p>Ak zostane vývoj v rukách hŕstky firiem, o budúcnosti sa rozhoduje bez verejnej kontroly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup" id="pridaj-sa">
+    <div class="wrap signup-inner">
+      <span class="eyebrow">Pridaj sa</span>
+      <h2>Nemusíš byť expert. Stačí, že ti na tom záleží.</h2>
+      <p>Nechaj nám kontakt a ozveme sa ti, keď spustíme prvé stretnutie, akciu alebo výzvu na podpis.</p>
+      <form class="signup-form" id="signupForm">
+        <input type="email" id="emailInput" placeholder="tvoj@email.sk" required aria-label="E-mailová adresa">
+        <button type="submit" class="btn btn-primary">Odoslať</button>
+      </form>
+      <p class="signup-status" id="signupStatus" role="status"></p>
+    </div>
+  </section>
+
+  <div class="stripe"></div>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="logo"><span class="mark"></span>PAUSE<b>AI</b>&nbsp;SK</div>
+        <nav class="footer-links">
+          <a href="#kroky">Naše požiadavky</a>
+          <a href="#pridaj-sa">Pridaj sa</a>
+          <a href="mailto:info@pauseai.sk">Kontakt</a>
+        </nav>
+      </div>
+      <p class="footer-fine">PauseAI Slovensko je súčasťou medzinárodnej federácie PauseAI. Táto stránka je predbežná verzia — kontaktné údaje a právne informácie budú doplnené.</p>
+    </div>
+  </footer>
+
+<script>
+  const form = document.getElementById('signupForm');
+  const status = document.getElementById('signupStatus');
+  const emailInput = document.getElementById('emailInput');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if(!email){ return; }
+    status.textContent = 'Ďakujeme, ' + email + '. Ozveme sa ti čoskoro.';
+    emailInput.value = '';
+    emailInput.disabled = true;
+    form.querySelector('button').disabled = true;
+  });
+</script>
+
+</body>
+</html>
