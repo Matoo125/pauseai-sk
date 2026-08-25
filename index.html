@@ -1,573 +1,1252 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="sk" data-theme="pauseai">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PauseAI Slovensko — Zastavme preteky v superinteligencii</title>
-<meta name="description" content="Občianska iniciatíva za dočasné pozastavenie vývoja najnebezpečnejších AI systémov. Pridaj sa, podpíš výzvu, over si riziká umelej inteligencie.">
+<title>PauseAI Slovensko — Za bezpečnú a demokratickú budúcnosť umelej inteligencie</title>
+<meta name="description" content="Občianska iniciatíva za dočasné pozastavenie nekontrolovaných pretekov vo vývoji najnebezpečnejších AI systémov a za medzinárodný dohľad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper:#EDEAE0;
-    --paper-raised:#F7F5EC;
-    --ink:#17160F;
-    --muted:#6B6656;
-    --siren:#D0271F;
-    --siren-dark:#A31E17;
-    --amber:#EFA100;
-    --navy:#17263A;
-    --navy-light:#24405A;
-    --line: rgba(23,22,15,0.14);
-    --max-w: 1120px;
+  :root {
+    /* DEFAULT: Scheme 1 — Modern Civic (Trustworthy Slate & Indigo / Crimson) */
+    --bg: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-subtle: #F1F5F9;
+    --surface-card: #FFFFFF;
+    --ink: #0F172A;
+    --ink-muted: #475569;
+    --ink-faint: #64748B;
+    --accent: #2563EB;
+    --accent-hover: #1D4ED8;
+    --accent-contrast: #FFFFFF;
+    --alert: #DC2626;
+    --alert-light: #FEE2E2;
+    --warm: #D97706;
+    --warm-light: #FEF3C7;
+    --border: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --shadow-sm: 0 1px 3px rgba(15,23,42,0.06);
+    --shadow-md: 0 10px 25px -5px rgba(15,23,42,0.08), 0 8px 10px -6px rgba(15,23,42,0.04);
+    --radius: 12px;
+    --max-w: 1140px;
   }
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:16px;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.01em;
-    margin:0;
-    color:var(--ink);
-  }
-  p{ margin:0; }
-  a{ color:inherit; }
-  img,svg{ display:block; max-width:100%; }
-  button{ font-family:inherit; cursor:pointer; }
-
-  .wrap{
-    max-width:var(--max-w);
-    margin:0 auto;
-    padding:0 24px;
+  /* Scheme 2: Editorial Warmth (Humanist Terracotta & Charcoal) */
+  [data-theme="warmth"] {
+    --bg: #FAF7F2;
+    --surface: #FFFFFF;
+    --surface-subtle: #F2ECE4;
+    --surface-card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-muted: #57534E;
+    --ink-faint: #78716C;
+    --accent: #C2410C;
+    --accent-hover: #9A3412;
+    --accent-contrast: #FFFFFF;
+    --alert: #B91C1C;
+    --alert-light: #FEE2E2;
+    --warm: #B45309;
+    --warm-light: #FEF3C7;
+    --border: #E7DFD5;
+    --border-strong: #D6C8B8;
+    --shadow-sm: 0 1px 3px rgba(28,25,23,0.06);
+    --shadow-md: 0 10px 25px -5px rgba(28,25,23,0.08);
   }
 
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--siren-dark);
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:7px; height:7px;
-    background:var(--siren);
-    border-radius:50%;
-    flex:none;
-    animation: blink 2.2s ease-in-out infinite;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .eyebrow::before{ animation:none; }
-  }
-  @keyframes blink{
-    0%,100%{ opacity:1; }
-    50%{ opacity:0.25; }
+  /* Scheme 3: Forest & Safety (Regenerative Emerald & Deep Slate) */
+  [data-theme="forest"] {
+    --bg: #F4F9F6;
+    --surface: #FFFFFF;
+    --surface-subtle: #E8F3ED;
+    --surface-card: #FFFFFF;
+    --ink: #064E3B;
+    --ink-muted: #374151;
+    --ink-faint: #4B5563;
+    --accent: #059669;
+    --accent-hover: #047857;
+    --accent-contrast: #FFFFFF;
+    --alert: #E11D48;
+    --alert-light: #FFE4E6;
+    --warm: #D97706;
+    --warm-light: #FEF3C7;
+    --border: #D1E5DB;
+    --border-strong: #A7D3BF;
+    --shadow-sm: 0 1px 3px rgba(6,78,59,0.06);
+    --shadow-md: 0 10px 25px -5px rgba(6,78,59,0.08);
   }
 
-  /* hazard stripe divider — structural signature: warning tape between sections */
-  .stripe{
-    height:10px;
-    width:100%;
-    background: repeating-linear-gradient(
-      -45deg,
-      var(--navy),
-      var(--navy) 16px,
-      var(--amber) 16px,
-      var(--amber) 32px
-    );
+  /* Scheme 4: Refined PauseAI (Clean Tangerine & Deep Graphite) */
+  [data-theme="pauseai"] {
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-subtle: #F3F4F6;
+    --surface-card: #FFFFFF;
+    --ink: #18181B;
+    --ink-muted: #52525B;
+    --ink-faint: #71717A;
+    --accent: #EA580C;
+    --accent-hover: #C2410C;
+    --accent-contrast: #FFFFFF;
+    --alert: #DC2626;
+    --alert-light: #FEE2E2;
+    --warm: #F59E0B;
+    --warm-light: #FEF3C7;
+    --border: #E4E4E7;
+    --border-strong: #D4D4D8;
+    --shadow-sm: 0 1px 3px rgba(24,24,27,0.06);
+    --shadow-md: 0 10px 25px -5px rgba(24,24,27,0.08);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  button { font-family: inherit; cursor: pointer; }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Eyebrow & Badges */
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-subtle);
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 24px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.18s ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+  .btn-secondary:hover {
+    background: var(--surface-subtle);
+    border-color: var(--ink);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+  }
+  .btn-outline:hover {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  /* Theme Switcher Bar */
+  .theme-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .theme-label {
+    color: var(--ink-faint);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .theme-options {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .theme-btn {
+    border: 1px solid var(--border);
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+  }
+  .theme-btn .color-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .theme-btn.active {
+    background: var(--ink);
+    color: var(--surface);
+    border-color: var(--ink);
+    font-weight: 600;
   }
 
   /* ===== HEADER ===== */
-  header{
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-    position:sticky;
-    top:0;
-    z-index:50;
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
   }
-  .header-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:16px 24px;
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
   }
-  .logo{
-    font-family:'IBM Plex Mono', monospace;
-    font-weight:500;
-    font-size:15px;
-    letter-spacing:0.02em;
-    display:flex;
-    align-items:center;
-    gap:10px;
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
   }
-  .logo .mark{
-    width:14px; height:14px;
-    background:var(--siren);
-    border-radius:50%;
-    flex:none;
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent);
+    flex-shrink: 0;
   }
-  .logo b{ font-weight:600; }
-  .header-cta{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    font-weight:500;
-    text-decoration:none;
-    padding:9px 16px;
-    border:1.5px solid var(--ink);
-    background:transparent;
-    white-space:nowrap;
+  .logo-text {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
   }
-  .header-cta:hover{ background:var(--ink); color:var(--paper); }
+  .logo-ai {
+    color: var(--accent);
+  }
+  .logo-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--surface-subtle);
+    color: var(--ink-muted);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .nav-link {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    transition: color 0.15s ease;
+  }
+  .nav-link:hover { color: var(--ink); }
 
   /* ===== HERO ===== */
-  .hero{
-    padding:72px 0 64px;
-    position:relative;
-    overflow:hidden;
+  .hero {
+    padding: 64px 0 56px;
+    position: relative;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
   }
-  .hero-inner{
-    display:grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap:48px;
-    align-items:center;
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.95fr;
+    gap: 48px;
+    align-items: center;
   }
-  .hero h1{
-    font-size:clamp(38px, 5.4vw, 68px);
-    line-height:0.98;
-    margin-top:18px;
+  .hero-content h1 {
+    font-size: clamp(34px, 4.4vw, 54px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 20px;
   }
-  .hero h1 .hl{ color:var(--siren); }
-  .hero-sub{
-    margin-top:22px;
-    max-width:52ch;
-    font-size:18px;
-    color:#3a3729;
+  .hero-content h1 .hl {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
   }
-  .hero-ctas{
-    margin-top:32px;
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
+  .hero-lead {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    margin-bottom: 28px;
+    max-width: 54ch;
   }
-  .btn{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:14px;
-    font-weight:500;
-    letter-spacing:0.02em;
-    text-decoration:none;
-    padding:14px 22px;
-    display:inline-block;
-    border:1.5px solid var(--ink);
-    transition: transform .15s ease;
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 24px;
   }
-  .btn:active{ transform: translateY(1px); }
-  .btn-primary{
-    background:var(--siren);
-    border-color:var(--siren);
-    color:#fff;
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
   }
-  .btn-primary:hover{ background:var(--siren-dark); border-color:var(--siren-dark); }
-  .btn-ghost{
-    background:transparent;
-    color:var(--ink);
+  .trust-avatars {
+    display: flex;
+    margin-right: -4px;
   }
-  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+  .avatar-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--surface-subtle);
+    border: 2px solid var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    margin-left: -6px;
+  }
+  .avatar-circle:first-child { margin-left: 0; }
 
-  .hero-note{
-    margin-top:24px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    color:var(--muted);
+  /* Hero Image Visual Card */
+  .hero-visual {
+    position: relative;
   }
-
-  /* siren pulse — signature visual element */
-  .siren-wrap{
-    position:relative;
-    aspect-ratio:1/1;
-    max-width:360px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
   }
-  .ring{
-    position:absolute;
-    border:2px solid var(--siren);
-    border-radius:50%;
-    opacity:0;
-    animation: pulse 3.6s ease-out infinite;
+  .hero-img-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 4/3;
+    background: var(--surface-subtle);
   }
-  .ring:nth-child(2){ animation-delay:1.2s; }
-  .ring:nth-child(3){ animation-delay:2.4s; }
-  @keyframes pulse{
-    0%{ width:60px; height:60px; opacity:0.9; }
-    80%{ opacity:0; }
-    100%{ width:340px; height:340px; opacity:0; }
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  @media (prefers-reduced-motion: reduce){
-    .ring{ animation:none; opacity:0.35; width:200px; height:200px; }
+  .hero-floating-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
   }
-  .siren-core{
-    position:relative;
-    width:96px; height:96px;
-    background:var(--navy);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:2;
-    box-shadow: 0 8px 24px rgba(23,38,58,0.35);
+  .badge-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.25;
   }
-  .siren-core svg{ width:34px; height:34px; }
-
-  /* ===== MISSION BAND ===== */
-  .mission{
-    background:var(--navy);
-    color:#EFEEE6;
-    padding:56px 0;
+  .badge-sub {
+    font-size: 11.5px;
+    color: #CBD5E1;
+    margin-top: 2px;
   }
-  .mission .eyebrow{ color:var(--amber); }
-  .mission .eyebrow::before{ background:var(--amber); }
-  .mission-inner{
-    display:grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap:40px;
-    align-items:start;
-  }
-  .mission h2{
-    color:#fff;
-    font-size:clamp(26px, 3.4vw, 36px);
-    margin-top:14px;
-    line-height:1.08;
-  }
-  .mission p{
-    font-size:16.5px;
-    color:#C9CDD4;
-    margin-top:8px;
-  }
-  .mission p + p{ margin-top:14px; }
-
-  /* ===== STEPS ===== */
-  .steps{ padding:72px 0; }
-  .section-head{ max-width:60ch; margin-bottom:40px; }
-  .section-head h2{
-    font-size:clamp(26px, 3.4vw, 34px);
-    margin-top:14px;
-  }
-  .steps-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:2px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .step{
-    background:var(--paper-raised);
-    padding:28px 24px 30px;
-  }
-  .step-num{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    color:var(--siren);
-    font-weight:500;
-    letter-spacing:0.06em;
-  }
-  .step h3{
-    font-size:19px;
-    margin-top:14px;
-    line-height:1.15;
-  }
-  .step p{
-    margin-top:10px;
-    font-size:14.5px;
-    color:var(--muted);
+  .badge-pill {
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  /* ===== WHY NOW ===== */
-  .why{ padding:0 0 76px; }
-  .why-grid{
-    display:grid;
+  /* ===== STATS BAND ===== */
+  .stats-band {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 0;
+  }
+  .stats-grid {
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap:28px;
-    margin-top:8px;
+    gap: 24px;
   }
-  .why-item{ padding-top:16px; border-top:2px solid var(--ink); }
-  .why-item h3{
-    font-size:15.5px;
-    letter-spacing:0.01em;
+  .stat-item {
+    text-align: left;
+    padding: 0 12px;
+    border-left: 2px solid var(--border);
   }
-  .why-item p{
-    margin-top:8px;
-    font-size:14px;
-    color:var(--muted);
+  .stat-item:first-child { border-left: none; padding-left: 0; }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .stat-desc {
+    font-size: 13px;
+    color: var(--ink-faint);
+    line-height: 1.4;
   }
 
-  /* ===== SIGNUP ===== */
-  .signup{
-    background:var(--ink);
-    color:var(--paper);
-    padding:72px 0;
+  /* ===== MISSION SECTION ===== */
+  .section {
+    padding: 80px 0;
   }
-  .signup .eyebrow{ color:var(--amber); }
-  .signup .eyebrow::before{ background:var(--amber); }
-  .signup-inner{
-    max-width:640px;
+  .section-alt {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
   }
-  .signup h2{
-    color:#fff;
-    font-size:clamp(28px, 4vw, 42px);
-    margin-top:14px;
-    line-height:1.05;
+  .section-head {
+    max-width: 680px;
+    margin-bottom: 48px;
   }
-  .signup p{
-    margin-top:16px;
-    color:#C7C4B6;
-    font-size:16px;
-    max-width:52ch;
+  .section-head h2 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    letter-spacing: -0.02em;
+    margin-top: 8px;
+    margin-bottom: 14px;
   }
-  .signup-form{
-    margin-top:32px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+  .section-head p {
+    font-size: 17px;
+    color: var(--ink-muted);
+    line-height: 1.6;
   }
-  .signup-form input[type=email]{
-    flex:1 1 260px;
-    padding:14px 16px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:14px;
-    background:#26251C;
-    border:1.5px solid #47453A;
-    color:#fff;
+
+  /* Mission Split Card */
+  .mission-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
   }
-  .signup-form input[type=email]::placeholder{ color:#8B8878; }
-  .signup-form input[type=email]:focus{
-    outline:none;
-    border-color:var(--siren);
+  .mission-quote {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    border-left: 4px solid var(--accent);
+    padding-left: 20px;
   }
-  .signup-form .btn-primary{ flex:none; }
-  .signup-status{
-    margin-top:14px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    color:var(--amber);
-    min-height:18px;
+  .mission-text p {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .mission-text p:last-child { margin-bottom: 0; }
+
+  /* ===== DEMANDS / STEPS ===== */
+  .demands-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .demand-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .demand-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+  .demand-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--surface-subtle);
+    padding: 4px 10px;
+    border-radius: 6px;
+    align-self: flex-start;
+    margin-bottom: 18px;
+  }
+  .demand-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .demand-card p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+
+  /* ===== WHY NOW / RISKS & HUMAN IMPACT ===== */
+  .risks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .risk-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex;
+    gap: 20px;
+  }
+  .risk-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--surface-subtle);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .risk-content h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .risk-content p {
+    font-size: 14.5px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+
+  /* ===== PETITION & SIGNUP ACTION SECTION ===== */
+  .action-section {
+    background: var(--ink);
+    color: #F8FAFC;
+    padding: 80px 0;
+    position: relative;
+  }
+  .action-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .action-info h2 {
+    color: #FFFFFF;
+    font-size: clamp(28px, 3.6vw, 42px);
+    margin-top: 10px;
+    margin-bottom: 18px;
+  }
+  .action-info p {
+    color: #CBD5E1;
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .action-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .action-points li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    color: #E2E8F0;
+  }
+  .check-icon {
+    color: #10B981;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* Direct email fallback box */
+  .email-fallback-box {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13.5px;
+    color: #CBD5E1;
+  }
+  .email-fallback-box b {
+    color: #FFFFFF;
+  }
+  .email-fallback-link {
+    color: #93C5FD;
+    text-decoration: underline;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  /* Form Card */
+  .form-card {
+    background: #FFFFFF;
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .form-card h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #0F172A;
+  }
+  .form-card p.form-desc {
+    font-size: 14px;
+    color: #64748B;
+    margin-bottom: 24px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14.5px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 6px;
+    background: #FFFFFF;
+    color: #0F172A;
+    transition: border-color 0.15s ease;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  }
+  .form-submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .form-privacy {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #64748B;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .form-status {
+    margin-top: 16px;
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+  }
+  .form-status.success {
+    display: block;
+    background: #DCFCE7;
+    color: #166534;
+    border: 1px solid #BBF7D0;
+  }
+  .form-status.error {
+    display: block;
+    background: #FEE2E2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
   }
 
   /* ===== FOOTER ===== */
-  footer{
-    background:var(--navy);
-    color:#9BA6B3;
-    padding:40px 0;
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 48px 0 36px;
+    color: var(--ink-muted);
+    font-size: 14px;
   }
-  .footer-inner{
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:20px;
-    align-items:center;
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 36px;
   }
-  .footer-inner .logo{ color:#EFEEE6; }
-  .footer-links{
-    display:flex;
-    gap:22px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
-    flex-wrap:wrap;
+  .footer-brand p {
+    margin-top: 12px;
+    max-width: 42ch;
+    font-size: 14px;
+    color: var(--ink-faint);
   }
-  .footer-links a{ text-decoration:none; }
-  .footer-links a:hover{ color:#fff; }
-  .footer-fine{
-    margin-top:22px;
-    font-size:12.5px;
-    color:#6E7C8C;
-    max-width:70ch;
+  .footer-nav {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-col h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-col a {
+    color: var(--ink-muted);
+    transition: color 0.15s ease;
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--ink-faint);
   }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 860px){
-    .hero-inner{ grid-template-columns:1fr; }
-    .hero{ padding-top:44px; }
-    .siren-wrap{ order:-1; max-width:220px; }
-    .mission-inner{ grid-template-columns:1fr; }
-    .steps-grid{ grid-template-columns:1fr; }
-    .why-grid{ grid-template-columns:1fr 1fr; }
-    .footer-inner{ flex-direction:column; align-items:flex-start; }
-  }
-  @media (max-width: 480px){
-    .why-grid{ grid-template-columns:1fr; }
-    .header-cta{ padding:8px 12px; font-size:12px; }
-  }
-
-  :focus-visible{
-    outline:2px solid var(--siren);
-    outline-offset:2px;
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-visual { order: -1; max-width: 560px; margin: 0 auto; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { border-left: none; padding-left: 0; }
+    .mission-card { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+    .demands-grid { grid-template-columns: 1fr; }
+    .risks-grid { grid-template-columns: 1fr; }
+    .action-wrap { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
   }
 </style>
 </head>
 <body>
 
+  <!-- Interactive Theme Scheme Selector -->
+  <aside class="theme-bar" aria-label="Nastavenie farebnej témy">
+    <div class="theme-label">
+      <span>🎨 Test farebných schém:</span>
+    </div>
+    <div class="theme-options" id="themePicker">
+      <button type="button" class="theme-btn" data-set-theme="civic">
+        <span class="color-indicator" style="background:#2563EB;"></span>
+        1. Modern Civic
+      </button>
+      <button type="button" class="theme-btn" data-set-theme="warmth">
+        <span class="color-indicator" style="background:#C2410C;"></span>
+        2. Editorial Warmth
+      </button>
+      <button type="button" class="theme-btn" data-set-theme="forest">
+        <span class="color-indicator" style="background:#059669;"></span>
+        3. Forest & Safety
+      </button>
+      <button type="button" class="theme-btn active" data-set-theme="pauseai">
+        <span class="color-indicator" style="background:#EA580C;"></span>
+        4. Refined PauseAI (Predvolená)
+      </button>
+    </div>
+  </aside>
+
+  <!-- Header -->
   <header>
     <div class="wrap header-inner">
-      <div class="logo"><span class="mark"></span>PAUSE<b>AI</b>&nbsp;SK</div>
-      <a class="header-cta" href="#pridaj-sa">Pridaj sa</a>
+      <a href="#" class="logo-link" aria-label="PauseAI Slovensko domovská stránka">
+        <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="16" cy="16" r="15" fill="currentColor" fill-opacity="0.15"/>
+          <rect x="10.5" y="9" width="3.75" height="14" rx="1.875" fill="currentColor"/>
+          <rect x="17.75" y="9" width="3.75" height="14" rx="1.875" fill="currentColor"/>
+        </svg>
+        <span class="logo-text">PAUSE<span class="logo-ai">AI</span></span>
+        <span class="logo-badge">SLOVENSKO</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#poslanie" class="nav-link">Poslanie</a>
+        <a href="#poziadavky" class="nav-link">Požiadavky</a>
+        <a href="#rizika" class="nav-link">Riziká & Dopad</a>
+        <a href="#vyzva" class="btn btn-primary" style="padding: 9px 18px; font-size: 14px;">Podpísať výzvu</a>
+      </nav>
     </div>
   </header>
 
-  <div class="stripe"></div>
-
+  <!-- Hero Section -->
   <section class="hero">
-    <div class="wrap hero-inner">
-      <div>
-        <span class="eyebrow">Občianska výstraha — AI riziká</span>
-        <h1>Zastavme<br>preteky v<br><span class="hl">superinteligencii.</span></h1>
-        <p class="hero-sub">PauseAI Slovensko presadzuje dočasné pozastavenie vývoja najsilnejších AI systémov — kým nebudeme vedieť, že ich vieme postaviť bezpečne a pod demokratickou kontrolou.</p>
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Občianska iniciatíva pre bezpečnú AI
+        </span>
+        <h1>Budúcnosť tvoríme my.<br>Nie nekontrolované<br><span class="hl">preteky algoritmov.</span></h1>
+        <p class="hero-lead">
+          PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo, medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
+        </p>
+
         <div class="hero-ctas">
-          <a class="btn btn-primary" href="#pridaj-sa">Podpíš výzvu</a>
-          <a class="btn btn-ghost" href="#kroky">Prečo je to potrebné</a>
+          <a href="#vyzva" class="btn btn-primary">Podpísať otvorenú výzvu</a>
+          <a href="#poziadavky" class="btn btn-secondary">Čo presne navrhujeme</a>
         </div>
-        <p class="hero-note">Súčasť medzinárodného hnutia PauseAI, založeného 2023 v Holandsku.</p>
+
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <div class="avatar-circle">SK</div>
+            <div class="avatar-circle">EU</div>
+            <div class="avatar-circle">AI</div>
+          </div>
+          <span>Súčasť celosvetového hnutia založeného v roku 2023.</span>
+        </div>
       </div>
-      <div class="siren-wrap" aria-hidden="true">
-        <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="siren-core">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="5" width="4" height="14" rx="1" fill="#EFA100"/>
-            <rect x="14" y="5" width="4" height="14" rx="1" fill="#EFA100"/>
-          </svg>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-img-wrap">
+            <img src="./hero-crowd.jpg" alt="Zhromaždenie občanov, študentov a rodín za demokratickú kontrolu technológií" loading="eager">
+            <div class="hero-floating-badge">
+              <div>
+                <div class="badge-title">Ľudia pred ziskom a rizikom</div>
+                <div class="badge-sub">Občianske hnutie za bezpečný a humánny pokrok</div>
+              </div>
+              <span class="badge-pill">Zapoj sa</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="stripe"></div>
-
-  <section class="mission">
-    <div class="wrap mission-inner">
-      <div>
-        <span class="eyebrow">Poslanie</span>
-        <h2>Nejde o strach z technológií.<br>Ide o zodpovednosť.</h2>
+  <!-- Stats & Global Impact Band -->
+  <section class="stats-band">
+    <div class="wrap stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-title">Krajín v hnutí</div>
+        <div class="stat-desc">Globálna sieť lokálnych tímov od EÚ cez UK až po USA.</div>
       </div>
-      <div>
-        <p>Spoločnosti, ktoré stoja za najpokročilejšími AI systémami, samy priznávajú, že nevedia zaručiť ich bezpečnosť — a napriek tomu pokračujú v pretekoch o čoraz výkonnejšie modely.</p>
-        <p>Žiadame, aby sa o najnebezpečnejších AI systémoch rozhodovalo verejne a zodpovedne, s dostatkom času na rozmyslenie — nie v tichu firemných laboratórií pod tlakom konkurencie.</p>
+      <div class="stat-item">
+        <div class="stat-num">5 000+</div>
+        <div class="stat-title">Signatárov výzvy</div>
+        <div class="stat-desc">Tisíce expertov, akademikov a angažovaných občanov.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1 cieľ</div>
+        <div class="stat-title">Zaručená bezpečnosť</div>
+        <div class="stat-desc">Technológie musia slúžiť ľuďom, nie naopak.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-title">Občianska transparentnosť</div>
+        <div class="stat-desc">Nezávislá iniciatíva financovaná z verejných darov.</div>
       </div>
     </div>
   </section>
 
-  <section class="steps" id="kroky">
+  <!-- Mission Section -->
+  <section class="section" id="poslanie">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Tri konkrétne kroky</span>
-        <h2>Čo presne žiadame</h2>
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Prečo sme tu</span>
+        <h2>Nejde o odpor k pokroku.<br>Ide o zodpovednosť voči spoločnosti.</h2>
+        <p>Umelá inteligencia prináša obrovský potenciál v medicíne, vzdelávaní či vede. Zároveň však komerčné preteky tlačia vývojárov do vypúšťania stále silnejších modelov bez toho, aby rozumeli ich vnútornému fungovaniu.</p>
       </div>
-      <div class="steps-grid">
-        <div class="step">
-          <span class="step-num">STUPEŇ 01</span>
-          <h3>Medzinárodná agentúra pre bezpečnosť AI</h3>
-          <p>Podobná Medzinárodnej agentúre pre atómovú energiu — dohliadajúca na vývoj najsilnejších systémov naprieč krajinami.</p>
+
+      <div class="mission-card">
+        <div class="mission-quote">
+          „Spoločnosti samy priznávajú, že nevedia garantovať bezpečnosť budúcich frontier modelov. O osude ľudstva sa nesmie rozhodovať za zatvorenými dverami korporácií.“
         </div>
-        <div class="step">
-          <span class="step-num">STUPEŇ 02</span>
-          <h3>Trénovanie len s garantovanou bezpečnosťou</h3>
-          <p>Najvýkonnejšie modely by sa mali trénovať iba vtedy, ak je ich bezpečnosť vopred overiteľná.</p>
-        </div>
-        <div class="step">
-          <span class="step-num">STUPEŇ 03</span>
-          <h3>Nasadenie len po overení</h3>
-          <p>Modely by sa mali dostať k verejnosti až po dôkladnom overení, že nepredstavujú nebezpečné schopnosti.</p>
+        <div class="mission-text">
+          <p>
+            V letectve, jadrovej energetike či farmácii je nemysliteľné nasadiť technológiu skôr, ako prejde prísnou certifikáciou. Pri najsilnejších AI systémoch takýto mechanizmus stále chýba.
+          </p>
+          <p>
+            PauseAI Slovensko žiada priestor na dôkladné vedecké overenie, etické vyhodnotenie a stanovenie jasných pravidiel demokratickými inštitúciami.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="why">
+  <!-- 3 Concrete Demands -->
+  <section class="section section-alt" id="poziadavky">
     <div class="wrap">
-      <div class="section-head" style="margin-bottom:28px;">
-        <span class="eyebrow">Prečo teraz</span>
-        <h2>Riziká, ktoré nás spájajú</h2>
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Konkrétne riešenia</span>
+        <h2>Tri kroky pre bezpečnú budúcnosť</h2>
+        <p>Naše požiadavky vychádzajú z odporúčaní popredných výskumníkov a princípov medzinárodného práva.</p>
       </div>
-      <div class="why-grid">
-        <div class="why-item">
-          <h3>Existenčné riziko</h3>
-          <p>Poprední výskumníci varujú, že strata kontroly nad pokročilou AI patrí medzi civilizačné riziká.</p>
+
+      <div class="demands-grid">
+        <div class="demand-card">
+          <span class="demand-badge">KROK 01</span>
+          <h3>Medzinárodná agentúra pre dohľad nad AI</h3>
+          <p>Po vzore Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny orgán, ktorý audituje dátové centrá a monitoruje tréning modelov na hranici schopností.</p>
         </div>
-        <div class="why-item">
-          <h3>Strata práce</h3>
-          <p>Automatizácia môže rýchlo zasiahnuť milióny pozícií bez toho, aby bola spoločnosť pripravená.</p>
+
+        <div class="demand-card">
+          <span class="demand-badge">KROK 02</span>
+          <h3>Podmienka garantovanej bezpečnosti</h3>
+          <p>Vývoj a trénovanie novej generácie superinteligentných modelov musí byť pozastavené, kým vedecká komunita nepreukáže spoľahlivé metódy zarovnania (alignment) a kontroly.</p>
         </div>
-        <div class="why-item">
-          <h3>Ohrozenie demokracie</h3>
-          <p>Dezinformácie a masová manipulácia môžu podkopať dôveru vo verejnú diskusiu a voľby.</p>
-        </div>
-        <div class="why-item">
-          <h3>Koncentrácia moci</h3>
-          <p>Ak zostane vývoj v rukách hŕstky firiem, o budúcnosti sa rozhoduje bez verejnej kontroly.</p>
+
+        <div class="demand-card">
+          <span class="demand-badge">KROK 03</span>
+          <h3>Demokratická kontrola & certifikácia</h3>
+          <p>Nasadenie modelov do kritickej infraštruktúry a verejného priestoru musí podliehať verejnému posúdeniu dopadov na prácu, demokraciu a bezpečnosť občanov.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="signup" id="pridaj-sa">
-    <div class="wrap signup-inner">
-      <span class="eyebrow">Pridaj sa</span>
-      <h2>Nemusíš byť expert. Stačí, že ti na tom záleží.</h2>
-      <p>Nechaj nám kontakt a ozveme sa ti, keď spustíme prvé stretnutie, akciu alebo výzvu na podpis.</p>
-      <form class="signup-form" id="signupForm">
-        <input type="email" id="emailInput" placeholder="tvoj@email.sk" required aria-label="E-mailová adresa">
-        <button type="submit" class="btn btn-primary">Odoslať</button>
-      </form>
-      <p class="signup-status" id="signupStatus" role="status"></p>
+  <!-- Risks & Positive Vision -->
+  <section class="section" id="rizika">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Dopad na spoločnosť</span>
+        <h2>Riziká, ktoré vyžadujú našu pozornosť</h2>
+        <p>Bezpečnosť umelej inteligencie nie je abstraktná teória — dotýka sa každodenného života každého z nás.</p>
+      </div>
+
+      <div class="risks-grid">
+        <div class="risk-box">
+          <div class="risk-icon">🛡️</div>
+          <div class="risk-content">
+            <h3>Zachovanie ľudskej kontroly</h3>
+            <p>Riziko straty kontroly nad autonómnymi systémami označujú špičkoví vedci za závažnú civilizačnú hrozbu porovnateľnú s pandémiami či jadrovou vojnou.</p>
+          </div>
+        </div>
+
+        <div class="risk-box">
+          <div class="risk-icon">💼</div>
+          <div class="risk-content">
+            <h3>Ochrana práce a ekonomiky</h3>
+            <p>Neriadený a unáhlený nástup umelej inteligencie môže otriasť trhom práce skôr, ako vzdelávacie a sociálne systémy stihnú reagovať.</p>
+          </div>
+        </div>
+
+        <div class="risk-box">
+          <div class="risk-icon">🗳️</div>
+          <div class="risk-content">
+            <h3>Obrana demokracie pred manipuláciou</h3>
+            <p>Generatívne dezinformácie, deepfake obsah a cielená automatizovaná manipulácia môžu fatálne podkopať dôveru vo voľby a slobodnú diskusiu.</p>
+          </div>
+        </div>
+
+        <div class="risk-box">
+          <div class="risk-icon">🤝</div>
+          <div class="risk-content">
+            <h3>Technológie pre verejné dobro</h3>
+            <p>Chceme technológie, ktoré pomáhajú liečiť choroby, zefektívňujú energetiku a obohacujú ľudský potenciál — pod dohľadom verejnosti.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="stripe"></div>
+  <!-- Petition & Action Section -->
+  <section class="action-section" id="vyzva">
+    <div class="wrap action-wrap">
+      <div class="action-info">
+        <span class="eyebrow" style="background: rgba(255,255,255,0.1); color:#93C5FD; border-color: rgba(255,255,255,0.2);">
+          <span class="eyebrow-dot" style="background:#93C5FD;"></span>
+          Pridaj svoj hlas
+        </span>
+        <h2>Podpíš občiansku výzvu za bezpečnú budúcnosť AI</h2>
+        <p>Každý podpis má váhu pri vyjednávaní s európskymi a národnými zákonodarcami. Podporte požiadavku na medzinárodnú reguláciu a nezávislý bezpečnostný audit.</p>
 
+        <ul class="action-points">
+          <li><span class="check-icon">✓</span> Zastavenie neoverených pretekov vo frontier AI</li>
+          <li><span class="check-icon">✓</span> Vznik nezávislého medzinárodného bezpečnostného úradu</li>
+          <li><span class="check-icon">✓</span> Transparentnosť a demokratické rozhodovanie</li>
+        </ul>
+
+        <!-- Explicit Email Destination & Fallback -->
+        <div class="email-fallback-box">
+          <p><strong>Transparentné doručenie:</strong> Údaje z formulára putujú priamo tímu slovenských koordinátorov na adresu <b style="color:#93C5FD;">slovensko@pauseai.info</b>.</p>
+          <p style="margin-top: 8px;">
+            Keby formulár nefungoval alebo preferuješ priamy kontakt, napíš nám priamo:
+            <a class="email-fallback-link" href="mailto:slovensko@pauseai.info?subject=Podpisujem%20v%C3%BDzvu%20PauseAI%20Slovensko&body=Dobr%C3%BD%20de%C5%88%2C%0A%0Achcem%20sa%20prida%C5%A5%20k%20v%C3%BDzve%20PauseAI%20Slovensko.%0A%0AMeno%20a%20priezvisko%3A%20%0AE-mail%3A%20%0AMesto%20%2F%20Pozn%C3%A1mka%3A%20">
+              slovensko@pauseai.info ✉️
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Form -->
+      <div class="form-card">
+        <h3>Podpísať výzvu online</h3>
+        <p class="form-desc">Zaberie to menej než 30 sekúnd. Formulár je nezáväzný.</p>
+
+        <form id="petitionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-group">
+            <label for="nameInput">Meno a priezvisko</label>
+            <input type="text" id="nameInput" name="name" class="form-control" placeholder="napr. Mária Horváthová" required>
+          </div>
+
+          <div class="form-group">
+            <label for="emailInput">E-mailová adresa</label>
+            <input type="email" id="emailInput" name="email" class="form-control" placeholder="tvoj@email.sk" required>
+          </div>
+
+          <div class="form-group">
+            <label for="roleInput">Mesto alebo zameranie (voliteľné)</label>
+            <input type="text" id="roleInput" name="role" class="form-control" placeholder="napr. Bratislava / študent, rodič, IT">
+          </div>
+
+          <div class="form-group" style="margin-top: 18px;">
+            <label style="display:flex; align-items:flex-start; gap:8px; font-weight:normal; font-size:13px; color:#475569; cursor:pointer;">
+              <input type="checkbox" id="volunteerCheck" name="volunteer" style="margin-top:2px;">
+              <span>Mám záujem pomôcť ako dobrovoľník alebo sa zapojiť do lokálnych aktivít na Slovensku.</span>
+            </label>
+          </div>
+
+          <input type="hidden" name="_subject" value="Nový podpis výzvy PauseAI Slovensko">
+
+          <button type="submit" class="btn btn-primary form-submit-btn" id="submitBtn">
+            Odoslať podpis výzvy
+          </button>
+
+          <p class="form-privacy">
+            🔒 Rešpektujeme tvoje súkromie. Žiadny spam. Údaje slúžia výhradne pre iniciatívu PauseAI Slovensko.
+          </p>
+
+          <div class="form-status" id="formStatus" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <div class="wrap">
-      <div class="footer-inner">
-        <div class="logo"><span class="mark"></span>PAUSE<b>AI</b>&nbsp;SK</div>
-        <nav class="footer-links">
-          <a href="#kroky">Naše požiadavky</a>
-          <a href="#pridaj-sa">Pridaj sa</a>
-          <a href="mailto:info@pauseai.sk">Kontakt</a>
-        </nav>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo-link">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="16" cy="16" r="15" fill="currentColor" fill-opacity="0.15"/>
+              <rect x="10.5" y="9" width="3.75" height="14" rx="1.875" fill="currentColor"/>
+              <rect x="17.75" y="9" width="3.75" height="14" rx="1.875" fill="currentColor"/>
+            </svg>
+            <span class="logo-text">PAUSE<span class="logo-ai">AI</span></span>
+            <span class="logo-badge">SLOVENSKO</span>
+          </a>
+          <p>
+            PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI. Presadzujeme bezpečnosť a demokratický dohľad nad pokročilou umelou inteligenciou.
+          </p>
+        </div>
+
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Navigácia</h4>
+            <ul>
+              <li><a href="#poslanie">Naše poslanie</a></li>
+              <li><a href="#poziadavky">Tri požiadavky</a></li>
+              <li><a href="#rizika">Riziká a dopad</a></li>
+              <li><a href="#vyzva">Podpísať výzvu</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Medzinárodné hnutie</h4>
+            <ul>
+              <li><a href="https://pauseai.info" target="_blank" rel="noopener noreferrer">PauseAI Global (pauseai.info) ↗</a></li>
+              <li><a href="https://pauseai-us.org" target="_blank" rel="noopener noreferrer">PauseAI USA ↗</a></li>
+              <li><a href="https://pauseai.uk" target="_blank" rel="noopener noreferrer">PauseAI UK ↗</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Kontakt</h4>
+            <ul>
+              <li><a href="mailto:slovensko@pauseai.info">slovensko@pauseai.info</a></li>
+              <li><a href="mailto:info@pauseai.sk">info@pauseai.sk</a></li>
+              <li>Bratislava, Slovensko</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <p class="footer-fine">PauseAI Slovensko je súčasťou medzinárodnej federácie PauseAI. Táto stránka je predbežná verzia — kontaktné údaje a právne informácie budú doplnené.</p>
+
+      <div class="footer-bottom">
+        <div>© 2026 PauseAI Slovensko. Občianska a otvorená iniciatíva.</div>
+        <div>Web vytvorený a spravovaný komunitou dobrovoľníkov.</div>
+      </div>
     </div>
   </footer>
 
-<script>
-  const form = document.getElementById('signupForm');
-  const status = document.getElementById('signupStatus');
-  const emailInput = document.getElementById('emailInput');
+  <!-- Script for Themes and Form Handling -->
+  <script>
+    // Theme Switcher Logic
+    const themeButtons = document.querySelectorAll('#themePicker .theme-btn');
+    const htmlEl = document.documentElement;
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const email = emailInput.value.trim();
-    if(!email){ return; }
-    status.textContent = 'Ďakujeme, ' + email + '. Ozveme sa ti čoskoro.';
-    emailInput.value = '';
-    emailInput.disabled = true;
-    form.querySelector('button').disabled = true;
-  });
-</script>
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-set-theme');
+        htmlEl.setAttribute('data-theme', theme);
+        
+        themeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        try {
+          localStorage.setItem('pauseai_theme', theme);
+        } catch (e) {}
+      });
+    });
+
+    // Restore saved theme if present
+    try {
+      const savedTheme = localStorage.getItem('pauseai_theme');
+      if (savedTheme) {
+        const targetBtn = document.querySelector(`[data-set-theme="${savedTheme}"]`);
+        if (targetBtn) {
+          targetBtn.click();
+        }
+      }
+    } catch (e) {}
+
+    // Form Handling
+    const petitionForm = document.getElementById('petitionForm');
+    const formStatus = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+
+    petitionForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      const isVolunteer = document.getElementById('volunteerCheck').checked;
+
+      if (!email) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Odosielam podpis...';
+      formStatus.className = 'form-status';
+      formStatus.textContent = '';
+
+      fetch(petitionForm.action, {
+        method: 'POST',
+        body: new FormData(petitionForm),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('submit-failed');
+
+          formStatus.className = 'form-status success';
+          formStatus.textContent =
+            `Ďakujeme, ${name || email}! Tvoj podpis bol zaznamenaný a odoslaný tímu na slovensko@pauseai.info.` +
+            (isVolunteer ? ' Skvelé! Ozveme sa ti ohľadom možností dobrovoľníckej pomoci.' : '');
+
+          petitionForm.reset();
+          submitBtn.textContent = 'Podpis úspešne odoslaný ✓';
+        })
+        .catch(() => {
+          formStatus.className = 'form-status error';
+          formStatus.textContent =
+            'Nepodarilo sa odoslať formulár. Skús to prosím znova, alebo nám napíš priamo na slovensko@pauseai.info.';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Odoslať podpis výzvy';
+        });
+    });
+  </script>
 
 </body>
 </html>
