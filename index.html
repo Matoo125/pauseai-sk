@@ -1062,11 +1062,11 @@
 
         <!-- Explicit Email Destination & Fallback -->
         <div class="email-fallback-box">
-          <p><strong>Transparentné doručenie:</strong> Údaje z formulára putujú priamo tímu slovenských koordinátorov na adresu <b style="color:#93C5FD;">slovensko@pauseai.info</b>.</p>
+          <p><strong>Transparentné doručenie:</strong> Údaje z formulára putujú priamo tímu slovenských koordinátorov na adresu <b style="color:#93C5FD;">info@pauseai.sk</b>.</p>
           <p style="margin-top: 8px;">
             Keby formulár nefungoval alebo preferuješ priamy kontakt, napíš nám priamo:
-            <a class="email-fallback-link" href="mailto:slovensko@pauseai.info?subject=Podpisujem%20v%C3%BDzvu%20PauseAI%20Slovensko&body=Dobr%C3%BD%20de%C5%88%2C%0A%0Achcem%20sa%20prida%C5%A5%20k%20v%C3%BDzve%20PauseAI%20Slovensko.%0A%0AMeno%20a%20priezvisko%3A%20%0AE-mail%3A%20%0AMesto%20%2F%20Pozn%C3%A1mka%3A%20">
-              slovensko@pauseai.info ✉️
+            <a class="email-fallback-link" href="mailto:info@pauseai.sk?subject=Podpisujem%20v%C3%BDzvu%20PauseAI%20Slovensko&body=Dobr%C3%BD%20de%C5%88%2C%0A%0Achcem%20sa%20prida%C5%A5%20k%20v%C3%BDzve%20PauseAI%20Slovensko.%0A%0AMeno%20a%20priezvisko%3A%20%0AE-mail%3A%20%0AMesto%20%2F%20Pozn%C3%A1mka%3A%20">
+              info@pauseai.sk ✉️
             </a>
           </p>
         </div>
@@ -1077,7 +1077,7 @@
         <h3>Podpísať výzvu online</h3>
         <p class="form-desc">Zaberie to menej než 30 sekúnd. Formulár je nezáväzný.</p>
 
-        <form id="petitionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form id="petitionForm" action="https://formspree.io/f/xppagjeo" method="POST">
           <div class="form-group">
             <label for="nameInput">Meno a priezvisko</label>
             <input type="text" id="nameInput" name="name" class="form-control" placeholder="napr. Mária Horváthová" required>
@@ -1152,13 +1152,13 @@
               <li><a href="https://pauseai.info" target="_blank" rel="noopener noreferrer">PauseAI Global (pauseai.info) ↗</a></li>
               <li><a href="https://pauseai-us.org" target="_blank" rel="noopener noreferrer">PauseAI USA ↗</a></li>
               <li><a href="https://pauseai.uk" target="_blank" rel="noopener noreferrer">PauseAI UK ↗</a></li>
+              <li><a href="https://pauseai.cz" target="_blank" rel="noopener noreferrer">PauseAI Česko (pauseai.cz) ↗</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
             <h4>Kontakt</h4>
             <ul>
-              <li><a href="mailto:slovensko@pauseai.info">slovensko@pauseai.info</a></li>
               <li><a href="mailto:info@pauseai.sk">info@pauseai.sk</a></li>
               <li>Bratislava, Slovensko</li>
             </ul>
@@ -1232,7 +1232,7 @@
 
           formStatus.className = 'form-status success';
           formStatus.textContent =
-            `Ďakujeme, ${name || email}! Tvoj podpis bol zaznamenaný a odoslaný tímu na slovensko@pauseai.info.` +
+            `Ďakujeme, ${name || email}! Tvoj podpis bol zaznamenaný a odoslaný tímu na info@pauseai.sk.` +
             (isVolunteer ? ' Skvelé! Ozveme sa ti ohľadom možností dobrovoľníckej pomoci.' : '');
 
           petitionForm.reset();
@@ -1241,7 +1241,7 @@
         .catch(() => {
           formStatus.className = 'form-status error';
           formStatus.textContent =
-            'Nepodarilo sa odoslať formulár. Skús to prosím znova, alebo nám napíš priamo na slovensko@pauseai.info.';
+            'Nepodarilo sa odoslať formulár. Skús to prosím znova, alebo nám napíš priamo na info@pauseai.sk.';
           submitBtn.disabled = false;
           submitBtn.textContent = 'Odoslať podpis výzvy';
         });
