@@ -325,16 +325,19 @@ ol {
   color: var(--ink-soft);
 }
 
-#dokazy {
+#data {
   padding-top: clamp(72px, 11vw, 150px);
 }
 
 /* ── Charts ────────────────────────────────────────────────────────────────── */
 
+/* A chart picks its wide or narrow drawing from the room it is given, not the screen. */
 .chart {
   margin: 0;
   min-width: 0;
+  container-type: inline-size;
 }
+
 
 .chart figcaption h3 {
   max-width: 46rem;
@@ -425,6 +428,15 @@ ol {
 
 .plot .variant-narrow {
   display: none;
+}
+@container (max-width: 600px) {
+  .plot .variant-wide {
+    display: none;
+  }
+
+  .plot .variant-narrow {
+    display: block;
+  }
 }
 
 .plot .grid line {
@@ -650,6 +662,14 @@ ol {
   border-bottom: 2px solid var(--black);
 }
 
+.contents-title {
+  display: none;
+}
+
+.claims {
+  min-width: 0;
+}
+
 .contents ol {
   counter-reset: claim;
 }
@@ -687,8 +707,110 @@ ol {
   margin-bottom: clamp(32px, 5vw, 48px);
 }
 
+.tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tab-list button {
+  margin-bottom: -1px;
+  padding: 6px 0 10px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.tab-list button:hover {
+  color: var(--black);
+}
+
+.tab-list button[aria-selected='true'] {
+  border-bottom-color: var(--orange-deep);
+  color: var(--black);
+}
+
+.tabs {
+  gap: 28px;
+}
+
 .claim .figures {
   margin: 0 0 clamp(28px, 4vw, 40px);
+}
+
+.video {
+  max-width: 44rem;
+  margin: 0 0 clamp(28px, 4vw, 40px);
+}
+
+.video-frame {
+  aspect-ratio: 16 / 9;
+  background: var(--black);
+}
+
+.video-frame iframe,
+.video-play {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-play {
+  position: relative;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.video-play img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-button {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55em 1.1em 0.55em 0.8em;
+  background: var(--orange);
+  color: var(--black);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.video-button svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+
+.video-play:hover .video-button {
+  background: #ffa740;
+}
+
+.video figcaption {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.video figcaption a {
+  color: var(--ink);
 }
 
 .claim-sources {
@@ -1156,14 +1278,6 @@ ol {
 }
 
 @media (max-width: 640px) {
-  .plot .variant-wide {
-    display: none;
-  }
-
-  .plot .variant-narrow {
-    display: block;
-  }
-
   .logo-place {
     display: none;
   }
@@ -1173,10 +1287,82 @@ ol {
   html {
     scroll-behavior: auto;
   }
+
+  .contents {
+    transition: none;
+  }
 }
 
 @media (min-width: 861px) {
   .claim-charts-pair {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+
+/* Wide screens: the list of sections becomes a menu that stays beside the text. */
+@media (min-width: 1040px) {
+  .with-sidebar {
+    display: grid;
+    grid-template-columns: 12.5rem minmax(0, 1fr);
+    gap: clamp(72px, 8vw, 112px);
+    align-items: start;
+  }
+
+  /* The menu steps back while you read and comes forward when you reach for it. */
+  .contents {
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    padding-bottom: 0;
+    overflow-y: auto;
+    border-bottom: 0;
+    opacity: 0.45;
+    transition: opacity 0.2s ease;
+  }
+
+  .contents:hover,
+  .contents:focus-within {
+    opacity: 1;
+  }
+
+  .contents-title {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+  }
+
+  .contents li {
+    font-size: 1.125rem;
+    line-height: 1.25;
+  }
+
+  .contents li + li {
+    margin-top: 0;
+  }
+
+  .contents li::before {
+    content: none;
+  }
+
+  .contents a {
+    display: block;
+    padding: 7px 0 7px 14px;
+    border-left: 3px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .contents a:hover {
+    border-left-color: var(--ink-soft);
+  }
+
+  .contents a[aria-current] {
+    border-left-color: var(--orange-deep);
+    color: var(--black);
+  }
+
+  .claims > .claim:first-child {
+    padding-top: 0;
   }
 }

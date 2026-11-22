@@ -1,17 +1,15 @@
 ---
-// The landing page's evidence in brief: the task-horizon chart, the researcher
-// survey figures and the risk statement. The full set is on /dokazy/.
-import { getEntry } from 'astro:content';
+// The landing page's evidence in brief: the task-horizon chart, what the Slovak
+// public thinks, and the experts' risk statement. The full set is on /informacie/.
 import HorizonChart from './charts/HorizonChart.astro';
 import ChartTips from './charts/ChartTips.astro';
 import Figures from './Figures.astro';
 import { copy, rich } from '../lib/copy';
 
 const text = copy.home_evidence;
-const survey = (await getEntry('tvrdenia', 'obavy'))!;
 ---
 
-<section class="band" id="dokazy">
+<section class="band" id="data">
   <div class="wrap">
     <header class="band-head">
       <h2>{text.heading}</h2>
@@ -22,13 +20,9 @@ const survey = (await getEntry('tvrdenia', 'obavy'))!;
 
     <div class="evidence-row">
       <div>
-        <h3>{survey.data.title}</h3>
-        <Figures items={survey.data.figures} />
-        <p class="source">
-          {survey.data.sources.slice(0, 2).map((source, i) => (
-            <Fragment>{i > 0 && '; '}<a href={source.url}>{source.label}</a></Fragment>
-          ))}
-        </p>
+        <h3>{text.public.heading}</h3>
+        <Figures items={text.public.figures} />
+        <p class="source" set:html={rich(text.public.source)} />
       </div>
 
       <figure class="statement">

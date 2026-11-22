@@ -19,13 +19,23 @@ export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
   nav: Record<'label' | 'evidence' | 'demands' | 'questions' | 'about' | 'join', string>;
   hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string };
-  home_evidence: { heading: string; intro: string; more: string; quote: string; quote_source: string };
+  home_evidence: {
+    heading: string;
+    intro: string;
+    more: string;
+    public: { heading: string; figures: { figure: string; text: string }[]; source: string };
+    quote: string;
+    quote_source: string;
+  };
   evidence_page: {
     heading: string;
     lead: string;
     description: string;
     contents: string;
     sources: string;
+    video_play: string;
+    video_note: string;
+    tabs_label: string;
     reading: {
       heading: string;
       intro: string;

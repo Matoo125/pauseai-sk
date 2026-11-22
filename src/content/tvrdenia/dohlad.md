@@ -1,6 +1,6 @@
 ---
 title: Nezávislý dohľad zatiaľ chýba
-order: 4
+order: 5
 charts: [sectors, investment]
 sources:
   - label: Epoch AI, Data on AI models

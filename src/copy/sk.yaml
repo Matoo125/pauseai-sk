@@ -5,9 +5,9 @@
 #   >-              starts a paragraph that runs over several lines
 #
 # Longer texts are Markdown files in src/content/:
-#   tvrdenia/   the claims on /dokazy/, one file per claim
+#   tvrdenia/   the claims on /informacie/, one file per claim
 #   otazky/     questions and answers on /otazky/, one file per question
-#   zdroje/     the reading list at the end of /dokazy/, one file per book or report
+#   zdroje/     the reading list at the end of /informacie/, one file per book or report
 #   stranky/    the page /kto-sme/
 
 site:
@@ -22,7 +22,7 @@ site:
 
 nav:
   label: Hlavná navigácia
-  evidence: Dôkazy
+  evidence: Informácie
   demands: Požiadavky
   questions: Otázky
   about: Kto sme
@@ -36,13 +36,13 @@ hero:
     PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
     medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
   cta: Pridať sa
-  cta_data: Pozrieť dôkazy
+  cta_data: Pozrieť dáta
   note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
   photo_alt: >-
     Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti
     nekontrolovanému vývoju AI.
 
-# The evidence section of the landing page: one chart, the survey figures and a quote.
+# The evidence section of the landing page: one chart, what the Slovak public thinks, and a quote.
 home_evidence:
   heading: Čo hovoria dáta
   intro: >-
@@ -50,7 +50,22 @@ home_evidence:
     Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
   more: >-
     Toto je len začiatok. Všetky tvrdenia s grafmi, zdrojmi a s tým, čo dáta neukazujú,
-    sú na stránke [Dôkazy](/dokazy/).
+    sú na stránke [Informácie](/informacie/).
+  public:
+    heading: Čo si myslí slovenská verejnosť
+    figures:
+      - figure: 89 %
+        text: >-
+          ľudí na Slovensku súhlasí, že roboty a umelá inteligencia sú technológie, ktoré si
+          vyžadujú starostlivé riadenie. Priemer Európskej únie je 84 %.
+      - figure: 79 %
+        text: >-
+          si myslí, že pre roboty a umelú inteligenciu zanikne viac pracovných miest, než vznikne.
+          Priemer Európskej únie je 66 %.
+    source: >-
+      [Špeciálny Eurobarometer 554](https://www.cec-managers.org/wp-content/uploads/2025/02/Artificial-Intelligence-and-the-future-of-work_SP554_factsheet_sk_en.pdf),
+      1 023 respondentov na Slovensku, jar 2024. Prieskum sa pýtal na AI a roboty v práci,
+      nie na pozastavenie vývoja.
   # Our translation of the Center for AI Safety statement. Original:
   # "Mitigating the risk of extinction from AI should be a global priority alongside other
   # societal-scale risks such as pandemics and nuclear war."
@@ -63,13 +78,16 @@ home_evidence:
     Demis Hassabis a Sam Altman.
 
 evidence_page:
-  heading: Dôkazy
+  heading: Informácie
   lead: >-
     Tvrdenia, o ktoré opierame svoje požiadavky. Pri každom je graf alebo údaj, zdroje
     a aj to, čo z dát nevyplýva.
   description: Dáta, prieskumy a správy, o ktoré sa opiera PauseAI Slovensko, usporiadané podľa tvrdení.
   contents: Na tejto stránke
   sources: "Zdroje:"
+  video_play: Prehrať video
+  video_note: Video sa načíta z YouTube až po kliknutí.
+  tabs_label: Grafy
   reading:
     heading: Na čítanie
     intro: >-
@@ -97,6 +115,7 @@ charts:
   total: Spolu
 
   horizon:
+    tab: Dĺžka úloh
     # {first}/{last} = durations like '3 s' and '17 h'   {first_year} = year   {months} = number
     title: AI dnes sama dokončí úlohy, ktoré odborníkovi trvajú {last}. V roku {first_year} to bolo {first}
     subtitle: >-
@@ -113,6 +132,7 @@ charts:
     value: Dĺžka úlohy
 
   compute:
+    tab: Tréningové výpočty
     # {growth} = '1,6 mld.'   {months} = '5'   {from}/{to} = years
     title: Najväčší tréning AI dnes spotrebuje približne {growth} ráz viac výpočtov než koncom roka 2012
     subtitle: >-
@@ -136,6 +156,7 @@ charts:
       unknown: neuvedená
 
   cybench:
+    tab: Hackerské úlohy
     # {first_year} = earliest year in the data   {first}/{last} = percentages   {model} = latest record
     title: V roku {first_year} vyriešil najlepší model {first} % hackerských úloh. Najnovší výsledok je {last} %
     subtitle: >-
@@ -154,6 +175,7 @@ charts:
     reported: Výsledok uvádza
 
   sectors:
+    tab: Kto modely zverejňuje
     # {share_last}/{share_first} = whole percentages   {last}/{first} = years
     title: V roku {last} prišlo {share_last} % významných modelov z firiem. V roku {first} to bolo {share_first} %
     subtitle: Počet významných modelov AI zverejnených za rok, podľa typu organizácie.
@@ -168,6 +190,7 @@ charts:
       other: Iné
 
   investment:
+    tab: Investície
     # {last_value}/{first_value} = billions of dollars   {last}/{first} = years
     title: Do súkromných AI firiem prišlo v roku {last} približne {last_value} mld. dolárov. V roku {first} to bolo {first_value} mld.
     subtitle: Súkromné investície do firiem vyvíjajúcich AI vo svete, v miliardách dolárov (v cenách roku 2021).

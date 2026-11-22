@@ -14,7 +14,7 @@ bun run data     # refresh the chart data from Epoch AI
 Three pages and one building block:
 
 - **/** — the pitch in one scroll: hero, evidence in brief, the three demands, sign-up.
-- **/dokazy/** — the evidence, as a list of *claims*. A claim is one sentence we assert, the chart
+- **/informacie/** — the evidence, as a list of *claims*. A claim is one sentence we assert, the chart
   or figure behind it, a few lines of context including what the data doesn't show, and its
   sources. The reading list closes the page.
 - **/otazky/** — objections and answers.
@@ -25,7 +25,7 @@ Three pages and one building block:
 | To change… | Edit |
 |---|---|
 | Short text anywhere: headings, buttons, chart titles, the demands | `src/copy/sk.yaml` |
-| A claim on `/dokazy/` | its Markdown file in `src/content/tvrdenia/` |
+| A claim on `/informacie/` | its Markdown file in `src/content/tvrdenia/` |
 | A question on `/otazky/` | its Markdown file in `src/content/otazky/` |
 | The reading list | one Markdown file per book or report in `src/content/zdroje/` (covers in `covers/`) |
 | The about page | `src/content/stranky/kto-sme.md` |
@@ -37,7 +37,8 @@ In `sk.yaml`, `{name}` is a value the build fills in and `[text](url)` is a link
 placeholder stops the build with a message naming it.
 
 To add a claim, copy a file in `src/content/tvrdenia/`: `charts:` lists which charts it shows
-(the names are in `src/content.config.ts`), `figures:` are headline numbers, `sources:` its links.
+(the names are in `src/content.config.ts`), `figures:` are headline numbers, `video:` is a YouTube
+video shown as a still until someone presses play, and `sources:` are its links.
 Restart `bun run dev` after adding a new folder of content.
 
 ## Sign-ups
