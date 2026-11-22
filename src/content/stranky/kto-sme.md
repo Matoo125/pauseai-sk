@@ -19,8 +19,8 @@ o odpor k pokroku. Ide o zodpovednosť voči spoločnosti.
 ## Ľudia
 
 - Matej Vrzala
-- Bianka Madaraszova
-- Patrik Simko
+- Bianka Madarászová
+- Patrik Šimko
 
 ## Financovanie
 
