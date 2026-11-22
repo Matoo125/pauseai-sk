@@ -1,37 +1,31 @@
 ---
 import { Image } from 'astro:assets';
 import crowd from '../assets/hero-crowd.jpeg';
-import Logo from './Logo.astro';
-import { nav } from '../data/site';
+import Topbar from './Topbar.astro';
+import { copy } from '../lib/copy';
+import { joinHref } from '../data/site';
+
+const { hero } = copy;
 ---
 
 <div class="placard">
-  <header class="wrap topbar">
-    <Logo tone="on-orange" />
-    <nav aria-label="Hlavná navigácia">
-      {nav.map((item) => <a class="topbar-link" href={item.href}>{item.label}</a>)}
-      <a class="button button-small" href="#vyzva">Podpísať výzvu</a>
-    </nav>
-  </header>
+  <Topbar />
 
   <section class="wrap hero">
-    <h1><span>Budúcnosť tvoríme my.</span> <span>Nie nekontrolované preteky algoritmov.</span></h1>
+    <h1>{hero.title.map((line) => <span>{line} </span>)}</h1>
     <div class="hero-row">
       <div class="hero-text">
-        <p>
-          PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
-          medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
-        </p>
+        <p>{hero.lead}</p>
         <div class="hero-actions">
-          <a class="button" href="#vyzva">Podpísať výzvu</a>
-          <a class="text-link" href="#data">Pozrieť dáta</a>
+          <a class="button" href={joinHref}>{hero.cta}</a>
+          <a class="text-link" href="#data">{hero.cta_data}</a>
         </div>
-        <p class="hero-note">Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.</p>
+        <p class="hero-note">{hero.note}</p>
       </div>
       <Image
         class="hero-photo"
         src={crowd}
-        alt="Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti nekontrolovanému vývoju AI."
+        alt={hero.photo_alt}
         widths={[480, 800, 1200]}
         sizes="(max-width: 800px) 100vw, 560px"
         loading="eager"

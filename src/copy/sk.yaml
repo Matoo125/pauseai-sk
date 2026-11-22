@@ -1,0 +1,264 @@
+# All Slovak text of the site, in page order. Edit the words; leave the keys.
+#
+#   {name}          a number or name the build fills in (from the chart data)
+#   [text](url)     a link
+#   |               starts a paragraph that runs over several lines
+#
+# The reading list on /zdroje/ is one file per source in src/content/zdroje/.
+
+site:
+  name: PauseAI Slovensko
+  title: PauseAI Slovensko — Za bezpečnú a demokratickú budúcnosť umelej inteligencie
+  description: >-
+    Občianska iniciatíva za dočasné pozastavenie nekontrolovaných pretekov vo vývoji
+    najnebezpečnejších AI systémov a za medzinárodný dohľad.
+  email: info@pauseai.sk
+  skip: Preskočiť na obsah
+  logo_label: PauseAI Slovensko, domovská stránka
+
+nav:
+  label: Hlavná navigácia
+  data: Dáta
+  mission: Poslanie
+  demands: Požiadavky
+  risks: Riziká
+  sources: Zdroje
+  join: Pridať sa
+
+hero:
+  title:
+    - Budúcnosť tvoríme my.
+    - Nie nekontrolované preteky algoritmov.
+  lead: >-
+    PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
+    medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
+  cta: Pridať sa
+  cta_data: Pozrieť dáta
+  note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
+  photo_alt: >-
+    Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti
+    nekontrolovanému vývoju AI.
+
+evidence:
+  heading: Čo hovoria dáta
+  intro: >-
+    Nemusíš nám veriť na slovo. Toto sú verejné dáta a prieskumy, z ktorých vychádzame.
+    Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
+  more: Knihy, štúdie a správy, o ktoré sa opierame, sú na stránke [Zdroje](/zdroje/).
+  source_line: "Zdroj: [{name}]({url}), {licence}, stav k {date}."
+
+  compute:
+    # {growth} = '1,6 mld.'   {months} = '5'   {from}/{to} = years
+    title: Najväčší tréning AI dnes spotrebuje približne {growth} ráz viac výpočtov než koncom roka 2012
+    subtitle: >-
+      Výpočty použité na tréning významných modelov AI, {from} – {to}.
+      Zvislá os je logaritmická, v operáciách s pohyblivou rádovou čiarkou (FLOP).
+    legend_record: rekord v čase zverejnenia
+    legend_other: ostatné významné modely
+    note: >-
+      Rekord sa od konca roka 2012 zdvojnásobuje v priemere každých {months} mesiacov
+      (vlastný výpočet z prvej a poslednej hodnoty). Časť hodnôt sú odhady.
+    aria: >-
+      Bodový graf: tréningové výpočty významných modelov AI od roku {from}. Rekord vzrástol
+      z {base} FLOP koncom roka 2012 na {latest} FLOP ({model}). Hodnoty sú v tabuľke pod grafom.
+    table_summary: Zobraziť rekordy ako tabuľku
+    table_all: Všetkých {count} modelov je v [pôvodnom súbore CSV]({csv}).
+    columns:
+      model: Model
+      org: Organizácia
+      date: Zverejnené
+      flop: Tréning (FLOP)
+      confidence: Istota odhadu
+    tip_flop: Tréning
+    confidence:
+      Confident: vysoká
+      Likely: stredná
+      Speculative: nízka
+      unknown: neuvedená
+
+  sectors:
+    # {share_last}/{share_first} = whole percentages   {last}/{first} = years
+    title: V roku {last} prišlo {share_last} % významných modelov z firiem. V roku {first} to bolo {share_first} %
+    subtitle: Počet významných modelov AI zverejnených za rok, podľa typu organizácie.
+    note: Zaradenie organizácií je podľa Epoch AI.
+    aria: >-
+      Stĺpcový graf: počet významných modelov AI za rok podľa typu organizácie, {first} až {last}.
+      Podiel firiem vzrástol z {share_first} % na {share_last} %. Hodnoty sú v tabuľke pod grafom.
+    table_summary: Zobraziť ako tabuľku
+    year: Rok
+    total: Spolu
+    series:
+      industry: Firmy
+      mixed: Firmy spolu s univerzitami
+      academia: Univerzity
+      other: Iné
+
+  survey:
+    heading: Čo si myslia samotní výskumníci
+    items:
+      - figure: 38 – 51 %
+        text: >-
+          opýtaných výskumníkov AI dalo aspoň 10 % šancu, že pokročilá AI povedie k následkom
+          takým zlým ako vyhynutie ľudstva. Rozpätie závisí od toho, ako bola otázka položená.
+      - figure: "2047"
+        text: >-
+          je rok, do ktorého podľa súhrnného odhadu s 50 % pravdepodobnosťou stroje bez pomoci
+          prekonajú ľudí v každej úlohe. V prieskume o rok skôr vychádzal ten istý odhad o 13 rokov neskôr.
+    source: >-
+      Zdroj: Grace a kol., [Thousands of AI Authors on the Future of AI](https://arxiv.org/abs/2401.02843)
+      (2024), prieskum medzi 2 778 autormi z popredných konferencií o AI.
+
+mission:
+  heading: Nejde o odpor k pokroku. Ide o zodpovednosť voči spoločnosti.
+  paragraphs:
+    - >-
+      Umelá inteligencia prináša obrovský potenciál v medicíne, vzdelávaní či vede. Zároveň však
+      komerčné preteky tlačia vývojárov do vypúšťania stále silnejších modelov bez toho, aby
+      rozumeli ich vnútornému fungovaniu.
+    - >-
+      V letectve, jadrovej energetike či farmácii je nemysliteľné nasadiť technológiu skôr, ako
+      prejde prísnou certifikáciou. Pri najsilnejších AI systémoch takýto mechanizmus stále chýba.
+    - >-
+      PauseAI Slovensko žiada priestor na dôkladné vedecké overenie, etické vyhodnotenie a
+      stanovenie jasných pravidiel demokratickými inštitúciami.
+  # Our translation of the Center for AI Safety statement. Original:
+  # "Mitigating the risk of extinction from AI should be a global priority alongside other
+  # societal-scale risks such as pandemics and nuclear war."
+  quote: >-
+    „Zmiernenie rizika vyhynutia v dôsledku AI by malo byť globálnou prioritou popri iných
+    rizikách celospoločenského rozsahu, akými sú pandémie a jadrová vojna.“
+  quote_source: >-
+    [Vyhlásenie o riziku AI](https://www.safe.ai/work/statement-on-ai-risk), Center for AI Safety,
+    máj 2023 (náš preklad). Podpísali ho okrem iných Geoffrey Hinton, Yoshua Bengio,
+    Demis Hassabis a Sam Altman.
+
+demands:
+  heading: Tri kroky pre bezpečnú budúcnosť
+  intro: Naše požiadavky vychádzajú z odporúčaní popredných výskumníkov a princípov medzinárodného práva.
+  items:
+    - title: Medzinárodná agentúra pre dohľad nad AI
+      text: >-
+        Po vzore Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny
+        orgán, ktorý audituje dátové centrá a monitoruje tréning modelov na hranici schopností.
+    - title: Podmienka garantovanej bezpečnosti
+      text: >-
+        Vývoj a trénovanie novej generácie superinteligentných modelov musí byť pozastavené, kým
+        vedecká komunita nepreukáže spoľahlivé metódy zarovnania (alignment) a kontroly.
+    - title: Demokratická kontrola a certifikácia
+      text: >-
+        Nasadenie modelov do kritickej infraštruktúry a verejného priestoru musí podliehať
+        verejnému posúdeniu dopadov na prácu, demokraciu a bezpečnosť občanov.
+
+risks:
+  heading: Riziká, ktoré vyžadujú našu pozornosť
+  intro: Bezpečnosť umelej inteligencie nie je abstraktná teória. Dotýka sa každodenného života každého z nás.
+  read_more: "Viac:"
+  # `source` is the file name (without .md) of an entry in src/content/zdroje/.
+  items:
+    - title: Zachovanie ľudskej kontroly
+      text: >-
+        Riziko straty kontroly nad autonómnymi systémami označujú špičkoví vedci za závažnú
+        civilizačnú hrozbu porovnateľnú s pandémiami či jadrovou vojnou.
+      source: if-anyone-builds-it
+    - title: Ochrana práce a ekonomiky
+      text: >-
+        Neriadený a unáhlený nástup umelej inteligencie môže otriasť trhom práce skôr, ako
+        vzdelávacie a sociálne systémy stihnú reagovať.
+      source: gradual-disempowerment
+    - title: Obrana demokracie pred manipuláciou
+      text: >-
+        Generatívne dezinformácie, deepfake obsah a cielená automatizovaná manipulácia môžu
+        fatálne podkopať dôveru vo voľby a slobodnú diskusiu.
+      source: international-ai-safety-report
+    - title: Technológie pre verejné dobro
+      text: >-
+        Chceme technológie, ktoré pomáhajú liečiť choroby, zefektívňujú energetiku a obohacujú
+        ľudský potenciál — pod dohľadom verejnosti.
+      source: life-3-0
+
+join:
+  heading: Pridaj sa k PauseAI Slovensko
+  text: >-
+    Nechaj nám kontakt. Dáme ti vedieť o akciách, kampaniach a možnostiach, ako sa zapojiť
+    na Slovensku.
+  contact: >-
+    Kontakty z formulára dostáva tím slovenských koordinátorov. Ak formulár nefunguje alebo nám
+    chceš napísať priamo, [pošli nám e-mail](mailto:info@pauseai.sk).
+
+  statement:
+    heading: Podpíš medzinárodné vyhlásenie
+    text: >-
+      Hnutie PauseAI vyzýva vlády sveta, aby uzavreli medzinárodnú zmluvu o pozastavení tréningu
+      najvýkonnejších všeobecných systémov AI, kým nebudeme vedieť, ako ich vytvárať bezpečne
+      a udržať pod demokratickou kontrolou. Podpisuje sa priamo na stránke hnutia.
+    button: Podpísať na pauseai.info
+    url: https://pauseai.info/statement
+    also: >-
+      Podobnú výzvu, [Statement on Superintelligence](https://superintelligence-statement.org/),
+      podpísali desaťtisíce ľudí vrátane popredných vedcov.
+
+  form:
+    heading: Zostaňme v kontakte
+    intro: Zaberie to menej než 30 sekúnd a k ničomu ťa to nezaväzuje.
+    name: Meno a priezvisko
+    name_placeholder: napr. Mária Horváthová
+    email: E-mailová adresa
+    email_placeholder: tvoj@email.sk
+    role: Mesto alebo zameranie (voliteľné)
+    role_placeholder: napr. Bratislava / študent, rodič, IT
+    volunteer: Mám záujem pomôcť ako dobrovoľník alebo sa zapojiť do lokálnych aktivít na Slovensku.
+    button: Pridať sa
+    sending: Odosielam…
+    done: Kontakt odoslaný
+    # {name} = what the person typed
+    success: Ďakujeme, {name}! Ozveme sa ti.
+    success_volunteer: Ďakujeme, {name}! Ozveme sa ti s možnosťami, ako pomôcť.
+    error: Kontakt sa nepodarilo odoslať. Skús to znova alebo nám napíš na info@pauseai.sk.
+    privacy: >-
+      Žiadny spam. Údaje použijeme len na to, aby sme ti písali o aktivitách PauseAI Slovensko.
+      O ich vymazanie môžeš kedykoľvek požiadať na info@pauseai.sk.
+    # Subject of the e-mail the coordinators receive.
+    mail_subject: Nový záujemca – PauseAI Slovensko
+
+sources:
+  title: Zdroje — PauseAI Slovensko
+  description: Správy, štúdie a knihy, o ktoré sa opiera PauseAI Slovensko, s tým, čo ktorý zdroj tvrdí.
+  heading: Prečo si to myslíme
+  intro: >-
+    Naše požiadavky nestoja na jednom texte ani na jednom autorovi. Toto sú správy, štúdie a knihy,
+    o ktoré sa opierame. Pri každom zdroji píšeme, čo tvrdí a aký typ textu to je: vedecký prehľad
+    je niečo iné než argument jedného tímu.
+  # One heading per kind of source, in the order they appear on the page.
+  kinds:
+    report: Vedecké prehľady
+    argument: Argumenty
+    book: Knihy
+  claim_label: Čo tvrdí
+  open: Otvoriť zdroj
+  data_note: Dáta a prieskum, z ktorých sú grafy, sú priamo na [hlavnej stránke](/#data).
+  disagree:
+    heading: V čom sa tieto zdroje nezhodnú
+    paragraphs:
+      - >-
+        Autori týchto textov sa nezhodnú na tom, ako by k najhoršiemu došlo. Yudkowsky a Soares
+        opisujú náhlu stratu kontroly nad systémom inteligentnejším než ľudia. Autori štúdie
+        o postupnej strate vplyvu tvrdia, že žiadny taký okamih netreba: stačí, aby ľudí v ekonomike,
+        kultúre a štáte postupne nahradili systémy AI. Tegmark opisuje celú škálu možných budúcností,
+        dobrých aj zlých.
+      - >-
+        Nezhodnú sa ani na tom, ako veľmi je to pravdepodobné a čo presne treba urobiť. Zhodnú sa
+        na jednom: dnes nevieme zaručiť, že systémy schopnejšie než ľudia zostanú pod ľudskou
+        kontrolou, a vývoj napriek tomu pokračuje. Z toho vychádza aj naša požiadavka.
+
+footer:
+  about: >-
+    PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI.
+    Presadzujeme bezpečnosť a demokratický dohľad nad pokročilou umelou inteligenciou.
+  pages: Na tomto webe
+  movement: Medzinárodné hnutie
+  contact: Kontakt
+  place: Bratislava, Slovensko
+  # {year} = the current year
+  legal: >-
+    © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov. Grafy používajú dáta
+    [Epoch AI](https://epoch.ai/data/ai-models) pod licenciou CC BY 4.0.

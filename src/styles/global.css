@@ -635,6 +635,105 @@ ol {
   margin: 8px 0 0;
 }
 
+.evidence-more {
+  max-width: 44rem;
+  margin-top: clamp(40px, 6vw, 64px);
+  font-size: 1.1875rem;
+}
+
+/* ── Sources page ──────────────────────────────────────────────────────────── */
+
+.page-head {
+  padding-block: clamp(28px, 6vw, 72px) clamp(40px, 7vw, 88px);
+}
+
+.page-head h1 {
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.page-head p {
+  max-width: 42rem;
+  margin-top: 24px;
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.topbar-link[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+}
+
+.source-group + .source-group {
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.source-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 12px clamp(28px, 5vw, 72px);
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 2px solid var(--black);
+  scroll-margin-top: 24px;
+}
+
+.source-entry:target {
+  border-top-color: var(--orange-deep);
+}
+
+.source-entry h3 {
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.source-byline {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.source-body p {
+  max-width: 40rem;
+}
+
+.source-body p + p {
+  margin-top: 14px;
+}
+
+.source-body p a {
+  color: var(--ink);
+}
+
+.source-body .source-claim {
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: var(--black);
+}
+
+.source-body .source-format {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.source-body .text-link {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.disagree {
+  margin-top: clamp(56px, 8vw, 96px);
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--tint);
+}
+
+.disagree p {
+  max-width: 44rem;
+  margin-top: 18px;
+}
+
 /* ── Mission ───────────────────────────────────────────────────────────────── */
 
 .mission {
@@ -716,35 +815,57 @@ ol {
   max-width: 32rem;
 }
 
-/* ── Petition ──────────────────────────────────────────────────────────────── */
+.risks .risk-source {
+  font-size: 0.9375rem;
+}
 
-.petition {
+.risks .risk-source a {
+  color: var(--ink);
+}
+
+/* ── Join ──────────────────────────────────────────────────────────────────── */
+
+/* Sign-up first: beside the heading on wide screens, right under it on narrow ones. */
+.join {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
-  gap: clamp(32px, 6vw, 88px);
+  grid-template-areas:
+    'head form'
+    'statement form';
+  grid-template-rows: auto 1fr;
+  gap: clamp(32px, 5vw, 56px) clamp(32px, 6vw, 88px);
   align-items: start;
 }
 
-.petition-text p {
+.join-head {
+  grid-area: head;
+}
+
+.join .form {
+  grid-area: form;
+}
+
+.join-text p {
   max-width: 36rem;
   margin-top: 20px;
 }
 
-.petition-text ul {
+.join-statement {
+  grid-area: statement;
+  padding-top: 28px;
+  border-top: 1px solid #4a4843;
+}
+
+.join-statement h3 {
+  color: var(--paper);
+  font-size: 1.75rem;
+}
+
+.join-statement .button {
   margin-top: 24px;
 }
 
-.petition-text li {
-  padding: 10px 0;
-  border-top: 1px solid #4a4843;
-  font-family: var(--display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.petition-text .petition-contact {
-  margin-top: 28px;
+.join-text .join-small {
   font-size: 0.9375rem;
   color: #cfcdc6;
 }
@@ -879,8 +1000,14 @@ ol {
   .hero-row,
   .evidence-row,
   .mission,
-  .petition {
+  .join,
+  .source-entry {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .join {
+    grid-template-areas: 'head' 'form' 'statement';
+    grid-template-rows: auto;
   }
 
   .hero-text {

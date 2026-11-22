@@ -13,11 +13,23 @@ bun run data     # refresh the chart data from Epoch AI
 
 | To change… | Edit |
 |---|---|
-| Demands, risks, nav, contact e-mail, form endpoint | `src/data/site.ts` |
-| Hero, mission, petition copy | the matching file in `src/components/` |
-| Evidence text and the survey figures | `src/components/Evidence.astro` |
+| Any Slovak text on the site | `src/copy/sk.yaml` (one file, in page order) |
+| The reading list on `/zdroje/` | one Markdown file per source in `src/content/zdroje/` |
+| Menu links, form endpoint, sister sites | `src/data/site.ts` |
 | Colours, type, layout | `src/styles/global.css` |
 | Chart data | don't edit `src/data/epoch.json` by hand — run `bun run data` |
+
+In `sk.yaml`, `{name}` is a value the build fills in and `[text](url)` is a link. A typo in a
+placeholder or in a risk's `source:` stops the build with a message naming it.
+
+To add a source, copy a file in `src/content/zdroje/`; the fields are described in
+`src/content.config.ts`. Restart `bun run dev` after adding the first file of a new kind.
+
+## Sign-ups
+
+The form posts name, e-mail and an optional note to Formspree, which mails them to the coordinators.
+It is a contact list, not a petition: the page sends people to pauseai.info to sign the movement's
+statement.
 
 ## Charts
 

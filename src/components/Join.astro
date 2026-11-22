@@ -1,0 +1,95 @@
+---
+// Sign-up form (to Formspree) plus a pointer to the international statement,
+// which is signed on pauseai.info, not here.
+import { copy, rich } from '../lib/copy';
+import { formEndpoint } from '../data/site';
+
+const { join } = copy;
+const { form, statement } = join;
+const messages = {
+  sending: form.sending,
+  done: form.done,
+  success: form.success,
+  successVolunteer: form.success_volunteer,
+  error: form.error,
+};
+---
+
+<section class="band band-dark" id="pridaj-sa">
+  <div class="wrap join">
+    <div class="join-text join-head">
+      <h2>{join.heading}</h2>
+      <p>{join.text}</p>
+    </div>
+
+    <div class="join-text join-statement">
+      <h3>{statement.heading}</h3>
+      <p>{statement.text}</p>
+      <a class="button button-orange" href={statement.url} rel="noopener">{statement.button}</a>
+      <p class="join-small" set:html={rich(statement.also)} />
+    </div>
+
+    <form id="join-form" class="form" action={formEndpoint} method="POST" data-messages={JSON.stringify(messages)}>
+      <h3>{form.heading}</h3>
+      <p class="form-intro">{form.intro}</p>
+
+      <label for="join-name">{form.name}</label>
+      <input id="join-name" name="name" type="text" autocomplete="name" placeholder={form.name_placeholder} required />
+
+      <label for="join-email">{form.email}</label>
+      <input id="join-email" name="email" type="email" autocomplete="email" placeholder={form.email_placeholder} required />
+
+      <label for="join-role">{form.role}</label>
+      <input id="join-role" name="role" type="text" placeholder={form.role_placeholder} />
+
+      <label class="check">
+        <input name="volunteer" type="checkbox" />
+        <span>{form.volunteer}</span>
+      </label>
+
+      <input type="hidden" name="_subject" value={form.mail_subject} />
+
+      <button class="button" type="submit">{form.button}</button>
+      <p class="form-status" role="status" hidden></p>
+      <p class="form-privacy">{form.privacy}</p>
+      <p class="form-privacy" set:html={rich(join.contact)} />
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#join-form')!;
+  const status = form.querySelector<HTMLElement>('.form-status')!;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const messages: Record<string, string> = JSON.parse(form.dataset.messages!);
+  const idle = button.textContent!;
+
+  const say = (kind: 'ok' | 'error', text: string) => {
+    status.hidden = false;
+    status.dataset.kind = kind;
+    status.textContent = text;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim() || String(data.get('email'));
+    const volunteer = data.has('volunteer');
+
+    button.disabled = true;
+    button.textContent = messages.sending;
+    status.hidden = true;
+
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(String(response.status));
+      say('ok', (volunteer ? messages.successVolunteer : messages.success).replace('{name}', name));
+      form.reset();
+      button.textContent = messages.done;
+    } catch {
+      say('error', messages.error);
+      button.disabled = false;
+      button.textContent = idle;
+    }
+  });
+</script>

@@ -5,7 +5,9 @@ import '@fontsource/saira-condensed/latin-800.css';
 import '@fontsource/saira-condensed/latin-ext-800.css';
 import '@fontsource-variable/roboto-slab/wght.css';
 import '../styles/global.css';
-import { site } from '../data/site';
+import { copy } from '../lib/copy';
+
+const { site } = copy;
 
 interface Props {
   title?: string;
@@ -32,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:locale" content="sk_SK" />
   </head>
   <body>
-    <a class="skip" href="#data">Preskočiť na obsah</a>
+    <a class="skip" href="#obsah">{site.skip}</a>
     <slot />
   </body>
 </html>

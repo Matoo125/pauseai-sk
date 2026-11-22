@@ -1,18 +1,16 @@
 ---
 import ComputeChart from './ComputeChart.astro';
 import SectorChart from './SectorChart.astro';
+import { copy, plain, rich } from '../lib/copy';
 
-const SURVEY_URL = 'https://arxiv.org/abs/2401.02843';
+const { evidence } = copy;
 ---
 
 <section class="band" id="data">
   <div class="wrap">
     <header class="band-head">
-      <h2>Čo hovoria dáta</h2>
-      <p>
-        Nemusíš nám veriť na slovo. Toto sú verejné dáta a prieskumy, z ktorých vychádzame.
-        Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
-      </p>
+      <h2>{evidence.heading}</h2>
+      <p>{evidence.intro}</p>
     </header>
 
     <ComputeChart />
@@ -21,29 +19,22 @@ const SURVEY_URL = 'https://arxiv.org/abs/2401.02843';
       <SectorChart />
 
       <div class="survey">
-        <h3>Čo si myslia samotní výskumníci</h3>
+        <h3>{evidence.survey.heading}</h3>
         <dl>
-          <div>
-            <dt>38 – 51&nbsp;%</dt>
-            <dd>
-              opýtaných výskumníkov AI dalo aspoň 10&nbsp;% šancu, že pokročilá AI povedie k následkom
-              takým zlým ako vyhynutie ľudstva. Rozpätie závisí od toho, ako bola otázka položená.
-            </dd>
-          </div>
-          <div>
-            <dt>2047</dt>
-            <dd>
-              je rok, do ktorého podľa súhrnného odhadu s 50&nbsp;% pravdepodobnosťou stroje bez pomoci
-              prekonajú ľudí v každej úlohe. V prieskume o rok skôr vychádzal ten istý odhad o 13 rokov neskôr.
-            </dd>
-          </div>
+          {
+            evidence.survey.items.map((item) => (
+              <div>
+                <dt>{plain(item.figure)}</dt>
+                <dd>{plain(item.text)}</dd>
+              </div>
+            ))
+          }
         </dl>
-        <p class="source">
-          Zdroj: Grace a kol., <a href={SURVEY_URL}>Thousands of AI Authors on the Future of AI</a> (2024),
-          prieskum medzi 2&nbsp;778 autormi z popredných konferencií o AI.
-        </p>
+        <p class="source" set:html={rich(evidence.survey.source)} />
       </div>
     </div>
+
+    <p class="evidence-more" set:html={rich(evidence.more)} />
   </div>
 </section>
 

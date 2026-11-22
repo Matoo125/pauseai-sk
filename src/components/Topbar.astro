@@ -1,0 +1,20 @@
+---
+// The orange strip with the logo and menu; the top of the placard on every page.
+import Logo from './Logo.astro';
+import { copy } from '../lib/copy';
+import { joinHref, nav } from '../data/site';
+---
+
+<header class="wrap topbar">
+  <Logo tone="on-orange" />
+  <nav aria-label={copy.nav.label}>
+    {
+      nav.map((item) => (
+        <a class="topbar-link" href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+    <a class="button button-small" href={joinHref}>{copy.nav.join}</a>
+  </nav>
+</header>

@@ -4,6 +4,9 @@
 // CSS shows whichever fits.
 import epoch from '../data/epoch.json';
 import { flopText, scale, skBig, skDate, skDecimal, yearOf, type Tip } from '../lib/chart';
+import { copy, plain, rich } from '../lib/copy';
+
+const text = copy.evidence.compute;
 
 const { points, records, fromYear } = epoch.compute;
 const recordNames = new Set(records);
@@ -25,23 +28,36 @@ const baseRecord = recordPoints.filter((p) => p.date <= BASE_DATE).at(-1)!;
 const growth = latestRecord.flop / baseRecord.flop;
 const doublingMonths = ((yearOf(latestRecord.date) - yearOf(BASE_DATE)) * 12) / Math.log2(growth);
 
-const CONFIDENCE: Record<string, string> = {
-  Confident: 'vysoká',
-  Likely: 'stredná',
-  Speculative: 'nízka',
-};
 const orgText = (org: string) => org.split(',').join(', ');
 
 // Tooltip contents, written into the page once and shared by both variants.
 const tips: Tip[] = points.map((p) => ({
   title: p.name,
   rows: [
-    ['Tréning', `${flopText(p.flop)} FLOP`],
-    ['Organizácia', orgText(p.org)],
-    ['Zverejnené', skDate(p.date)],
+    [text.tip_flop, `${flopText(p.flop)} FLOP`],
+    [text.columns.org, orgText(p.org)],
+    [text.columns.date, skDate(p.date)],
   ],
 }));
 const tipsJson = JSON.stringify(tips).replace(/</g, '\\u003c');
+
+const vars = {
+  growth: skBig(growth),
+  months: skDecimal(doublingMonths, 0),
+  from: fromYear,
+  to: epoch.source.latestModel.slice(0, 4),
+  base: flopText(baseRecord.flop),
+  latest: flopText(latestRecord.flop),
+  model: latestRecord.name,
+  count: points.length,
+  csv: epoch.source.csv,
+};
+const sourceLine = rich(copy.evidence.source_line, {
+  name: epoch.source.name,
+  url: epoch.source.url,
+  licence: epoch.source.licence,
+  date: skDate(epoch.source.retrieved),
+});
 
 const x0 = fromYear;
 const x1 = Math.ceil(yearOf(epoch.source.latestModel));
@@ -77,18 +93,13 @@ const variants = [
 
 <figure class="chart">
   <figcaption>
-    <h3>
-      Najväčší tréning AI dnes spotrebuje približne {skBig(growth)} ráz viac výpočtov než koncom roka 2012
-    </h3>
-    <p>
-      Výpočty použité na tréning významných modelov AI, {fromYear} – {epoch.source.latestModel.slice(0, 4)}.
-      Zvislá os je logaritmická, v operáciách s pohyblivou rádovou čiarkou (FLOP).
-    </p>
+    <h3>{plain(text.title, vars)}</h3>
+    <p>{plain(text.subtitle, vars)}</p>
   </figcaption>
 
   <ul class="legend">
-    <li><span class="key key-dot key-record"></span>rekord v čase zverejnenia</li>
-    <li><span class="key key-dot key-other"></span>ostatné významné modely</li>
+    <li><span class="key key-dot key-record"></span>{text.legend_record}</li>
+    <li><span class="key key-dot key-other"></span>{text.legend_other}</li>
   </ul>
 
   <div class="plot" data-plot="nearest">
@@ -98,7 +109,7 @@ const variants = [
           class={`variant-${v.id}`}
           viewBox={`0 0 ${v.w} ${v.h}`}
           role="img"
-          aria-label={`Bodový graf: tréningové výpočty významných modelov AI od roku ${fromYear}. Rekord vzrástol z ${flopText(baseRecord.flop)} FLOP koncom roka 2012 na ${flopText(latestRecord.flop)} FLOP (${latestRecord.name}). Hodnoty sú v tabuľke pod grafom.`}
+          aria-label={plain(text.aria, vars)}
         >
           <g class="grid">
             {v.powers.map((exp) => (
@@ -135,18 +146,14 @@ const variants = [
     <div class="tip" hidden></div>
   </div>
 
-  <p class="source">
-    Rekord sa od konca roka 2012 zdvojnásobuje v priemere každých {skDecimal(doublingMonths, 0)} mesiacov
-    (vlastný výpočet z prvej a poslednej hodnoty). Časť hodnôt sú odhady. Zdroj:{' '}
-    <a href={epoch.source.url}>{epoch.source.name}</a>, {epoch.source.licence}, stav k {skDate(epoch.source.retrieved)}.
-  </p>
+  <p class="source">{plain(text.note, vars)} <Fragment set:html={sourceLine} /></p>
 
   <details class="table-view">
-    <summary>Zobraziť rekordy ako tabuľku</summary>
+    <summary>{text.table_summary}</summary>
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th>Model</th><th>Organizácia</th><th>Zverejnené</th><th class="num">Tréning (FLOP)</th><th>Istota odhadu</th></tr>
+          <tr><th>{text.columns.model}</th><th>{text.columns.org}</th><th>{text.columns.date}</th><th class="num">{text.columns.flop}</th><th>{text.columns.confidence}</th></tr>
         </thead>
         <tbody>
           {recordPoints.map((p) => (
@@ -155,14 +162,12 @@ const variants = [
               <td>{orgText(p.org)}</td>
               <td>{skDate(p.date)}</td>
               <td class="num">{flopText(p.flop)}</td>
-              <td>{CONFIDENCE[p.confidence] ?? 'neuvedená'}</td>
+              <td>{text.confidence[p.confidence] ?? text.confidence.unknown}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-    <p class="source">
-      Všetkých {points.length} modelov je v <a href={epoch.source.csv}>pôvodnom súbore CSV</a>.
-    </p>
+    <p class="source" set:html={rich(text.table_all, vars)} />
   </details>
 </figure>

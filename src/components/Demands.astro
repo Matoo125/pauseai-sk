@@ -1,16 +1,27 @@
 ---
-import { demands, risks } from '../data/site';
+import { getCollection } from 'astro:content';
+import { copy } from '../lib/copy';
+
+const { demands, risks } = copy;
+
+const sources = new Map((await getCollection('zdroje')).map((entry) => [entry.id, entry.data.title]));
+const riskItems = risks.items.map((risk) => {
+  if (risk.source && !sources.has(risk.source)) {
+    throw new Error(`sk.yaml: risk "${risk.title}" points to source "${risk.source}", which is not in src/content/zdroje/`);
+  }
+  return { ...risk, sourceTitle: risk.source ? sources.get(risk.source)!.split(':')[0] : undefined };
+});
 ---
 
 <section class="band" id="poziadavky">
   <div class="wrap">
     <header class="band-head">
-      <h2>Tri kroky pre bezpečnú budúcnosť</h2>
-      <p>Naše požiadavky vychádzajú z odporúčaní popredných výskumníkov a princípov medzinárodného práva.</p>
+      <h2>{demands.heading}</h2>
+      <p>{demands.intro}</p>
     </header>
     <ol class="demands">
       {
-        demands.map((demand) => (
+        demands.items.map((demand) => (
           <li>
             <h3>{demand.title}</h3>
             <p>{demand.text}</p>
@@ -24,15 +35,20 @@ import { demands, risks } from '../data/site';
 <section class="band band-tint" id="rizika">
   <div class="wrap">
     <header class="band-head">
-      <h2>Riziká, ktoré vyžadujú našu pozornosť</h2>
-      <p>Bezpečnosť umelej inteligencie nie je abstraktná teória. Dotýka sa každodenného života každého z nás.</p>
+      <h2>{risks.heading}</h2>
+      <p>{risks.intro}</p>
     </header>
     <ul class="risks">
       {
-        risks.map((risk) => (
+        riskItems.map((risk) => (
           <li>
             <h3>{risk.title}</h3>
             <p>{risk.text}</p>
+            {risk.source && (
+              <p class="risk-source">
+                {risks.read_more} <a href={`/zdroje/#${risk.source}`}>{risk.sourceTitle}</a>
+              </p>
+            )}
           </li>
         ))
       }
