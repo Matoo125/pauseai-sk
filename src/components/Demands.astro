@@ -1,0 +1,41 @@
+---
+import { demands, risks } from '../data/site';
+---
+
+<section class="band" id="poziadavky">
+  <div class="wrap">
+    <header class="band-head">
+      <h2>Tri kroky pre bezpečnú budúcnosť</h2>
+      <p>Naše požiadavky vychádzajú z odporúčaní popredných výskumníkov a princípov medzinárodného práva.</p>
+    </header>
+    <ol class="demands">
+      {
+        demands.map((demand) => (
+          <li>
+            <h3>{demand.title}</h3>
+            <p>{demand.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<section class="band band-tint" id="rizika">
+  <div class="wrap">
+    <header class="band-head">
+      <h2>Riziká, ktoré vyžadujú našu pozornosť</h2>
+      <p>Bezpečnosť umelej inteligencie nie je abstraktná teória. Dotýka sa každodenného života každého z nás.</p>
+    </header>
+    <ul class="risks">
+      {
+        risks.map((risk) => (
+          <li>
+            <h3>{risk.title}</h3>
+            <p>{risk.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

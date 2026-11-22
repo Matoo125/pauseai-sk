@@ -1,0 +1,93 @@
+---
+import { site } from '../data/site';
+
+const mailto =
+  `mailto:${site.email}?subject=${encodeURIComponent('Podpisujem výzvu PauseAI Slovensko')}` +
+  `&body=${encodeURIComponent('Dobrý deň,\n\nchcem sa pridať k výzve PauseAI Slovensko.\n\nMeno a priezvisko: \nE-mail: \nMesto / Poznámka: ')}`;
+---
+
+<section class="band band-dark" id="vyzva">
+  <div class="wrap petition">
+    <div class="petition-text">
+      <h2>Podpíš občiansku výzvu za bezpečnú budúcnosť AI</h2>
+      <p>
+        Každý podpis má váhu pri vyjednávaní s európskymi a národnými zákonodarcami. Podpor požiadavku na
+        medzinárodnú reguláciu a nezávislý bezpečnostný audit.
+      </p>
+      <ul>
+        <li>Zastavenie neoverených pretekov vo frontier AI</li>
+        <li>Vznik nezávislého medzinárodného bezpečnostného úradu</li>
+        <li>Transparentnosť a demokratické rozhodovanie</li>
+      </ul>
+      <p class="petition-contact">
+        Podpisy z formulára dostáva tím slovenských koordinátorov na adrese {site.email}. Ak formulár nefunguje
+        alebo nám chceš napísať priamo, <a href={mailto}>pošli nám e-mail</a>.
+      </p>
+    </div>
+
+    <form id="petition-form" class="form" action={site.formEndpoint} method="POST">
+      <h3>Podpísať výzvu online</h3>
+      <p class="form-intro">Zaberie to menej než 30 sekúnd. Formulár je nezáväzný.</p>
+
+      <label for="petition-name">Meno a priezvisko</label>
+      <input id="petition-name" name="name" type="text" autocomplete="name" placeholder="napr. Mária Horváthová" required />
+
+      <label for="petition-email">E-mailová adresa</label>
+      <input id="petition-email" name="email" type="email" autocomplete="email" placeholder="tvoj@email.sk" required />
+
+      <label for="petition-role">Mesto alebo zameranie (voliteľné)</label>
+      <input id="petition-role" name="role" type="text" placeholder="napr. Bratislava / študent, rodič, IT" />
+
+      <label class="check">
+        <input id="petition-volunteer" name="volunteer" type="checkbox" />
+        <span>Mám záujem pomôcť ako dobrovoľník alebo sa zapojiť do lokálnych aktivít na Slovensku.</span>
+      </label>
+
+      <input type="hidden" name="_subject" value="Nový podpis výzvy PauseAI Slovensko" />
+
+      <button class="button button-orange" type="submit">Podpísať výzvu</button>
+      <p class="form-status" role="status" hidden></p>
+      <p class="form-privacy">Žiadny spam. Údaje slúžia výhradne pre iniciatívu PauseAI Slovensko.</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#petition-form')!;
+  const status = form.querySelector<HTMLElement>('.form-status')!;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const idle = button.textContent!;
+
+  const say = (kind: 'ok' | 'error', text: string) => {
+    status.hidden = false;
+    status.dataset.kind = kind;
+    status.textContent = text;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const volunteer = data.has('volunteer');
+
+    button.disabled = true;
+    button.textContent = 'Odosielam podpis…';
+    status.hidden = true;
+
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(String(response.status));
+      say(
+        'ok',
+        `Ďakujeme, ${name || data.get('email')}! Výzva je podpísaná.` +
+          (volunteer ? ' Ozveme sa ti s možnosťami, ako pomôcť.' : ''),
+      );
+      form.reset();
+      button.textContent = 'Výzva podpísaná';
+    } catch {
+      say('error', 'Podpis sa nepodarilo odoslať. Skús to znova alebo nám napíš na info@pauseai.sk.');
+      button.disabled = false;
+      button.textContent = idle;
+    }
+  });
+</script>

@@ -1,0 +1,929 @@
+/*
+  PauseAI Slovensko.
+
+  The page opens as a protest placard — orange board, heavy black condensed
+  capitals, the way the movement's signs look — and then goes quiet: white
+  paper, slab body text and plain charts, so the evidence reads as evidence.
+*/
+
+:root {
+  color-scheme: light;
+
+  --orange: #ff9416; /* the placard; never used for text on white */
+  --orange-deep: #e06a00; /* chart marks and links on white */
+  --black: #000000;
+  --ink: #1d1d1b;
+  --ink-soft: #55534e;
+  --paper: #ffffff;
+  --tint: #f4f3f0;
+  --rule: #d9d7d1;
+
+  /* chart series: fixed per sector, validated together */
+  --series-industry: #e06a00;
+  --series-mixed: #1baf7a;
+  --series-academia: #2a78d6;
+  --series-other: #b3b1aa;
+
+  --display: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Roboto Slab Variable', Georgia, serif;
+
+  --max: 1120px;
+  --gutter: 20px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--black);
+  font-family: var(--display);
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(2.25rem, 5.2vw, 3.5rem);
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--max));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 10;
+  padding: 8px 14px;
+  background: var(--black);
+  color: var(--paper);
+}
+
+.skip:focus {
+  left: 8px;
+}
+
+/* ── Buttons and links ─────────────────────────────────────────────────────── */
+
+.button {
+  display: inline-block;
+  padding: 0.7em 1.4em;
+  border: 0;
+  background: var(--black);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #2e2c28;
+}
+
+.button-small {
+  padding: 0.45em 1em;
+  font-size: 1.125rem;
+}
+
+.button-orange {
+  background: var(--orange);
+  color: var(--black);
+}
+
+.button-orange:hover {
+  background: #ffa740;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.text-link {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* ── Logo ──────────────────────────────────────────────────────────────────── */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--black);
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.logo svg {
+  width: 34px;
+  height: 34px;
+  flex: none;
+}
+
+.logo-place {
+  font-weight: 600;
+}
+
+.logo-on-white .logo-disc {
+  fill: var(--orange);
+}
+
+.logo-on-white .logo-bar {
+  fill: var(--paper);
+}
+
+.logo-on-orange .logo-disc {
+  fill: var(--paper);
+}
+
+.logo-on-orange .logo-bar {
+  fill: var(--orange);
+}
+
+/* ── The placard: top bar and hero ─────────────────────────────────────────── */
+
+.placard {
+  background: var(--orange);
+  color: var(--black);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 18px;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.topbar-link {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.topbar-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.hero {
+  padding-top: clamp(28px, 6vw, 72px);
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 9.2vw, 6.5rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+.hero h1 span {
+  display: block;
+}
+
+.hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+  margin-top: clamp(24px, 4vw, 44px);
+}
+
+.hero-text {
+  padding-bottom: clamp(32px, 5vw, 64px);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: 28px;
+}
+
+.hero-note {
+  margin-top: 28px;
+  font-size: 0.9375rem;
+}
+
+/* The photo hangs off the bottom of the placard onto the page below. */
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: -72px;
+  position: relative;
+}
+
+/* ── Bands ─────────────────────────────────────────────────────────────────── */
+
+.band {
+  padding-block: clamp(56px, 9vw, 112px);
+}
+
+.band-tint {
+  background: var(--tint);
+}
+
+.band-dark {
+  background: var(--black);
+  color: var(--paper);
+}
+
+.band-dark h2 {
+  color: var(--paper);
+}
+
+.band-head {
+  max-width: 44rem;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.band-head p {
+  margin-top: 18px;
+  font-size: 1.1875rem;
+  color: var(--ink-soft);
+}
+
+#data {
+  padding-top: clamp(72px, 11vw, 150px);
+}
+
+/* ── Charts ────────────────────────────────────────────────────────────────── */
+
+.chart {
+  margin: 0;
+  min-width: 0;
+}
+
+.chart figcaption h3 {
+  max-width: 46rem;
+}
+
+.chart figcaption p {
+  max-width: 46rem;
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 16px;
+  font-family: var(--display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.key {
+  flex: none;
+}
+
+.key-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.key-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.key-record {
+  background: var(--series-industry);
+}
+
+.key-other {
+  background: #a3a19a;
+}
+
+.key-box.series-industry {
+  background: var(--series-industry);
+}
+
+.key-box.series-mixed {
+  background: var(--series-mixed);
+}
+
+.key-box.series-academia {
+  background: var(--series-academia);
+}
+
+.key-box.series-other {
+  background: var(--series-other);
+}
+
+.plot {
+  position: relative;
+  margin-top: 12px;
+}
+
+.plot-narrow {
+  max-width: 520px;
+}
+
+.plot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.plot .variant-narrow {
+  display: none;
+}
+
+.plot .grid line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.plot .axis text {
+  fill: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.plot .dots-other circle {
+  fill: #8f8d86;
+  fill-opacity: 0.45;
+}
+
+.plot .frontier {
+  fill: none;
+  stroke: var(--series-industry);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-opacity: 0.55;
+}
+
+.plot .dots-record circle {
+  fill: var(--series-industry);
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.plot .direct text {
+  fill: var(--black);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.plot .hover-ring[cx='-20'] {
+  display: none;
+}
+
+.plot .hover-ring {
+  fill: none;
+  stroke: var(--black);
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+.plot path.series-industry {
+  fill: var(--series-industry);
+}
+
+.plot path.series-mixed {
+  fill: var(--series-mixed);
+}
+
+.plot path.series-academia {
+  fill: var(--series-academia);
+}
+
+.plot path.series-other {
+  fill: var(--series-other);
+}
+
+.plot .hit {
+  fill: transparent;
+}
+
+.plot .column.is-hover .hit {
+  fill: rgb(0 0 0 / 0.06);
+}
+
+.tip {
+  position: absolute;
+  z-index: 2;
+  width: max-content;
+  max-width: min(280px, 80vw);
+  padding: 10px 12px;
+  background: var(--black);
+  color: var(--paper);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.tip strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tip dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  margin: 6px 0 0;
+}
+
+.tip dt {
+  color: #b9b7b0;
+}
+
+.tip dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.source {
+  max-width: 46rem;
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.source a {
+  color: var(--ink);
+}
+
+.table-view {
+  margin-top: 10px;
+  font-size: 0.875rem;
+}
+
+.table-view summary {
+  width: fit-content;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.table-scroll {
+  max-height: 22rem;
+  margin-top: 12px;
+  overflow: auto;
+  border-block: 1px solid var(--rule);
+}
+
+.table-view table {
+  width: 100%;
+  border-collapse: collapse;
+  line-height: 1.35;
+}
+
+.table-view th,
+.table-view td {
+  padding: 7px 14px 7px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table-view th {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.table-view .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.evidence-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 80px);
+  margin-top: clamp(48px, 7vw, 88px);
+  padding-top: clamp(40px, 6vw, 72px);
+  border-top: 2px solid var(--black);
+}
+
+.survey dl {
+  margin: 20px 0 0;
+}
+
+.survey dl > div + div {
+  margin-top: 28px;
+}
+
+.survey dt {
+  color: var(--black);
+  font-family: var(--display);
+  font-size: clamp(3.25rem, 7vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.survey dd {
+  max-width: 30rem;
+  margin: 8px 0 0;
+}
+
+/* ── Mission ───────────────────────────────────────────────────────────────── */
+
+.mission {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.mission p {
+  max-width: 40rem;
+  margin-top: 20px;
+}
+
+.statement {
+  margin: 0;
+  padding: 28px 28px 26px;
+  background: var(--orange);
+  color: var(--black);
+}
+
+.statement blockquote {
+  margin: 0;
+}
+
+.statement blockquote p {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(1.625rem, 2.6vw, 2rem);
+  font-weight: 600;
+  line-height: 1.22;
+}
+
+.statement figcaption {
+  margin-top: 18px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* ── Demands and risks ─────────────────────────────────────────────────────── */
+
+.demands {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  counter-reset: demand;
+}
+
+.demands li {
+  counter-increment: demand;
+  padding-top: 18px;
+  border-top: 2px solid var(--black);
+}
+
+.demands li::before {
+  content: counter(demand);
+  display: block;
+  margin-bottom: 10px;
+  color: var(--orange-deep);
+  font-family: var(--display);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.demands p,
+.risks p {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.risks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 48px) clamp(32px, 6vw, 88px);
+}
+
+.risks li {
+  max-width: 32rem;
+}
+
+/* ── Petition ──────────────────────────────────────────────────────────────── */
+
+.petition {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.petition-text p {
+  max-width: 36rem;
+  margin-top: 20px;
+}
+
+.petition-text ul {
+  margin-top: 24px;
+}
+
+.petition-text li {
+  padding: 10px 0;
+  border-top: 1px solid #4a4843;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.petition-text .petition-contact {
+  margin-top: 28px;
+  font-size: 0.9375rem;
+  color: #cfcdc6;
+}
+
+.form {
+  padding: clamp(22px, 3vw, 32px);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.form-intro {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+.form label {
+  display: block;
+  margin-top: 18px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.form input[type='text'],
+.form input[type='email'] {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 12px;
+  border: 1.5px solid #8a8880;
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--black);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.form input::placeholder {
+  color: #77756f;
+}
+
+.form .check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.form .check input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--black);
+}
+
+.form .button {
+  width: 100%;
+  margin-top: 22px;
+}
+
+.form-status {
+  margin-top: 14px;
+  padding: 10px 12px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.form-status[data-kind='ok'] {
+  background: #dff3e4;
+  color: #12481f;
+}
+
+.form-status[data-kind='error'] {
+  background: #fde3e1;
+  color: #7c1610;
+}
+
+.form-privacy {
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+
+.footer {
+  padding-block: 56px 36px;
+  font-size: 0.9375rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+  gap: 32px 40px;
+}
+
+.footer-about p {
+  max-width: 26rem;
+  margin-top: 14px;
+  color: var(--ink-soft);
+}
+
+.footer h2 {
+  margin-bottom: 10px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.footer li + li {
+  margin-top: 6px;
+}
+
+.footer-legal {
+  margin-top: 40px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ── Narrow screens ────────────────────────────────────────────────────────── */
+
+@media (max-width: 860px) {
+  .topbar-link {
+    display: none;
+  }
+
+  .hero-row,
+  .evidence-row,
+  .mission,
+  .petition {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-text {
+    padding-bottom: 0;
+  }
+
+  .hero-photo {
+    margin-bottom: -48px;
+  }
+
+  .demands {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-about {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .plot .variant-wide {
+    display: none;
+  }
+
+  .plot .variant-narrow {
+    display: block;
+  }
+
+  .risks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .logo-place {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

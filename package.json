@@ -1,0 +1,16 @@
+{
+  "name": "pauseai-slovensko",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "data": "bun scripts/update-data.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/roboto-slab": "^5.2.0",
+    "@fontsource/saira-condensed": "^5.2.0",
+    "astro": "^7.3.3"
+  }
+}

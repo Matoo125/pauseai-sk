@@ -1,0 +1,118 @@
+---
+// Who publishes notable AI models: stacked columns per full calendar year.
+import epoch from '../data/epoch.json';
+import { roundedTop, scale, skDate, type Tip } from '../lib/chart';
+
+const years = epoch.sectors;
+const last = years.at(-1)!;
+const first = years[0];
+const total = (row: (typeof years)[number]) => row.industry + row.academia + row.mixed + row.other;
+const share = (row: (typeof years)[number]) => Math.round((row.industry / total(row)) * 100);
+
+// Bottom to top. Colour follows the sector, not its size.
+const SERIES = [
+  { key: 'industry', label: 'Firmy' },
+  { key: 'mixed', label: 'Firmy spolu s univerzitami' },
+  { key: 'academia', label: 'Univerzity' },
+  { key: 'other', label: 'Iné' },
+] as const;
+
+const W = 400;
+const H = 300;
+const left = 34;
+const right = 8;
+const top = 12;
+const bottom = 30;
+const GAP = 2;
+
+const yMax = Math.ceil(Math.max(...years.map(total)) / 40) * 40;
+const ticks = [];
+for (let tick = 0; tick <= yMax; tick += 40) ticks.push(tick);
+const y = scale(0, yMax, H - bottom, top);
+const slot = (W - left - right) / years.length;
+const barWidth = Math.min(24, slot - 6);
+
+const columns = years.map((row, i) => {
+  const x = left + i * slot + (slot - barWidth) / 2;
+  let base = 0;
+  const present = SERIES.filter((s) => row[s.key] > 0);
+  const segments = present.map((s, n) => {
+    const y1 = y(base);
+    base += row[s.key];
+    const y0 = y(base);
+    // The gap above every segment but the top one separates it from its neighbour.
+    const isTop = n === present.length - 1;
+    const height = Math.max(1, y1 - y0 - (isTop ? 0 : GAP));
+    const yTop = y1 - height;
+    return { key: s.key, d: isTop ? roundedTop(x, yTop, barWidth, height, 4) : `M${x},${yTop}h${barWidth}v${height}h${-barWidth}Z` };
+  });
+  const tip: Tip = {
+    title: String(row.year),
+    rows: [...SERIES.map((s): [string, string] => [s.label, String(row[s.key])]), ['Spolu', String(total(row))]],
+  };
+  return { year: row.year, x: left + i * slot, segments, tip: JSON.stringify(tip) };
+});
+---
+
+<figure class="chart">
+  <figcaption>
+    <h3>V roku {last.year} prišlo {share(last)}&nbsp;% významných modelov z firiem. V roku {first.year} to bolo {share(first)}&nbsp;%</h3>
+    <p>Počet významných modelov AI zverejnených za rok, podľa typu organizácie.</p>
+  </figcaption>
+
+  <ul class="legend">
+    {SERIES.map((s) => <li><span class={`key key-box series-${s.key}`}></span>{s.label}</li>)}
+  </ul>
+
+  <div class="plot plot-narrow">
+    <svg
+      viewBox={`0 0 ${W} ${H}`}
+      role="img"
+      aria-label={`Stĺpcový graf: počet významných modelov AI za rok podľa typu organizácie, ${first.year} až ${last.year}. Podiel firiem vzrástol z ${share(first)} % na ${share(last)} %. Hodnoty sú v tabuľke pod grafom.`}
+    >
+      <g class="grid">
+        {ticks.map((tick) => <line x1={left} x2={W - right} y1={y(tick)} y2={y(tick)} />)}
+      </g>
+      <g class="axis">
+        {ticks.map((tick) => <text x={left - 8} y={y(tick) + 4} text-anchor="end">{tick}</text>)}
+        {columns.filter((c) => c.year % 5 === 0).map((c) => (
+          <text x={c.x + slot / 2} y={H - 9} text-anchor="middle">{c.year}</text>
+        ))}
+      </g>
+      {
+        columns.map((c) => (
+          <g class="column" data-tip={c.tip}>
+            {c.segments.map((s) => <path class={`series-${s.key}`} d={s.d} />)}
+            <rect class="hit" x={c.x} y={top} width={slot} height={H - top - bottom} />
+          </g>
+        ))
+      }
+    </svg>
+    <div class="tip" hidden></div>
+  </div>
+
+  <p class="source">
+    Zdroj: <a href={epoch.source.url}>{epoch.source.name}</a>, {epoch.source.licence}, stav k {skDate(epoch.source.retrieved)}.
+    Zaradenie organizácií je podľa Epoch AI.
+  </p>
+
+  <details class="table-view">
+    <summary>Zobraziť ako tabuľku</summary>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Rok</th>{SERIES.map((s) => <th class="num">{s.label}</th>)}<th class="num">Spolu</th></tr>
+        </thead>
+        <tbody>
+          {years.map((row) => (
+            <tr>
+              <td>{row.year}</td>
+              {SERIES.map((s) => <td class="num">{row[s.key]}</td>)}
+              <td class="num">{total(row)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</figure>

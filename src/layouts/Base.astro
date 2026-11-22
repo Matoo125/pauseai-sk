@@ -1,0 +1,38 @@
+---
+import '@fontsource/saira-condensed/latin-600.css';
+import '@fontsource/saira-condensed/latin-ext-600.css';
+import '@fontsource/saira-condensed/latin-800.css';
+import '@fontsource/saira-condensed/latin-ext-800.css';
+import '@fontsource-variable/roboto-slab/wght.css';
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#ff9416" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="sk_SK" />
+  </head>
+  <body>
+    <a class="skip" href="#data">Preskočiť na obsah</a>
+    <slot />
+  </body>
+</html>

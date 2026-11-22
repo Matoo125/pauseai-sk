@@ -1,0 +1,40 @@
+---
+import Logo from './Logo.astro';
+import { movement, nav, site } from '../data/site';
+---
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div class="footer-about">
+      <Logo />
+      <p>
+        PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI. Presadzujeme
+        bezpečnosť a demokratický dohľad nad pokročilou umelou inteligenciou.
+      </p>
+    </div>
+    <nav aria-label="Na tejto stránke">
+      <h2>Na tejto stránke</h2>
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href="#vyzva">Podpísať výzvu</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Medzinárodné hnutie">
+      <h2>Medzinárodné hnutie</h2>
+      <ul>
+        {movement.map((item) => <li><a href={item.href} rel="noopener">{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <div>
+      <h2>Kontakt</h2>
+      <ul>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li>Bratislava, Slovensko</li>
+      </ul>
+    </div>
+  </div>
+  <p class="wrap footer-legal">
+    © {new Date().getFullYear()} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov. Grafy používajú dáta{' '}
+    <a href="https://epoch.ai/data/ai-models">Epoch AI</a> pod licenciou CC BY 4.0.
+  </p>
+</footer>
