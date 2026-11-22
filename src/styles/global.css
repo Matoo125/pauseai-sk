@@ -1288,9 +1288,6 @@ ol {
     scroll-behavior: auto;
   }
 
-  .contents {
-    transition: none;
-  }
 }
 
 @media (min-width: 861px) {
@@ -1309,7 +1306,8 @@ ol {
     align-items: start;
   }
 
-  /* The menu steps back while you read and comes forward when you reach for it. */
+  /* The menu steps back while you read: only the current section stays at full
+     strength, and the rest come forward when you reach for the menu. */
   .contents {
     position: sticky;
     top: 24px;
@@ -1317,13 +1315,16 @@ ol {
     padding-bottom: 0;
     overflow-y: auto;
     border-bottom: 0;
-    opacity: 0.45;
-    transition: opacity 0.2s ease;
   }
 
-  .contents:hover,
-  .contents:focus-within {
-    opacity: 1;
+  .contents a {
+    color: #77756f;
+    transition: color 0.2s ease;
+  }
+
+  .contents:hover a,
+  .contents:focus-within a {
+    color: var(--ink);
   }
 
   .contents-title {
@@ -1357,12 +1358,19 @@ ol {
     border-left-color: var(--ink-soft);
   }
 
-  .contents a[aria-current] {
+  .contents a[aria-current],
+  .contents:hover a[aria-current] {
     border-left-color: var(--orange-deep);
     color: var(--black);
   }
 
   .claims > .claim:first-child {
     padding-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contents a {
+    transition: none;
   }
 }

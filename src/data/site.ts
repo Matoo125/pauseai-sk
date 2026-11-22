@@ -9,10 +9,10 @@ export const nav = [
   { href: '/informacie/', label: copy.nav.evidence },
   { href: '/#poziadavky', label: copy.nav.demands },
   { href: '/otazky/', label: copy.nav.questions },
+  { href: '/kto-sme/', label: copy.nav.about },
 ];
 
-/** The footer adds the pages that don't need a place in the menu. */
-export const footerNav = [...nav, { href: '/kto-sme/', label: copy.nav.about }];
+export const footerNav = nav;
 
 export const joinHref = '/#pridaj-sa';
 
