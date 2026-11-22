@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { copy, rich } from '../lib/copy';
-import { joinHref, movement, nav } from '../data/site';
+import { footerNav, joinHref, movement } from '../data/site';
 
 const { footer, site } = copy;
 ---
@@ -15,7 +15,7 @@ const { footer, site } = copy;
     <nav aria-label={footer.pages}>
       <h2>{footer.pages}</h2>
       <ul>
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {footerNav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
         <li><a href={joinHref}>{copy.nav.join}</a></li>
       </ul>
     </nav>

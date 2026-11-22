@@ -9,6 +9,8 @@ claim: >-
 url: https://futureoflife.org/resource/life-3-0-being-human-in-the-age-of-artificial-intelligence/
 format: Anglicky. Česky vyšla ako Život 3.0.
 order: 2
+cover: ./covers/life-3-0.jpg
+cover_credit: "Obálka: Alfred A. Knopf"
 ---
 
 Najprístupnejší úvod do témy v tomto zozname. Tegmark neopisuje len riziká, ale aj to, čo dobré

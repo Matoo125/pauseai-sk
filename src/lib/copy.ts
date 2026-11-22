@@ -13,7 +13,10 @@ interface TitledText {
 
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
-  nav: Record<'label' | 'data' | 'mission' | 'demands' | 'risks' | 'sources' | 'join', string>;
+  nav: Record<
+    'label' | 'data' | 'mission' | 'demands' | 'risks' | 'security' | 'questions' | 'sources' | 'about' | 'join',
+    string
+  >;
   hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string };
   evidence: {
     heading: string;
@@ -46,7 +49,7 @@ export interface Copy {
     survey: { heading: string; items: { figure: string; text: string }[]; source: string };
   };
   mission: { heading: string; paragraphs: string[]; quote: string; quote_source: string };
-  demands: { heading: string; intro: string; items: TitledText[] };
+  demands: { heading: string; intro: string; more: string; items: (TitledText & { basis?: string })[] };
   risks: { heading: string; intro: string; read_more: string; items: (TitledText & { source?: string })[] };
   join: {
     heading: string;
@@ -71,6 +74,19 @@ export interface Copy {
     data_note: string;
     disagree: { heading: string; paragraphs: string[] };
   };
+  security: {
+    chart: {
+      title: string;
+      subtitle: string;
+      legend_record: string;
+      legend_other: string;
+      note: string;
+      aria: string;
+      table_summary: string;
+      columns: Record<'model' | 'org' | 'date' | 'solved' | 'reported', string>;
+    };
+  };
+  questions: { heading: string; lead: string; description: string; missing: string };
   footer: { about: string; pages: string; movement: string; contact: string; place: string; legal: string };
 }
 

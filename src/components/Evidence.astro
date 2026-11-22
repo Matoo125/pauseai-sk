@@ -1,6 +1,7 @@
 ---
 import ComputeChart from './ComputeChart.astro';
 import SectorChart from './SectorChart.astro';
+import ChartTips from './ChartTips.astro';
 import { copy, plain, rich } from '../lib/copy';
 
 const { evidence } = copy;
@@ -38,83 +39,4 @@ const { evidence } = copy;
   </div>
 </section>
 
-<script>
-  // Hover and touch tooltips for the charts. Every value shown here is also in
-  // the table under its chart, so this adds comfort, not access.
-  interface Tip {
-    title: string;
-    rows: [string, string][];
-  }
-
-  function fill(box: HTMLElement, tip: Tip) {
-    const title = document.createElement('strong');
-    title.textContent = tip.title;
-    const list = document.createElement('dl');
-    for (const [label, value] of tip.rows) {
-      const dt = document.createElement('dt');
-      dt.textContent = label;
-      const dd = document.createElement('dd');
-      dd.textContent = value;
-      list.append(dt, dd);
-    }
-    box.replaceChildren(title, list);
-  }
-
-  function place(box: HTMLElement, plot: HTMLElement, clientX: number, clientY: number) {
-    box.hidden = false;
-    const frame = plot.getBoundingClientRect();
-    const x = clientX - frame.left;
-    const y = clientY - frame.top;
-    const left = x + 14 + box.offsetWidth > frame.width ? x - 14 - box.offsetWidth : x + 14;
-    box.style.left = `${Math.max(0, left)}px`;
-    box.style.top = `${Math.max(0, y - box.offsetHeight - 10)}px`;
-  }
-
-  for (const plot of document.querySelectorAll<HTMLElement>('.plot')) {
-    const box = plot.querySelector<HTMLElement>('.tip')!;
-    const hide = () => {
-      box.hidden = true;
-      plot.querySelectorAll<SVGElement>('.hover-ring').forEach((ring) => ring.setAttribute('cx', '-20'));
-      plot.querySelectorAll('.is-hover').forEach((el) => el.classList.remove('is-hover'));
-    };
-    plot.addEventListener('pointerleave', hide);
-
-    if (plot.dataset.plot === 'nearest') {
-      // Scatter: the pointer only has to be closest to a dot, not on it.
-      const tips: Tip[] = JSON.parse(plot.querySelector('.tips')!.textContent!);
-      plot.addEventListener('pointermove', (event) => {
-        const svg = [...plot.querySelectorAll<SVGSVGElement>('svg')].find((el) => el.getClientRects().length);
-        if (!svg) return;
-        const frame = svg.getBoundingClientRect();
-        const unit = svg.viewBox.baseVal.width / frame.width;
-        const px = (event.clientX - frame.left) * unit;
-        const py = (event.clientY - frame.top) * unit;
-        let best: SVGCircleElement | null = null;
-        let bestDistance = 40 * 40;
-        for (const dot of svg.querySelectorAll<SVGCircleElement>('circle[data-i]')) {
-          const dx = dot.cx.baseVal.value - px;
-          const dy = dot.cy.baseVal.value - py;
-          const distance = dx * dx + dy * dy;
-          if (distance < bestDistance) [best, bestDistance] = [dot, distance];
-        }
-        if (!best) return hide();
-        const ring = svg.querySelector<SVGElement>('.hover-ring')!;
-        ring.setAttribute('cx', String(best.cx.baseVal.value));
-        ring.setAttribute('cy', String(best.cy.baseVal.value));
-        fill(box, tips[Number(best.dataset.i)]);
-        const at = best.getBoundingClientRect();
-        place(box, plot, at.left + at.width / 2, at.top);
-      });
-    } else {
-      // Columns: the whole slot is the target.
-      for (const mark of plot.querySelectorAll<SVGElement>('[data-tip]')) {
-        mark.addEventListener('pointermove', (event) => {
-          plot.querySelectorAll('.is-hover').forEach((el) => el.classList.remove('is-hover'));
-          mark.classList.add('is-hover');
-          fill(box, JSON.parse(mark.dataset.tip!));
-          place(box, plot, event.clientX, event.clientY);
-        });
-      }
-    }
-  }
-</script>
+<ChartTips />

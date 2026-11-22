@@ -1,0 +1,31 @@
+---
+// A subpage: the orange header with a title and lead, then the page's own content.
+import Base from '../layouts/Base.astro';
+import Topbar from './Topbar.astro';
+import Footer from './Footer.astro';
+import { copy } from '../lib/copy';
+
+interface Props {
+  heading: string;
+  lead: string;
+  description?: string;
+}
+const { heading, lead, description = lead } = Astro.props;
+---
+
+<Base title={`${heading} — ${copy.site.name}`} description={description}>
+  <div class="placard">
+    <Topbar />
+    <div class="wrap page-head">
+      <h1>{heading}</h1>
+      <p>{lead}</p>
+    </div>
+  </div>
+
+  <main id="obsah" class="band">
+    <div class="wrap">
+      <slot />
+    </div>
+  </main>
+  <Footer />
+</Base>

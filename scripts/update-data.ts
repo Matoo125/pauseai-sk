@@ -1,5 +1,7 @@
 #!/usr/bin/env bun
-// Refresh src/data/epoch.json from Epoch AI's public "Notable AI models" dataset.
+// Refresh the chart data from Epoch AI's public datasets:
+//   src/data/epoch.json    "Notable AI models" (training compute, who publishes)
+//   src/data/cybench.json  Cybench results from the benchmarking hub (security page)
 //
 //   bun run data
 //
@@ -7,9 +9,10 @@
 // always says which day its numbers are from. Run this when you want fresher
 // charts, look at the diff, commit.
 //
-// Data: Epoch AI, "Data on AI models", https://epoch.ai/data/ai-models (CC BY 4.0).
+// Data: Epoch AI, https://epoch.ai/data/ai-models and https://epoch.ai/benchmarks (CC BY 4.0).
 
-import { writeFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const SOURCE_CSV = 'https://epoch.ai/data/notable_ai_models.csv';
@@ -112,3 +115,49 @@ const data = {
 writeFileSync(OUT, JSON.stringify(data, null, 1) + '\n');
 console.log(`${points.length} models with a compute estimate, ${records.length} records, sectors ${FROM_YEAR}–${lastFullYear}`);
 console.log(`→ ${path.relative(process.cwd(), OUT)}`);
+
+// ── Cybench: share of professional CTF tasks each model solved unaided ───────
+// Epoch publishes its benchmark hub only as one zip, so this needs `unzip`.
+const BENCH_ZIP = 'https://epoch.ai/data/benchmark_data.zip';
+const BENCH_PAGE = 'https://epoch.ai/benchmarks';
+const CYBENCH_OUT = path.join(import.meta.dir, '../src/data/cybench.json');
+
+const zip = await fetch(BENCH_ZIP, { headers: { 'User-Agent': 'pauseai-sk-site-build' } });
+if (!zip.ok) throw new Error(`${BENCH_ZIP} answered ${zip.status}`);
+const scratch = mkdtempSync(path.join(tmpdir(), 'epoch-bench-'));
+const zipPath = path.join(scratch, 'benchmark_data.zip');
+writeFileSync(zipPath, Buffer.from(await zip.arrayBuffer()));
+const unzip = Bun.spawnSync(['unzip', '-p', zipPath, 'cybench_external.csv']);
+rmSync(scratch, { recursive: true });
+if (unzip.exitCode !== 0) throw new Error(`unzip failed: ${unzip.stderr.toString() || 'is unzip installed?'}`);
+
+const results = parseCsv(unzip.stdout.toString())
+  .map((r) => ({
+    name: need(r, 'Model version').replace(/_unknown$/, ''),
+    org: need(r, 'Organization'),
+    date: need(r, 'Release date'),
+    solved: Number(need(r, 'Unguided % Solved')),
+    // Where the number comes from: the public leaderboard, or the developer's own model card.
+    reportedBy: need(r, 'Source'),
+  }))
+  .filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.date) && Number.isFinite(r.solved) && r.solved > 0)
+  .sort((a, b) => a.date.localeCompare(b.date));
+if (results.length < 10) throw new Error(`Only ${results.length} Cybench results parsed — refusing to overwrite the data`);
+
+writeFileSync(
+  CYBENCH_OUT,
+  JSON.stringify(
+    {
+      source: {
+        name: 'Epoch AI, Capabilities & benchmarking',
+        url: BENCH_PAGE,
+        licence: 'CC BY 4.0',
+        retrieved: new Date().toISOString().slice(0, 10),
+      },
+      results,
+    },
+    null,
+    1,
+  ) + '\n',
+);
+console.log(`${results.length} Cybench results → ${path.relative(process.cwd(), CYBENCH_OUT)}`);

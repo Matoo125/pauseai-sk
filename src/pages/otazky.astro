@@ -1,0 +1,24 @@
+---
+// Questions and objections: every entry of src/content/otazky/, in `order`.
+import { getCollection, render } from 'astro:content';
+import Page from '../components/Page.astro';
+import { copy, rich } from '../lib/copy';
+
+const text = copy.questions;
+const entries = (await getCollection('otazky')).sort((a, b) => a.data.order - b.data.order);
+const items = await Promise.all(entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })));
+---
+
+<Page heading={text.heading} lead={text.lead} description={text.description}>
+  {
+    items.map(({ entry, Content }) => (
+      <article class="question" id={entry.id}>
+        <h2>{entry.data.question}</h2>
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+    ))
+  }
+  <p class="evidence-more" set:html={rich(text.missing)} />
+</Page>

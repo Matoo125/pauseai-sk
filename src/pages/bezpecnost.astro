@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from 'astro:content';
+import Page from '../components/Page.astro';
+import CyberChart from '../components/CyberChart.astro';
+import ChartTips from '../components/ChartTips.astro';
+
+const page = (await getEntry('stranky', 'bezpecnost'))!;
+const { Content } = await render(page);
+---
+
+<Page heading={page.data.title} lead={page.data.lead} description={page.data.description}>
+  <CyberChart />
+  <div class="prose prose-after-chart">
+    <Content />
+  </div>
+  <ChartTips />
+</Page>

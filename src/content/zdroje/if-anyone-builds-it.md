@@ -9,6 +9,8 @@ claim: >-
 url: https://ifanyonebuildsit.com/
 format: Anglicky. Kniha pre širokú verejnosť.
 order: 2
+cover: ./covers/if-anyone-builds-it.jpg
+cover_credit: "Obálka: Little, Brown and Company"
 ---
 
 Najvyhranenejšie stanovisko v tomto zozname. Kratšiu verziu toho istého argumentu má inštitút

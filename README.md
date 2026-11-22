@@ -14,7 +14,9 @@ bun run data     # refresh the chart data from Epoch AI
 | To change… | Edit |
 |---|---|
 | Any Slovak text on the site | `src/copy/sk.yaml` (one file, in page order) |
-| The reading list on `/zdroje/` | one Markdown file per source in `src/content/zdroje/` |
+| The reading list on `/zdroje/` | one Markdown file per source in `src/content/zdroje/` (covers in `covers/`) |
+| Questions and answers on `/otazky/` | one Markdown file per question in `src/content/otazky/` |
+| The pages `/bezpecnost/` and `/kto-sme/` | `src/content/stranky/` |
 | Menu links, form endpoint, sister sites | `src/data/site.ts` |
 | Colours, type, layout | `src/styles/global.css` |
 | Chart data | don't edit `src/data/epoch.json` by hand — run `bun run data` |
@@ -33,9 +35,10 @@ statement.
 
 ## Charts
 
-`scripts/update-data.ts` downloads Epoch AI's "Notable AI models" CSV and reduces it to
-`src/data/epoch.json`, which is committed. The charts are plain SVG written at build time by
-`ComputeChart.astro` and `SectorChart.astro`; their headline numbers are computed from that file, so
+`scripts/update-data.ts` downloads Epoch AI's "Notable AI models" CSV and its benchmark archive
+(needs `unzip`) and reduces them to `src/data/epoch.json` and `src/data/cybench.json`, which are
+committed. The charts are plain SVG written at build time by
+`ComputeChart.astro`, `SectorChart.astro` and `CyberChart.astro`; their headline numbers are computed from that file, so
 they change when the data does. After `bun run data`, read the diff and the page before committing.
 
 The data is CC BY 4.0: keep the source line under each chart.

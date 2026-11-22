@@ -1,0 +1,164 @@
+{
+ "source": {
+  "name": "Epoch AI, Capabilities & benchmarking",
+  "url": "https://epoch.ai/benchmarks",
+  "licence": "CC BY 4.0",
+  "retrieved": "2026-11-22"
+ },
+ "results": [
+  {
+   "name": "gemini-1.5-pro-001-feb24",
+   "org": "Google DeepMind",
+   "date": "2024-02-15",
+   "solved": 0.075,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "claude-3-opus-20240229",
+   "org": "Anthropic",
+   "date": "2024-02-29",
+   "solved": 0.1,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "Mixtral-8x22B-Instruct-v0.1",
+   "org": "Mistral AI",
+   "date": "2024-04-17",
+   "solved": 0.075,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "Meta-Llama-3-70B-Instruct",
+   "org": "Meta AI",
+   "date": "2024-04-18",
+   "solved": 0.05,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "claude-3-5-sonnet-20240620",
+   "org": "Anthropic",
+   "date": "2024-06-20",
+   "solved": 0.175,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "Llama-3.1-405B-Instruct",
+   "org": "Meta AI",
+   "date": "2024-07-23",
+   "solved": 0.075,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "o1-mini-2024-09-12_medium",
+   "org": "OpenAI",
+   "date": "2024-09-12",
+   "solved": 0.1,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "o1-preview-2024-09-12",
+   "org": "OpenAI",
+   "date": "2024-09-12",
+   "solved": 0.1,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "gpt-4o-2024-11-20",
+   "org": "OpenAI",
+   "date": "2024-11-20",
+   "solved": 0.125,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "o3-mini-2025-01-31_medium",
+   "org": "OpenAI",
+   "date": "2025-01-31",
+   "solved": 0.225,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "claude-3-7-sonnet-20250219",
+   "org": "Anthropic",
+   "date": "2025-02-24",
+   "solved": 0.2,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "gpt-4.5-preview-2025-02-27",
+   "org": "OpenAI",
+   "date": "2025-02-27",
+   "solved": 0.175,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "claude-opus-4-20250514",
+   "org": "Anthropic",
+   "date": "2025-05-22",
+   "solved": 0.38,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "claude-sonnet-4-20250514",
+   "org": "Anthropic",
+   "date": "2025-05-22",
+   "solved": 0.35,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "grok-4-0709",
+   "org": "xAI",
+   "date": "2025-07-09",
+   "solved": 0.43,
+   "reportedBy": "Grok 4 Model Card"
+  },
+  {
+   "name": "claude-opus-4-1-20250805",
+   "org": "Anthropic",
+   "date": "2025-08-05",
+   "solved": 0.42,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "grok-4-fast",
+   "org": "xAI",
+   "date": "2025-09-19",
+   "solved": 0.3,
+   "reportedBy": "Grok 4 Fast Model Card"
+  },
+  {
+   "name": "claude-sonnet-4-5-20250929",
+   "org": "Anthropic",
+   "date": "2025-09-29",
+   "solved": 0.6,
+   "reportedBy": "Opus 4.5 System Card"
+  },
+  {
+   "name": "claude-sonnet-4-5-20250929",
+   "org": "Anthropic",
+   "date": "2025-09-29",
+   "solved": 0.55,
+   "reportedBy": "Cybench leaderboard"
+  },
+  {
+   "name": "grok-4-1",
+   "org": "xAI",
+   "date": "2025-11-17",
+   "solved": 0.39,
+   "reportedBy": "Grok 4.1 Model Card"
+  },
+  {
+   "name": "claude-opus-4-5-20251101",
+   "org": "Anthropic",
+   "date": "2025-11-24",
+   "solved": 0.82,
+   "reportedBy": "Opus 4.5 System Card"
+  },
+  {
+   "name": "claude-opus-4-6",
+   "org": "Anthropic",
+   "date": "2026-02-05",
+   "solved": 0.93,
+   "reportedBy": "Opus 4.6 System Card"
+  }
+ ]
+}

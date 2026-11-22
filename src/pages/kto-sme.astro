@@ -1,0 +1,13 @@
+---
+import { getEntry, render } from 'astro:content';
+import Page from '../components/Page.astro';
+
+const page = (await getEntry('stranky', 'kto-sme'))!;
+const { Content } = await render(page);
+---
+
+<Page heading={page.data.title} lead={page.data.lead} description={page.data.description}>
+  <div class="prose">
+    <Content />
+  </div>
+</Page>

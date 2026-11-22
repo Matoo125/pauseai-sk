@@ -228,7 +228,7 @@ ol {
 .topbar nav {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 22px;
 }
 
 .topbar-link {
@@ -684,6 +684,19 @@ ol {
   border-top-color: var(--orange-deep);
 }
 
+.source-entry header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.source-cover {
+  flex: none;
+  width: 96px;
+  height: auto;
+  box-shadow: 0 1px 0 var(--rule), 0 6px 16px rgb(0 0 0 / 0.14);
+}
+
 .source-entry h3 {
   font-size: 1.75rem;
   line-height: 1.15;
@@ -732,6 +745,80 @@ ol {
 .disagree p {
   max-width: 44rem;
   margin-top: 18px;
+}
+
+/* ── Markdown pages and questions ──────────────────────────────────────────── */
+
+.prose {
+  max-width: 44rem;
+}
+
+.prose-after-chart {
+  margin-top: clamp(48px, 7vw, 80px);
+}
+
+.prose h2 {
+  margin-top: clamp(40px, 6vw, 64px);
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p,
+.prose ul {
+  margin-top: 18px;
+}
+
+.prose ul {
+  padding-left: 1.2em;
+  list-style: square;
+}
+
+.prose li + li {
+  margin-top: 14px;
+}
+
+.prose li::marker {
+  color: var(--orange-deep);
+}
+
+.prose strong {
+  color: var(--black);
+}
+
+.question {
+  max-width: 44rem;
+  padding-top: 24px;
+  border-top: 2px solid var(--black);
+  scroll-margin-top: 24px;
+}
+
+.question + .question {
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.question .prose {
+  margin-top: 14px;
+}
+
+.question h2 {
+  font-size: clamp(1.625rem, 3.2vw, 2.125rem);
+  line-height: 1.12;
+  text-transform: none;
+}
+
+.demands .basis {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.demands .basis a {
+  color: var(--ink);
 }
 
 /* ── Mission ───────────────────────────────────────────────────────────────── */
@@ -993,8 +1080,34 @@ ol {
 /* ── Narrow screens ────────────────────────────────────────────────────────── */
 
 @media (max-width: 860px) {
+  /* The menu drops under the logo and wraps; the button stays beside the logo. */
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px 18px;
+  }
+
+  .topbar nav {
+    display: contents;
+  }
+
   .topbar-link {
-    display: none;
+    order: 2;
+    font-size: 1.125rem;
+  }
+
+  .topbar .logo {
+    margin-right: auto;
+  }
+
+  .topbar .button {
+    order: 1;
+  }
+
+  .topbar::after {
+    content: '';
+    order: 1;
+    flex-basis: 100%;
   }
 
   .hero-row,

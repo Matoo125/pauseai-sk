@@ -4,7 +4,10 @@
 #   [text](url)     a link
 #   |               starts a paragraph that runs over several lines
 #
-# The reading list on /zdroje/ is one file per source in src/content/zdroje/.
+# Longer texts are Markdown files in src/content/:
+#   zdroje/    the reading list on /zdroje/, one file per source
+#   otazky/    questions and answers on /otazky/, one file per question
+#   stranky/   the pages /bezpecnost/ and /kto-sme/
 
 site:
   name: PauseAI Slovensko
@@ -22,7 +25,10 @@ nav:
   mission: Poslanie
   demands: Požiadavky
   risks: Riziká
+  security: Bezpečnosť
+  questions: Otázky
   sources: Zdroje
+  about: Kto sme
   join: Pridať sa
 
 hero:
@@ -44,7 +50,9 @@ evidence:
   intro: >-
     Nemusíš nám veriť na slovo. Toto sú verejné dáta a prieskumy, z ktorých vychádzame.
     Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
-  more: Knihy, štúdie a správy, o ktoré sa opierame, sú na stránke [Zdroje](/zdroje/).
+  more: >-
+    Knihy, štúdie a správy, o ktoré sa opierame, sú na stránke [Zdroje](/zdroje/). Čo modely
+    dokážu v kybernetickej bezpečnosti, rozoberáme na stránke [AI ako bezpečnostný problém](/bezpecnost/).
   source_line: "Zdroj: [{name}]({url}), {licence}, stav k {date}."
 
   compute:
@@ -134,20 +142,38 @@ mission:
 
 demands:
   heading: Tri kroky pre bezpečnú budúcnosť
-  intro: Naše požiadavky vychádzajú z odporúčaní popredných výskumníkov a princípov medzinárodného práva.
+  intro: Žiadnu z týchto požiadaviek sme nevymysleli. Pri každej uvádzame, kto ju navrhuje.
+  more: Námietky, ktoré počúvame najčastejšie, rozoberáme v [otázkach a odpovediach](/otazky/).
+  # `basis` says who proposes the demand; keep the links.
   items:
     - title: Medzinárodná agentúra pre dohľad nad AI
       text: >-
         Po vzore Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny
         orgán, ktorý audituje dátové centrá a monitoruje tréning modelov na hranici schopností.
+      basis: >-
+        Orgán podobný IAEA navrhlo v roku 2023 vedenie OpenAI v texte
+        [Governance of superintelligence](https://openai.com/index/governance-of-superintelligence/)
+        a myšlienku verejne podporil generálny tajomník OSN António Guterres. Podrobný návrh má
+        [PauseAI](https://pauseai.info/proposal).
     - title: Podmienka garantovanej bezpečnosti
       text: >-
         Vývoj a trénovanie novej generácie superinteligentných modelov musí byť pozastavené, kým
         vedecká komunita nepreukáže spoľahlivé metódy zarovnania (alignment) a kontroly.
+      basis: >-
+        Zákaz vývoja superinteligencie, kým nebude vedecký konsenzus, že je bezpečná a ovládateľná,
+        žiada [Statement on Superintelligence](https://superintelligence-statement.org/) (2025).
+        Pozastavenie tréningu žiadal už otvorený list
+        [Pause Giant AI Experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) (2023)
+        a žiada ho [vyhlásenie PauseAI](https://pauseai.info/statement).
     - title: Demokratická kontrola a certifikácia
       text: >-
         Nasadenie modelov do kritickej infraštruktúry a verejného priestoru musí podliehať
         verejnému posúdeniu dopadov na prácu, demokraciu a bezpečnosť občanov.
+      basis: >-
+        Posudzovanie rizikových systémov pred uvedením na trh už zavádza európsky
+        [AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj). Licencie a nezávislé audity pre
+        najvýkonnejšie systémy navrhujú Yoshua Bengio, Geoffrey Hinton a ďalší v článku
+        [Managing extreme AI risks amid rapid progress](https://www.science.org/doi/10.1126/science.adn0117) (Science, 2024).
 
 risks:
   heading: Riziká, ktoré vyžadujú našu pozornosť
@@ -249,6 +275,39 @@ sources:
         Nezhodnú sa ani na tom, ako veľmi je to pravdepodobné a čo presne treba urobiť. Zhodnú sa
         na jednom: dnes nevieme zaručiť, že systémy schopnejšie než ľudia zostanú pod ľudskou
         kontrolou, a vývoj napriek tomu pokračuje. Z toho vychádza aj naša požiadavka.
+
+security:
+  # Page text is in src/content/stranky/bezpecnost.md; this is the chart on it.
+  chart:
+    # {first_year} = earliest year in the data   {first}/{last} = percentages   {model} = latest record
+    title: V roku {first_year} vyriešil najlepší model {first} % hackerských úloh. Najnovší výsledok je {last} %
+    subtitle: >-
+      Podiel úloh z testu Cybench, ktoré model vyriešil bez nápovede. Cybench tvorí 40 úloh
+      z profesionálnych súťaží capture the flag.
+    legend_record: najlepší výsledok v čase vydania
+    legend_other: ostatné modely
+    note: >-
+      Časť výsledkov vrátane najvyšších uvádzajú vývojári vo vlastnej dokumentácii k modelom;
+      pôvod každého čísla je v tabuľke.
+    aria: >-
+      Bodový graf: podiel úloh testu Cybench vyriešených modelmi AI podľa dátumu vydania.
+      Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}).
+      Hodnoty sú v tabuľke pod grafom.
+    table_summary: Zobraziť ako tabuľku
+    columns:
+      model: Model
+      org: Organizácia
+      date: Vydaný
+      solved: Vyriešené úlohy
+      reported: Výsledok uvádza
+
+questions:
+  heading: Otázky a námietky
+  lead: >-
+    Námietky, ktoré počúvame najčastejšie, a naše odpovede na ne. Kde sa dá, odkazujeme na zdroj,
+    aby si si odpoveď mohol overiť.
+  description: Najčastejšie námietky proti pozastaveniu vývoja najvýkonnejšej AI a odpovede PauseAI Slovensko.
+  missing: Chýba ti tu otázka? Napíš nám na [info@pauseai.sk](mailto:info@pauseai.sk).
 
 footer:
   about: >-

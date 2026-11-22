@@ -9,6 +9,8 @@ claim: >-
 url: https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026
 format: Anglicky. K správe je samostatné zhrnutie pre tvorcov politík.
 order: 1
+cover: ./covers/international-ai-safety-report.jpg
+cover_credit: "Obálka: International AI Safety Report"
 ---
 
 Druhé vydanie medzinárodnej správy, ktorú podporuje viac než 30 krajín a medzinárodných

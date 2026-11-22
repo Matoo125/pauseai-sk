@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { copy } from '../lib/copy';
+import { copy, rich } from '../lib/copy';
 
 const { demands, risks } = copy;
 
@@ -25,10 +25,12 @@ const riskItems = risks.items.map((risk) => {
           <li>
             <h3>{demand.title}</h3>
             <p>{demand.text}</p>
+            {demand.basis && <p class="basis" set:html={rich(demand.basis)} />}
           </li>
         ))
       }
     </ol>
+    <p class="evidence-more" set:html={rich(demands.more)} />
   </div>
 </section>
 
