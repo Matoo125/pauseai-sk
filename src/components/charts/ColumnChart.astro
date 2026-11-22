@@ -1,0 +1,110 @@
+---
+// One column per year, optionally stacked. Plain SVG drawn at build time.
+import { copy } from '../../lib/copy';
+import { roundedTop, scale, type Tip } from '../../lib/chart';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  aria: string;
+  noteHtml: string;
+  /** Bottom to top. A series keeps its slot (and so its colour) whatever its size. */
+  series: { key: string; label: string }[];
+  rows: { year: number; values: Record<string, number>; tip: Tip }[];
+  /** Top of the y axis and the gridlines to draw. */
+  yMax: number;
+  ticks: { value: number; label: string }[];
+  table: { head: { label: string; num?: boolean }[]; rows: string[][] };
+}
+const { title, subtitle, aria, noteHtml, series, rows, yMax, ticks, table } = Astro.props;
+
+const W = 400;
+const H = 300;
+const left = 44;
+const right = 8;
+const top = 12;
+const bottom = 30;
+const GAP = 2;
+
+const y = scale(0, yMax, H - bottom, top);
+const slot = (W - left - right) / rows.length;
+const barWidth = Math.min(24, slot - 6);
+
+const columns = rows.map((row, i) => {
+  const x = left + i * slot + (slot - barWidth) / 2;
+  let base = 0;
+  const present = series.map((s, n) => ({ ...s, slot: n + 1 })).filter((s) => row.values[s.key] > 0);
+  const segments = present.map((s, n) => {
+    const y1 = y(base);
+    base += row.values[s.key];
+    // The gap above every segment but the top one separates it from its neighbour.
+    const isTop = n === present.length - 1;
+    const height = Math.max(1, y1 - y(base) - (isTop ? 0 : GAP));
+    const yTop = y1 - height;
+    return {
+      slot: s.slot,
+      d: isTop ? roundedTop(x, yTop, barWidth, height, 4) : `M${x},${yTop}h${barWidth}v${height}h${-barWidth}Z`,
+    };
+  });
+  return { year: row.year, x: left + i * slot, segments, tip: JSON.stringify(row.tip) };
+});
+// Label about four years along the axis, always including the last.
+const every = Math.ceil(rows.length / 4);
+const lastYear = rows.at(-1)!.year;
+---
+
+<figure class="chart">
+  <figcaption>
+    <h3>{title}</h3>
+    <p>{subtitle}</p>
+  </figcaption>
+
+  {
+    series.length > 1 && (
+      <ul class="legend">
+        {series.map((s, n) => <li><span class={`key key-box series-${n + 1}`}></span>{s.label}</li>)}
+      </ul>
+    )
+  }
+
+  <div class="plot plot-narrow">
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={aria}>
+      <g class="grid">
+        {ticks.map((tick) => <line x1={left} x2={W - right} y1={y(tick.value)} y2={y(tick.value)} />)}
+      </g>
+      <g class="axis">
+        {ticks.map((tick) => <text x={left - 8} y={y(tick.value) + 4} text-anchor="end">{tick.label}</text>)}
+        {columns.filter((c) => (lastYear - c.year) % every === 0).map((c) => (
+          <text x={c.x + slot / 2} y={H - 9} text-anchor="middle">{c.year}</text>
+        ))}
+      </g>
+      {
+        columns.map((c) => (
+          <g class="column" data-tip={c.tip}>
+            {c.segments.map((s) => <path class={`series-${s.slot}`} d={s.d} />)}
+            <rect class="hit" x={c.x} y={top} width={slot} height={H - top - bottom} />
+          </g>
+        ))
+      }
+    </svg>
+    <div class="tip" hidden></div>
+  </div>
+
+  <p class="source" set:html={noteHtml} />
+
+  <details class="table-view">
+    <summary>{copy.charts.table_summary}</summary>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>{table.head.map((cell) => <th class:list={{ num: cell.num }}>{cell.label}</th>)}</tr>
+        </thead>
+        <tbody>
+          {table.rows.map((row) => (
+            <tr>{row.map((cell, i) => <td class:list={{ num: table.head[i].num }}>{cell}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</figure>

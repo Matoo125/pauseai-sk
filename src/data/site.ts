@@ -6,25 +6,13 @@ export const formEndpoint = 'https://formspree.io/f/xppagjeo';
 
 /** The top menu. Absolute paths, so the same menu works on every page. */
 export const nav = [
-  { href: '/#data', label: copy.nav.data },
+  { href: '/dokazy/', label: copy.nav.evidence },
   { href: '/#poziadavky', label: copy.nav.demands },
-  { href: '/bezpecnost/', label: copy.nav.security },
   { href: '/otazky/', label: copy.nav.questions },
-  { href: '/zdroje/', label: copy.nav.sources },
-  { href: '/kto-sme/', label: copy.nav.about },
 ];
 
-/** The footer lists everything, including the landing page's other sections. */
-export const footerNav = [
-  { href: '/#data', label: copy.nav.data },
-  { href: '/#poslanie', label: copy.nav.mission },
-  { href: '/#poziadavky', label: copy.nav.demands },
-  { href: '/#rizika', label: copy.nav.risks },
-  { href: '/bezpecnost/', label: copy.nav.security },
-  { href: '/otazky/', label: copy.nav.questions },
-  { href: '/zdroje/', label: copy.nav.sources },
-  { href: '/kto-sme/', label: copy.nav.about },
-];
+/** The footer adds the pages that don't need a place in the menu. */
+export const footerNav = [...nav, { href: '/kto-sme/', label: copy.nav.about }];
 
 export const joinHref = '/#pridaj-sa';
 

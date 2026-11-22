@@ -1,13 +1,14 @@
-# All Slovak text of the site, in page order. Edit the words; leave the keys.
+# All short Slovak text of the site. Edit the words; leave the keys.
 #
 #   {name}          a number or name the build fills in (from the chart data)
 #   [text](url)     a link
-#   |               starts a paragraph that runs over several lines
+#   >-              starts a paragraph that runs over several lines
 #
 # Longer texts are Markdown files in src/content/:
-#   zdroje/    the reading list on /zdroje/, one file per source
-#   otazky/    questions and answers on /otazky/, one file per question
-#   stranky/   the pages /bezpecnost/ and /kto-sme/
+#   tvrdenia/   the claims on /dokazy/, one file per claim
+#   otazky/     questions and answers on /otazky/, one file per question
+#   zdroje/     the reading list at the end of /dokazy/, one file per book or report
+#   stranky/    the page /kto-sme/
 
 site:
   name: PauseAI Slovensko
@@ -21,13 +22,9 @@ site:
 
 nav:
   label: Hlavná navigácia
-  data: Dáta
-  mission: Poslanie
+  evidence: Dôkazy
   demands: Požiadavky
-  risks: Riziká
-  security: Bezpečnosť
   questions: Otázky
-  sources: Zdroje
   about: Kto sme
   join: Pridať sa
 
@@ -39,21 +36,81 @@ hero:
     PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
     medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
   cta: Pridať sa
-  cta_data: Pozrieť dáta
+  cta_data: Pozrieť dôkazy
   note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
   photo_alt: >-
     Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti
     nekontrolovanému vývoju AI.
 
-evidence:
+# The evidence section of the landing page: one chart, the survey figures and a quote.
+home_evidence:
   heading: Čo hovoria dáta
   intro: >-
-    Nemusíš nám veriť na slovo. Toto sú verejné dáta a prieskumy, z ktorých vychádzame.
+    Nemusíš nám veriť na slovo. Toto sú verejné merania a prieskumy, z ktorých vychádzame.
     Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
   more: >-
-    Knihy, štúdie a správy, o ktoré sa opierame, sú na stránke [Zdroje](/zdroje/). Čo modely
-    dokážu v kybernetickej bezpečnosti, rozoberáme na stránke [AI ako bezpečnostný problém](/bezpecnost/).
+    Toto je len začiatok. Všetky tvrdenia s grafmi, zdrojmi a s tým, čo dáta neukazujú,
+    sú na stránke [Dôkazy](/dokazy/).
+  # Our translation of the Center for AI Safety statement. Original:
+  # "Mitigating the risk of extinction from AI should be a global priority alongside other
+  # societal-scale risks such as pandemics and nuclear war."
+  quote: >-
+    „Zmiernenie rizika vyhynutia v dôsledku AI by malo byť globálnou prioritou popri iných
+    rizikách celospoločenského rozsahu, akými sú pandémie a jadrová vojna.“
+  quote_source: >-
+    [Vyhlásenie o riziku AI](https://www.safe.ai/work/statement-on-ai-risk), Center for AI Safety,
+    máj 2023 (náš preklad). Podpísali ho okrem iných Geoffrey Hinton, Yoshua Bengio,
+    Demis Hassabis a Sam Altman.
+
+evidence_page:
+  heading: Dôkazy
+  lead: >-
+    Tvrdenia, o ktoré opierame svoje požiadavky. Pri každom je graf alebo údaj, zdroje
+    a aj to, čo z dát nevyplýva.
+  description: Dáta, prieskumy a správy, o ktoré sa opiera PauseAI Slovensko, usporiadané podľa tvrdení.
+  contents: Na tejto stránke
+  sources: "Zdroje:"
+  reading:
+    heading: Na čítanie
+    intro: >-
+      Dlhšie texty pre tých, ktorí chcú ísť do hĺbky. Pri každom píšeme, čo tvrdí.
+      Vedecký prehľad je niečo iné než argument jedného tímu, preto ich rozlišujeme.
+    kinds:
+      report: Vedecký prehľad
+      argument: Argument
+      book: Kniha
+    open: Otvoriť
+    disagree: >-
+      Autori sa nezhodnú na tom, ako by k najhoršiemu došlo. Yudkowsky a Soares opisujú náhlu
+      stratu kontroly, autori štúdie o postupnej strate vplyvu tvrdia, že žiadny taký okamih
+      netreba, a Tegmark opisuje celú škálu možných budúcností. Zhodnú sa na jednom: dnes nevieme
+      zaručiť, že systémy schopnejšie než ľudia zostanú pod ľudskou kontrolou.
+
+# Text of the charts. Shared lines first, then one block per chart.
+charts:
   source_line: "Zdroj: [{name}]({url}), {licence}, stav k {date}."
+  table_summary: Zobraziť ako tabuľku
+  model: Model
+  org: Organizácia
+  date: Zverejnené
+  year: Rok
+  total: Spolu
+
+  horizon:
+    # {first}/{last} = durations like '3 s' and '17 h'   {first_year} = year   {months} = number
+    title: AI dnes sama dokončí úlohy, ktoré odborníkovi trvajú {last}. V roku {first_year} to bolo {first}
+    subtitle: >-
+      Dĺžka softvérových úloh, meraná časom, ktorý na ne potrebuje odborník, ktoré model dokončí
+      s 50 % úspešnosťou. Zvislá os je logaritmická.
+    legend_record: najlepší výsledok v čase vydania
+    legend_other: ostatné modely
+    note: >-
+      Rekord sa zdvojnásobuje v priemere každých {months} mesiacov (vlastný výpočet z prvej
+      a poslednej hodnoty). Merania: [METR]({metr_url}).
+    aria: >-
+      Bodový graf: dĺžka úloh, ktoré modely AI dokončia s 50 % úspešnosťou, podľa dátumu vydania.
+      Rekord vzrástol z {first} v roku {first_year} na {last} ({model}). Hodnoty sú v tabuľke pod grafom.
+    value: Dĺžka úlohy
 
   compute:
     # {growth} = '1,6 mld.'   {months} = '5'   {from}/{to} = years
@@ -65,24 +122,36 @@ evidence:
     legend_other: ostatné významné modely
     note: >-
       Rekord sa od konca roka 2012 zdvojnásobuje v priemere každých {months} mesiacov
-      (vlastný výpočet z prvej a poslednej hodnoty). Časť hodnôt sú odhady.
+      (vlastný výpočet z prvej a poslednej hodnoty). Časť hodnôt sú odhady. V tabuľke sú len
+      rekordy; všetkých {count} modelov je v [pôvodnom súbore CSV]({csv}).
     aria: >-
       Bodový graf: tréningové výpočty významných modelov AI od roku {from}. Rekord vzrástol
       z {base} FLOP koncom roka 2012 na {latest} FLOP ({model}). Hodnoty sú v tabuľke pod grafom.
-    table_summary: Zobraziť rekordy ako tabuľku
-    table_all: Všetkých {count} modelov je v [pôvodnom súbore CSV]({csv}).
-    columns:
-      model: Model
-      org: Organizácia
-      date: Zverejnené
-      flop: Tréning (FLOP)
-      confidence: Istota odhadu
-    tip_flop: Tréning
+    value: Tréning (FLOP)
+    confidence_label: Istota odhadu
     confidence:
       Confident: vysoká
       Likely: stredná
       Speculative: nízka
       unknown: neuvedená
+
+  cybench:
+    # {first_year} = earliest year in the data   {first}/{last} = percentages   {model} = latest record
+    title: V roku {first_year} vyriešil najlepší model {first} % hackerských úloh. Najnovší výsledok je {last} %
+    subtitle: >-
+      Podiel úloh z testu Cybench, ktoré model vyriešil bez nápovede. Cybench tvorí 40 úloh
+      z profesionálnych súťaží capture the flag.
+    legend_record: najlepší výsledok v čase vydania
+    legend_other: ostatné modely
+    note: >-
+      Časť výsledkov vrátane najvyšších uvádzajú vývojári vo vlastnej dokumentácii k modelom;
+      pôvod každého čísla je v tabuľke.
+    aria: >-
+      Bodový graf: podiel úloh testu Cybench vyriešených modelmi AI podľa dátumu vydania.
+      Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}).
+      Hodnoty sú v tabuľke pod grafom.
+    value: Vyriešené úlohy
+    reported: Výsledok uvádza
 
   sectors:
     # {share_last}/{share_first} = whole percentages   {last}/{first} = years
@@ -92,53 +161,24 @@ evidence:
     aria: >-
       Stĺpcový graf: počet významných modelov AI za rok podľa typu organizácie, {first} až {last}.
       Podiel firiem vzrástol z {share_first} % na {share_last} %. Hodnoty sú v tabuľke pod grafom.
-    table_summary: Zobraziť ako tabuľku
-    year: Rok
-    total: Spolu
     series:
       industry: Firmy
       mixed: Firmy spolu s univerzitami
       academia: Univerzity
       other: Iné
 
-  survey:
-    heading: Čo si myslia samotní výskumníci
-    items:
-      - figure: 38 – 51 %
-        text: >-
-          opýtaných výskumníkov AI dalo aspoň 10 % šancu, že pokročilá AI povedie k následkom
-          takým zlým ako vyhynutie ľudstva. Rozpätie závisí od toho, ako bola otázka položená.
-      - figure: "2047"
-        text: >-
-          je rok, do ktorého podľa súhrnného odhadu s 50 % pravdepodobnosťou stroje bez pomoci
-          prekonajú ľudí v každej úlohe. V prieskume o rok skôr vychádzal ten istý odhad o 13 rokov neskôr.
-    source: >-
-      Zdroj: Grace a kol., [Thousands of AI Authors on the Future of AI](https://arxiv.org/abs/2401.02843)
-      (2024), prieskum medzi 2 778 autormi z popredných konferencií o AI.
-
-mission:
-  heading: Nejde o odpor k pokroku. Ide o zodpovednosť voči spoločnosti.
-  paragraphs:
-    - >-
-      Umelá inteligencia prináša obrovský potenciál v medicíne, vzdelávaní či vede. Zároveň však
-      komerčné preteky tlačia vývojárov do vypúšťania stále silnejších modelov bez toho, aby
-      rozumeli ich vnútornému fungovaniu.
-    - >-
-      V letectve, jadrovej energetike či farmácii je nemysliteľné nasadiť technológiu skôr, ako
-      prejde prísnou certifikáciou. Pri najsilnejších AI systémoch takýto mechanizmus stále chýba.
-    - >-
-      PauseAI Slovensko žiada priestor na dôkladné vedecké overenie, etické vyhodnotenie a
-      stanovenie jasných pravidiel demokratickými inštitúciami.
-  # Our translation of the Center for AI Safety statement. Original:
-  # "Mitigating the risk of extinction from AI should be a global priority alongside other
-  # societal-scale risks such as pandemics and nuclear war."
-  quote: >-
-    „Zmiernenie rizika vyhynutia v dôsledku AI by malo byť globálnou prioritou popri iných
-    rizikách celospoločenského rozsahu, akými sú pandémie a jadrová vojna.“
-  quote_source: >-
-    [Vyhlásenie o riziku AI](https://www.safe.ai/work/statement-on-ai-risk), Center for AI Safety,
-    máj 2023 (náš preklad). Podpísali ho okrem iných Geoffrey Hinton, Yoshua Bengio,
-    Demis Hassabis a Sam Altman.
+  investment:
+    # {last_value}/{first_value} = billions of dollars   {last}/{first} = years
+    title: Do súkromných AI firiem prišlo v roku {last} približne {last_value} mld. dolárov. V roku {first} to bolo {first_value} mld.
+    subtitle: Súkromné investície do firiem vyvíjajúcich AI vo svete, v miliardách dolárov (v cenách roku 2021).
+    note: >-
+      Nezahŕňa firmy obchodované na burze ani vlastné výdavky firiem na výskum a dátové centrá,
+      takže skutočné sumy sú vyššie.
+    aria: >-
+      Stĺpcový graf: súkromné investície do AI firiem vo svete za rok, {first} až {last}.
+      Vzrástli z {first_value} na {last_value} miliárd dolárov. Hodnoty sú v tabuľke pod grafom.
+    value: Investície (mld. USD)
+    unit: mld. $
 
 demands:
   heading: Tri kroky pre bezpečnú budúcnosť
@@ -174,33 +214,6 @@ demands:
         [AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj). Licencie a nezávislé audity pre
         najvýkonnejšie systémy navrhujú Yoshua Bengio, Geoffrey Hinton a ďalší v článku
         [Managing extreme AI risks amid rapid progress](https://www.science.org/doi/10.1126/science.adn0117) (Science, 2024).
-
-risks:
-  heading: Riziká, ktoré vyžadujú našu pozornosť
-  intro: Bezpečnosť umelej inteligencie nie je abstraktná teória. Dotýka sa každodenného života každého z nás.
-  read_more: "Viac:"
-  # `source` is the file name (without .md) of an entry in src/content/zdroje/.
-  items:
-    - title: Zachovanie ľudskej kontroly
-      text: >-
-        Riziko straty kontroly nad autonómnymi systémami označujú špičkoví vedci za závažnú
-        civilizačnú hrozbu porovnateľnú s pandémiami či jadrovou vojnou.
-      source: if-anyone-builds-it
-    - title: Ochrana práce a ekonomiky
-      text: >-
-        Neriadený a unáhlený nástup umelej inteligencie môže otriasť trhom práce skôr, ako
-        vzdelávacie a sociálne systémy stihnú reagovať.
-      source: gradual-disempowerment
-    - title: Obrana demokracie pred manipuláciou
-      text: >-
-        Generatívne dezinformácie, deepfake obsah a cielená automatizovaná manipulácia môžu
-        fatálne podkopať dôveru vo voľby a slobodnú diskusiu.
-      source: international-ai-safety-report
-    - title: Technológie pre verejné dobro
-      text: >-
-        Chceme technológie, ktoré pomáhajú liečiť choroby, zefektívňujú energetiku a obohacujú
-        ľudský potenciál — pod dohľadom verejnosti.
-      source: life-3-0
 
 join:
   heading: Pridaj sa k PauseAI Slovensko
@@ -246,61 +259,6 @@ join:
     # Subject of the e-mail the coordinators receive.
     mail_subject: Nový záujemca – PauseAI Slovensko
 
-sources:
-  title: Zdroje — PauseAI Slovensko
-  description: Správy, štúdie a knihy, o ktoré sa opiera PauseAI Slovensko, s tým, čo ktorý zdroj tvrdí.
-  heading: Prečo si to myslíme
-  intro: >-
-    Naše požiadavky nestoja na jednom texte ani na jednom autorovi. Toto sú správy, štúdie a knihy,
-    o ktoré sa opierame. Pri každom zdroji píšeme, čo tvrdí a aký typ textu to je: vedecký prehľad
-    je niečo iné než argument jedného tímu.
-  # One heading per kind of source, in the order they appear on the page.
-  kinds:
-    report: Vedecké prehľady
-    argument: Argumenty
-    book: Knihy
-  claim_label: Čo tvrdí
-  open: Otvoriť zdroj
-  data_note: Dáta a prieskum, z ktorých sú grafy, sú priamo na [hlavnej stránke](/#data).
-  disagree:
-    heading: V čom sa tieto zdroje nezhodnú
-    paragraphs:
-      - >-
-        Autori týchto textov sa nezhodnú na tom, ako by k najhoršiemu došlo. Yudkowsky a Soares
-        opisujú náhlu stratu kontroly nad systémom inteligentnejším než ľudia. Autori štúdie
-        o postupnej strate vplyvu tvrdia, že žiadny taký okamih netreba: stačí, aby ľudí v ekonomike,
-        kultúre a štáte postupne nahradili systémy AI. Tegmark opisuje celú škálu možných budúcností,
-        dobrých aj zlých.
-      - >-
-        Nezhodnú sa ani na tom, ako veľmi je to pravdepodobné a čo presne treba urobiť. Zhodnú sa
-        na jednom: dnes nevieme zaručiť, že systémy schopnejšie než ľudia zostanú pod ľudskou
-        kontrolou, a vývoj napriek tomu pokračuje. Z toho vychádza aj naša požiadavka.
-
-security:
-  # Page text is in src/content/stranky/bezpecnost.md; this is the chart on it.
-  chart:
-    # {first_year} = earliest year in the data   {first}/{last} = percentages   {model} = latest record
-    title: V roku {first_year} vyriešil najlepší model {first} % hackerských úloh. Najnovší výsledok je {last} %
-    subtitle: >-
-      Podiel úloh z testu Cybench, ktoré model vyriešil bez nápovede. Cybench tvorí 40 úloh
-      z profesionálnych súťaží capture the flag.
-    legend_record: najlepší výsledok v čase vydania
-    legend_other: ostatné modely
-    note: >-
-      Časť výsledkov vrátane najvyšších uvádzajú vývojári vo vlastnej dokumentácii k modelom;
-      pôvod každého čísla je v tabuľke.
-    aria: >-
-      Bodový graf: podiel úloh testu Cybench vyriešených modelmi AI podľa dátumu vydania.
-      Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}).
-      Hodnoty sú v tabuľke pod grafom.
-    table_summary: Zobraziť ako tabuľku
-    columns:
-      model: Model
-      org: Organizácia
-      date: Vydaný
-      solved: Vyriešené úlohy
-      reported: Výsledok uvádza
-
 questions:
   heading: Otázky a námietky
   lead: >-
@@ -320,4 +278,5 @@ footer:
   # {year} = the current year
   legal: >-
     © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov. Grafy používajú dáta
-    [Epoch AI](https://epoch.ai/data/ai-models) pod licenciou CC BY 4.0.
+    [Epoch AI](https://epoch.ai/data/ai-models) a [Our World in Data](https://ourworldindata.org/artificial-intelligence)
+    pod licenciou CC BY 4.0.

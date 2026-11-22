@@ -1,0 +1,59 @@
+---
+// METR time horizons: the length of task (in expert-human time) a model completes half the time.
+import ScatterChart from './ScatterChart.astro';
+import data from '../../data/horizon.json';
+import { records, skDate, skDecimal, skDuration, yearOf } from '../../lib/chart';
+import { copy, plain, rich, sourceLine } from '../../lib/copy';
+
+const text = copy.charts.horizon;
+const { results } = data;
+const isRecord = records(results.map((r) => r.minutes));
+const first = results[0];
+const latest = results.filter((_, i) => isRecord[i]).at(-1)!;
+const months = ((yearOf(latest.date) - yearOf(first.date)) * 12) / Math.log2(latest.minutes / first.minutes);
+
+const vars = {
+  first: skDuration(first.minutes),
+  first_year: first.date.slice(0, 4),
+  last: skDuration(latest.minutes),
+  model: latest.name,
+  months: skDecimal(months, 0),
+  metr_url: data.measuredBy.url,
+};
+const hour = 60;
+---
+
+<ScatterChart
+  title={plain(text.title, vars)}
+  subtitle={plain(text.subtitle, vars)}
+  legendRecord={text.legend_record}
+  legendOther={text.legend_other}
+  aria={plain(text.aria, vars)}
+  noteHtml={`${rich(text.note, vars)} ${sourceLine(data.source)}`}
+  points={results.map((r) => ({
+    name: r.name,
+    date: r.date,
+    value: r.minutes,
+    tip: {
+      title: r.name,
+      rows: [[text.value, skDuration(r.minutes)], [copy.charts.org, r.org], [copy.charts.date, skDate(r.date)]],
+    },
+  }))}
+  labels={{ [latest.name]: latest.name }}
+  log
+  yDomain={[0.03, 24 * hour]}
+  ticks={[
+    { value: 0.1, label: '6 s' },
+    { value: 1, label: '1 min' },
+    { value: 10, label: '10 min' },
+    { value: hour, label: '1 h' },
+    { value: 8 * hour, label: '8 h' },
+  ]}
+  ticksNarrow={[{ value: 0.1, label: '6 s' }, { value: 1, label: '1 min' }, { value: hour, label: '1 h' }, { value: 8 * hour, label: '8 h' }]}
+  xDomain={[Number(first.date.slice(0, 4)), Math.ceil(yearOf(latest.date) + 0.3)]}
+  xStep={[1, 2]}
+  table={{
+    head: [{ label: copy.charts.model }, { label: copy.charts.org }, { label: copy.charts.date }, { label: text.value, num: true }],
+    rows: results.map((r) => [r.name, r.org, skDate(r.date), skDuration(r.minutes)]),
+  }}
+/>

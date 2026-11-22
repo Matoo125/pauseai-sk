@@ -6,6 +6,16 @@ lead: >-
 description: Kto stojí za PauseAI Slovensko, ako sme financovaní a ako nás kontaktovať.
 ---
 
+## Prečo to robíme
+
+Umelá inteligencia prináša obrovský potenciál v medicíne, vzdelávaní či vede. Zároveň však
+komerčné preteky tlačia vývojárov do vypúšťania stále silnejších modelov bez toho, aby rozumeli
+ich vnútornému fungovaniu.
+
+V letectve, jadrovej energetike či farmácii je nemysliteľné nasadiť technológiu skôr, ako prejde
+prísnou certifikáciou. Pri najsilnejších AI systémoch takýto mechanizmus stále chýba. Nejde nám
+o odpor k pokroku. Ide o zodpovednosť voči spoločnosti.
+
 ## Ľudia
 
 - Matej Vrzala

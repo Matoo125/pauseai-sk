@@ -51,3 +51,16 @@ export interface Tip {
   title: string;
   rows: [label: string, value: string][];
 }
+
+/** For values in date order: true where a value beats everything before it. */
+export function records(values: number[]): boolean[] {
+  let best = -Infinity;
+  return values.map((value) => (value > best ? ((best = value), true) : false));
+}
+
+/** Minutes → '3 s', '5 min', '17 h'. */
+export function skDuration(minutes: number): string {
+  if (minutes < 1) return `${Math.round(minutes * 60)} s`;
+  if (minutes < 90) return `${Math.round(minutes)} min`;
+  return `${Math.round(minutes / 60)} h`;
+}

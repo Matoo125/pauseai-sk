@@ -1,0 +1,103 @@
+---
+// Every claim in src/content/tvrdenia/, each with its charts, figures, context
+// and sources, followed by the reading list from src/content/zdroje/.
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Page from '../components/Page.astro';
+import Figures from '../components/Figures.astro';
+import ChartTips from '../components/charts/ChartTips.astro';
+import HorizonChart from '../components/charts/HorizonChart.astro';
+import ComputeChart from '../components/charts/ComputeChart.astro';
+import CybenchChart from '../components/charts/CybenchChart.astro';
+import SectorChart from '../components/charts/SectorChart.astro';
+import InvestmentChart from '../components/charts/InvestmentChart.astro';
+import { copy } from '../lib/copy';
+
+const text = copy.evidence_page;
+const CHARTS = {
+  horizon: { Chart: HorizonChart, half: false },
+  compute: { Chart: ComputeChart, half: false },
+  cybench: { Chart: CybenchChart, half: false },
+  // Column charts are narrow, so two of them sit side by side.
+  sectors: { Chart: SectorChart, half: true },
+  investment: { Chart: InvestmentChart, half: true },
+};
+
+const claims = await Promise.all(
+  (await getCollection('tvrdenia'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => ({
+      entry,
+      Content: (await render(entry)).Content,
+      charts: entry.data.charts.map((name) => CHARTS[name]),
+    })),
+);
+
+const KIND_ORDER = ['report', 'argument', 'book'];
+const reading = (await getCollection('zdroje')).sort(
+  (a, b) => KIND_ORDER.indexOf(a.data.kind) - KIND_ORDER.indexOf(b.data.kind) || a.data.order - b.data.order,
+);
+---
+
+<Page heading={text.heading} lead={text.lead} description={text.description}>
+  <nav class="contents" aria-label={text.contents}>
+    <ol>
+      {claims.map(({ entry }) => <li><a href={`#${entry.id}`}>{entry.data.title}</a></li>)}
+      <li><a href="#citanie">{text.reading.heading}</a></li>
+    </ol>
+  </nav>
+
+  {
+    claims.map(({ entry, Content, charts }) => (
+      <section class="claim" id={entry.id}>
+        <h2>{entry.data.title}</h2>
+        {charts.length > 0 && (
+          <div class:list={['claim-charts', { 'claim-charts-pair': charts.every((chart) => chart.half) && charts.length === 2 }]}>
+            {charts.map(({ Chart }) => <Chart />)}
+          </div>
+        )}
+        {entry.data.figures.length > 0 && <Figures items={entry.data.figures} />}
+        <div class="prose">
+          <Content />
+        </div>
+        <p class="claim-sources">
+          {text.sources}{' '}
+          {entry.data.sources.map((source, i) => (
+            <Fragment>{i > 0 && '; '}<a href={source.url}>{source.label}</a></Fragment>
+          ))}
+        </p>
+      </section>
+    ))
+  }
+
+  <section class="claim" id="citanie">
+    <h2>{text.reading.heading}</h2>
+    <p class="reading-intro">{text.reading.intro}</p>
+    <ul class="reading">
+      {
+        reading.map((entry) => (
+          <li id={entry.id}>
+            {entry.data.cover ? (
+              <Image class="reading-cover" src={entry.data.cover} alt="" width={132} densities={[1, 2]} title={entry.data.cover_credit} />
+            ) : (
+              <span class="reading-cover reading-cover-none" />
+            )}
+            <div>
+              <p class="reading-kind">{text.reading.kinds[entry.data.kind]}</p>
+              <h3><a href={entry.data.url} rel="noopener">{entry.data.title}</a></h3>
+              <p class="reading-byline">{entry.data.authors}, {entry.data.year}</p>
+              <p>{entry.data.claim}</p>
+              <p class="reading-format">
+                {entry.data.format}
+                {entry.data.cover_credit && ` ${entry.data.cover_credit}.`}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="reading-intro">{text.reading.disagree}</p>
+  </section>
+
+  <ChartTips />
+</Page>

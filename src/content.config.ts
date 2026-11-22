@@ -1,8 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// The reading list on /zdroje/: one Markdown file per source. The file name is
-// the entry's id, used in links (/zdroje/#id) and by `source:` in sk.yaml.
+// The reading list at the end of /dokazy/: one Markdown file per book or report.
+// The body is not shown; the list uses the front matter only.
 const zdroje = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/zdroje' }),
   schema: ({ image }) =>
@@ -25,6 +25,21 @@ const zdroje = defineCollection({
     }),
 });
 
+// The claims on /dokazy/: the claim as the title, its charts and figures in the
+// front matter, and the context (including what the data doesn't show) as the body.
+const tvrdenia = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/tvrdenia' }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    // Charts to show, by name; see src/components/charts/.
+    charts: z.array(z.enum(['horizon', 'compute', 'cybench', 'sectors', 'investment'])).default([]),
+    // Headline numbers shown in place of (or beside) a chart.
+    figures: z.array(z.object({ figure: z.string(), text: z.string() })).default([]),
+    sources: z.array(z.object({ label: z.string(), url: z.string().url() })),
+  }),
+});
+
 // Questions and objections on /otazky/: the question in the front matter, the answer as the body.
 const otazky = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/otazky' }),
@@ -34,7 +49,7 @@ const otazky = defineCollection({
   }),
 });
 
-// Long-form pages written as Markdown: /bezpecnost/ and /kto-sme/.
+// Long-form pages written as Markdown: /kto-sme/.
 const stranky = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/stranky' }),
   schema: z.object({
@@ -44,4 +59,4 @@ const stranky = defineCollection({
   }),
 });
 
-export const collections = { zdroje, otazky, stranky };
+export const collections = { tvrdenia, zdroje, otazky, stranky };

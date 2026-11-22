@@ -1,0 +1,42 @@
+---
+// Who publishes notable AI models: stacked columns per full calendar year.
+import ColumnChart from './ColumnChart.astro';
+import epoch from '../../data/epoch.json';
+import { copy, plain, rich, sourceLine } from '../../lib/copy';
+
+const text = copy.charts.sectors;
+const years = epoch.sectors;
+const KEYS = ['industry', 'mixed', 'academia', 'other'] as const;
+const series = KEYS.map((key) => ({ key, label: text.series[key] as string }));
+const total = (row: (typeof years)[number]) => KEYS.reduce((sum, key) => sum + row[key], 0);
+const share = (row: (typeof years)[number]) => Math.round((row.industry / total(row)) * 100);
+
+const first = years[0];
+const last = years.at(-1)!;
+const vars = { first: first.year, last: last.year, share_first: share(first), share_last: share(last) };
+const yMax = Math.ceil(Math.max(...years.map(total)) / 40) * 40;
+const ticks = [];
+for (let value = 0; value <= yMax; value += 40) ticks.push({ value, label: String(value) });
+---
+
+<ColumnChart
+  title={plain(text.title, vars)}
+  subtitle={plain(text.subtitle, vars)}
+  aria={plain(text.aria, vars)}
+  noteHtml={`${sourceLine(epoch.source)} ${rich(text.note)}`}
+  series={series}
+  rows={years.map((row) => ({
+    year: row.year,
+    values: row,
+    tip: {
+      title: String(row.year),
+      rows: [...series.map((s): [string, string] => [s.label, String(row[s.key])]), [copy.charts.total, String(total(row))]],
+    },
+  }))}
+  yMax={yMax}
+  ticks={ticks}
+  table={{
+    head: [{ label: copy.charts.year }, ...series.map((s) => ({ label: s.label, num: true })), { label: copy.charts.total, num: true }],
+    rows: years.map((row) => [String(row.year), ...KEYS.map((key) => String(row[key])), String(total(row))]),
+  }}
+/>

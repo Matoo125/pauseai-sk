@@ -1,0 +1,20 @@
+---
+// Headline numbers with a sentence each, used where a number says more than a chart.
+import { plain } from '../lib/copy';
+
+interface Props {
+  items: { figure: string; text: string }[];
+}
+const { items } = Astro.props;
+---
+
+<dl class="figures">
+  {
+    items.map((item) => (
+      <div>
+        <dt>{plain(item.figure)}</dt>
+        <dd>{plain(item.text)}</dd>
+      </div>
+    ))
+  }
+</dl>

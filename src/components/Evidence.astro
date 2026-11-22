@@ -1,41 +1,45 @@
 ---
-import ComputeChart from './ComputeChart.astro';
-import SectorChart from './SectorChart.astro';
-import ChartTips from './ChartTips.astro';
-import { copy, plain, rich } from '../lib/copy';
+// The landing page's evidence in brief: the task-horizon chart, the researcher
+// survey figures and the risk statement. The full set is on /dokazy/.
+import { getEntry } from 'astro:content';
+import HorizonChart from './charts/HorizonChart.astro';
+import ChartTips from './charts/ChartTips.astro';
+import Figures from './Figures.astro';
+import { copy, rich } from '../lib/copy';
 
-const { evidence } = copy;
+const text = copy.home_evidence;
+const survey = (await getEntry('tvrdenia', 'obavy'))!;
 ---
 
-<section class="band" id="data">
+<section class="band" id="dokazy">
   <div class="wrap">
     <header class="band-head">
-      <h2>{evidence.heading}</h2>
-      <p>{evidence.intro}</p>
+      <h2>{text.heading}</h2>
+      <p>{text.intro}</p>
     </header>
 
-    <ComputeChart />
+    <HorizonChart />
 
     <div class="evidence-row">
-      <SectorChart />
-
-      <div class="survey">
-        <h3>{evidence.survey.heading}</h3>
-        <dl>
-          {
-            evidence.survey.items.map((item) => (
-              <div>
-                <dt>{plain(item.figure)}</dt>
-                <dd>{plain(item.text)}</dd>
-              </div>
-            ))
-          }
-        </dl>
-        <p class="source" set:html={rich(evidence.survey.source)} />
+      <div>
+        <h3>{survey.data.title}</h3>
+        <Figures items={survey.data.figures} />
+        <p class="source">
+          {survey.data.sources.slice(0, 2).map((source, i) => (
+            <Fragment>{i > 0 && '; '}<a href={source.url}>{source.label}</a></Fragment>
+          ))}
+        </p>
       </div>
+
+      <figure class="statement">
+        <blockquote>
+          <p>{text.quote}</p>
+        </blockquote>
+        <figcaption set:html={rich(text.quote_source)} />
+      </figure>
     </div>
 
-    <p class="evidence-more" set:html={rich(evidence.more)} />
+    <p class="evidence-more" set:html={rich(text.more)} />
   </div>
 </section>
 

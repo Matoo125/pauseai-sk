@@ -1,0 +1,50 @@
+---
+// Cybench: share of professional capture-the-flag tasks each model solved without hints.
+import ScatterChart from './ScatterChart.astro';
+import data from '../../data/cybench.json';
+import { records, skDate, skDecimal, yearOf } from '../../lib/chart';
+import { copy, plain, rich, sourceLine } from '../../lib/copy';
+
+const text = copy.charts.cybench;
+const { results } = data;
+const percent = (share: number) => skDecimal(share * 100, Number.isInteger(+(share * 100).toFixed(1)) ? 0 : 1);
+
+const isRecord = records(results.map((r) => r.solved));
+const latest = results.filter((_, i) => isRecord[i]).at(-1)!;
+const firstYear = results[0].date.slice(0, 4);
+const firstYearBest = Math.max(...results.filter((r) => r.date.startsWith(firstYear)).map((r) => r.solved));
+const vars = { first_year: firstYear, first: percent(firstYearBest), last: percent(latest.solved), model: latest.name };
+---
+
+<ScatterChart
+  title={plain(text.title, vars)}
+  subtitle={plain(text.subtitle, vars)}
+  legendRecord={text.legend_record}
+  legendOther={text.legend_other}
+  aria={plain(text.aria, vars)}
+  noteHtml={`${rich(text.note, vars)} ${sourceLine(data.source)}`}
+  points={results.map((r) => ({
+    name: r.name,
+    date: r.date,
+    value: r.solved * 100,
+    tip: {
+      title: r.name,
+      rows: [
+        [text.value, `${percent(r.solved)} %`], [copy.charts.org, r.org],
+        [copy.charts.date, skDate(r.date)], [text.reported, r.reportedBy],
+      ],
+    },
+  }))}
+  labels={{ [latest.name]: latest.name }}
+  yDomain={[0, 100]}
+  ticks={[0, 25, 50, 75, 100].map((value) => ({ value, label: `${value} %` }))}
+  ticksNarrow={[0, 50, 100].map((value) => ({ value, label: `${value} %` }))}
+  xDomain={[Number(firstYear), Math.ceil(yearOf(latest.date) + 0.25)]}
+  table={{
+    head: [
+      { label: copy.charts.model }, { label: copy.charts.org }, { label: copy.charts.date },
+      { label: text.value, num: true }, { label: text.reported },
+    ],
+    rows: results.map((r) => [r.name, r.org, skDate(r.date), `${percent(r.solved)} %`, r.reportedBy]),
+  }}
+/>

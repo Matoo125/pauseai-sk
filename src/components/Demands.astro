@@ -1,19 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import { copy, rich } from '../lib/copy';
 
-const { demands, risks } = copy;
-
-const sources = new Map((await getCollection('zdroje')).map((entry) => [entry.id, entry.data.title]));
-const riskItems = risks.items.map((risk) => {
-  if (risk.source && !sources.has(risk.source)) {
-    throw new Error(`sk.yaml: risk "${risk.title}" points to source "${risk.source}", which is not in src/content/zdroje/`);
-  }
-  return { ...risk, sourceTitle: risk.source ? sources.get(risk.source)!.split(':')[0] : undefined };
-});
+const { demands } = copy;
 ---
 
-<section class="band" id="poziadavky">
+<section class="band band-tint" id="poziadavky">
   <div class="wrap">
     <header class="band-head">
       <h2>{demands.heading}</h2>
@@ -31,29 +22,5 @@ const riskItems = risks.items.map((risk) => {
       }
     </ol>
     <p class="evidence-more" set:html={rich(demands.more)} />
-  </div>
-</section>
-
-<section class="band band-tint" id="rizika">
-  <div class="wrap">
-    <header class="band-head">
-      <h2>{risks.heading}</h2>
-      <p>{risks.intro}</p>
-    </header>
-    <ul class="risks">
-      {
-        riskItems.map((risk) => (
-          <li>
-            <h3>{risk.title}</h3>
-            <p>{risk.text}</p>
-            {risk.source && (
-              <p class="risk-source">
-                {risks.read_more} <a href={`/zdroje/#${risk.source}`}>{risk.sourceTitle}</a>
-              </p>
-            )}
-          </li>
-        ))
-      }
-    </ul>
   </div>
 </section>

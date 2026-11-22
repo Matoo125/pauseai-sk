@@ -1,0 +1,80 @@
+---
+// Training compute of notable AI models over time, log scale.
+import ScatterChart from './ScatterChart.astro';
+import epoch from '../../data/epoch.json';
+import { flopText, records, skBig, skDate, skDecimal, yearOf } from '../../lib/chart';
+import { copy, plain, rich, sourceLine } from '../../lib/copy';
+
+const text = copy.charts.compute;
+const { points, fromYear } = epoch.compute;
+const isRecord = records(points.map((p) => p.flop));
+const recordPoints = points.filter((_, i) => isRecord[i]);
+const latest = recordPoints.at(-1)!;
+
+// Headline: the largest training run now against the largest known at the end of 2012.
+const BASE_DATE = '2012-12-31';
+const base = recordPoints.filter((p) => p.date <= BASE_DATE).at(-1)!;
+const growth = latest.flop / base.flop;
+const months = ((yearOf(latest.date) - yearOf(BASE_DATE)) * 12) / Math.log2(growth);
+
+const vars = {
+  growth: skBig(growth),
+  months: skDecimal(months, 0),
+  from: fromYear,
+  to: epoch.source.latestModel.slice(0, 4),
+  base: flopText(base.flop),
+  latest: flopText(latest.flop),
+  model: latest.name,
+  count: points.length,
+  csv: epoch.source.csv,
+};
+const orgText = (org: string) => org.split(',').join(', ');
+
+const exps = points.map((p) => Math.log10(p.flop));
+const e0 = Math.floor(Math.min(...exps));
+const e1 = Math.ceil(Math.max(...exps));
+const powers = (step: number) => {
+  const ticks = [];
+  for (let exp = e1; exp >= e0; exp -= step) ticks.push({ value: 10 ** exp, power: exp });
+  return ticks;
+};
+---
+
+<ScatterChart
+  title={plain(text.title, vars)}
+  subtitle={plain(text.subtitle, vars)}
+  legendRecord={text.legend_record}
+  legendOther={text.legend_other}
+  aria={plain(text.aria, vars)}
+  noteHtml={`${rich(text.note, vars)} ${sourceLine(epoch.source)}`}
+  points={points.map((p) => ({
+    name: p.name,
+    date: p.date,
+    value: p.flop,
+    tip: {
+      title: p.name,
+      rows: [[text.value, flopText(p.flop)], [copy.charts.org, orgText(p.org)], [copy.charts.date, skDate(p.date)]],
+    },
+  }))}
+  labels={{
+    'AlphaGo Lee': 'AlphaGo',
+    'GPT-3 175B (davinci)': 'GPT-3',
+    'GPT-4 (Mar 2023)': 'GPT-4',
+    [latest.name]: latest.name,
+  }}
+  log
+  yDomain={[10 ** e0, 10 ** e1]}
+  ticks={powers(2)}
+  ticksNarrow={powers(3)}
+  xDomain={[fromYear, Math.ceil(yearOf(epoch.source.latestModel))]}
+  xStep={[2, 4]}
+  table={{
+    head: [
+      { label: copy.charts.model }, { label: copy.charts.org }, { label: copy.charts.date },
+      { label: text.value, num: true }, { label: text.confidence_label },
+    ],
+    rows: recordPoints.map((p) => [
+      p.name, orgText(p.org), skDate(p.date), flopText(p.flop), text.confidence[p.confidence] ?? text.confidence.unknown,
+    ]),
+  }}
+/>

@@ -1,0 +1,62 @@
+{
+ "source": {
+  "name": "Quid cez AI Index Report, spracovanie Our World in Data",
+  "url": "https://ourworldindata.org/grapher/private-investment-in-artificial-intelligence",
+  "licence": "CC BY 4.0",
+  "retrieved": "2026-11-22"
+ },
+ "years": [
+  {
+   "year": 2013,
+   "usd": 6011928538
+  },
+  {
+   "year": 2014,
+   "usd": 10940620567
+  },
+  {
+   "year": 2015,
+   "usd": 15258740290
+  },
+  {
+   "year": 2016,
+   "usd": 19340762642
+  },
+  {
+   "year": 2017,
+   "usd": 28434515011
+  },
+  {
+   "year": 2018,
+   "usd": 46508654628
+  },
+  {
+   "year": 2019,
+   "usd": 61663636439
+  },
+  {
+   "year": 2020,
+   "usd": 77252637155
+  },
+  {
+   "year": 2021,
+   "usd": 145398696899
+  },
+  {
+   "year": 2022,
+   "usd": 104637757614
+  },
+  {
+   "year": 2023,
+   "usd": 92792585552
+  },
+  {
+   "year": 2024,
+   "usd": 130850813417
+  },
+  {
+   "year": 2025,
+   "usd": 290094148769
+  }
+ ]
+}

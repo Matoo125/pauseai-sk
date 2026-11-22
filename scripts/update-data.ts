@@ -1,7 +1,10 @@
 #!/usr/bin/env bun
 // Refresh the chart data from Epoch AI's public datasets:
 //   src/data/epoch.json    "Notable AI models" (training compute, who publishes)
-//   src/data/cybench.json  Cybench results from the benchmarking hub (security page)
+//   src/data/cybench.json  Cybench results from the benchmarking hub
+//   src/data/horizon.json  METR task time horizons, from the same hub
+// and from Our World in Data:
+//   src/data/investment.json  private investment in AI companies per year
 //
 //   bun run data
 //
@@ -9,7 +12,8 @@
 // always says which day its numbers are from. Run this when you want fresher
 // charts, look at the diff, commit.
 //
-// Data: Epoch AI, https://epoch.ai/data/ai-models and https://epoch.ai/benchmarks (CC BY 4.0).
+// Data: Epoch AI, https://epoch.ai/data/ai-models and https://epoch.ai/benchmarks (CC BY 4.0);
+// Our World in Data, https://ourworldindata.org/grapher/private-investment-in-artificial-intelligence.
 
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -127,11 +131,23 @@ if (!zip.ok) throw new Error(`${BENCH_ZIP} answered ${zip.status}`);
 const scratch = mkdtempSync(path.join(tmpdir(), 'epoch-bench-'));
 const zipPath = path.join(scratch, 'benchmark_data.zip');
 writeFileSync(zipPath, Buffer.from(await zip.arrayBuffer()));
-const unzip = Bun.spawnSync(['unzip', '-p', zipPath, 'cybench_external.csv']);
+const fromZip = (file: string): string => {
+  const unzip = Bun.spawnSync(['unzip', '-p', zipPath, file]);
+  if (unzip.exitCode !== 0) throw new Error(`unzip ${file} failed: ${unzip.stderr.toString() || 'is unzip installed?'}`);
+  return unzip.stdout.toString();
+};
+const cybenchCsv = fromZip('cybench_external.csv');
+const horizonCsv = fromZip('metr_time_horizons_external.csv');
 rmSync(scratch, { recursive: true });
-if (unzip.exitCode !== 0) throw new Error(`unzip failed: ${unzip.stderr.toString() || 'is unzip installed?'}`);
 
-const results = parseCsv(unzip.stdout.toString())
+const benchSource = {
+  name: 'Epoch AI, Capabilities & benchmarking',
+  url: BENCH_PAGE,
+  licence: 'CC BY 4.0',
+  retrieved: new Date().toISOString().slice(0, 10),
+};
+
+const results = parseCsv(cybenchCsv)
   .map((r) => ({
     name: need(r, 'Model version').replace(/_unknown$/, ''),
     org: need(r, 'Organization'),
@@ -148,12 +164,7 @@ writeFileSync(
   CYBENCH_OUT,
   JSON.stringify(
     {
-      source: {
-        name: 'Epoch AI, Capabilities & benchmarking',
-        url: BENCH_PAGE,
-        licence: 'CC BY 4.0',
-        retrieved: new Date().toISOString().slice(0, 10),
-      },
+      source: benchSource,
       results,
     },
     null,
@@ -161,3 +172,67 @@ writeFileSync(
   ) + '\n',
 );
 console.log(`${results.length} Cybench results → ${path.relative(process.cwd(), CYBENCH_OUT)}`);
+
+// ── METR time horizons: how long a task (in human-expert minutes) a model finishes half the time ──
+const HORIZON_OUT = path.join(import.meta.dir, '../src/data/horizon.json');
+const measured = parseCsv(horizonCsv)
+  .map((r) => ({
+    name: need(r, 'Model version').replace(/_unknown$/, ''),
+    org: need(r, 'Organization'),
+    date: need(r, 'Release date'),
+    minutes: Number(Number(need(r, 'Time horizon')).toPrecision(3)),
+    current: need(r, 'METR version') === 'METR-Horizon-v1.1',
+  }))
+  .filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.date) && Number.isFinite(r.minutes) && r.minutes > 0);
+// A model measured under two versions of METR's method is kept once, under the newer one.
+const byName = new Map<string, (typeof measured)[number]>();
+for (const r of measured) {
+  const seen = byName.get(r.name);
+  if (!seen || (r.current && !seen.current)) byName.set(r.name, r);
+}
+const horizons = [...byName.values()]
+  .map(({ current, ...r }) => r)
+  .sort((a, b) => a.date.localeCompare(b.date));
+if (horizons.length < 20) throw new Error(`Only ${horizons.length} time horizons parsed — refusing to overwrite the data`);
+writeFileSync(
+  HORIZON_OUT,
+  JSON.stringify(
+    { source: benchSource, measuredBy: { name: 'METR', url: 'https://metr.org/time-horizons/' }, results: horizons },
+    null,
+    1,
+  ) + '\n',
+);
+console.log(`${horizons.length} time horizons → ${path.relative(process.cwd(), HORIZON_OUT)}`);
+
+// ── Private investment in AI companies, world total per year ─────────────────
+const OWID_CHART = 'https://ourworldindata.org/grapher/private-investment-in-artificial-intelligence';
+const INVESTMENT_OUT = path.join(import.meta.dir, '../src/data/investment.json');
+const owid = await fetch(`${OWID_CHART}.csv?v=1&csvType=full&useColumnShortNames=true`, {
+  headers: { 'User-Agent': 'pauseai-sk-site-build' },
+});
+if (!owid.ok) throw new Error(`${OWID_CHART}.csv answered ${owid.status}`);
+const investment = parseCsv(await owid.text())
+  .filter((r) => need(r, 'entity') === 'World')
+  .map((r) => ({ year: Number(need(r, 'year')), usd: Math.round(Number(need(r, 'private_investment'))) }))
+  .filter((r) => Number.isFinite(r.usd))
+  .sort((a, b) => a.year - b.year);
+if (investment.length < 5) throw new Error(`Only ${investment.length} investment years parsed — refusing to overwrite the data`);
+writeFileSync(
+  INVESTMENT_OUT,
+  JSON.stringify(
+    {
+      source: {
+        name: 'Quid cez AI Index Report, spracovanie Our World in Data',
+        url: OWID_CHART,
+        licence: 'CC BY 4.0',
+        retrieved: new Date().toISOString().slice(0, 10),
+      },
+      // Constant 2021 US dollars. Privately held AI companies raising over $1.5 million; excludes
+      // listed companies and firms' own spending on research and data centres.
+      years: investment,
+    },
+    null,
+    1,
+  ) + '\n',
+);
+console.log(`${investment.length} years of investment → ${path.relative(process.cwd(), INVESTMENT_OUT)}`);

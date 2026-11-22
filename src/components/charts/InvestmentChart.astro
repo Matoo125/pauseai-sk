@@ -1,0 +1,37 @@
+---
+// Private investment in AI companies worldwide, per year.
+import ColumnChart from './ColumnChart.astro';
+import data from '../../data/investment.json';
+import { skDecimal } from '../../lib/chart';
+import { copy, plain, rich, sourceLine } from '../../lib/copy';
+
+const text = copy.charts.investment;
+const years = data.years.map((row) => ({ year: row.year, billions: row.usd / 1e9 }));
+const billions = (value: number) => skDecimal(value, value < 10 ? 1 : 0).replace(/,0$/, '');
+
+const first = years[0];
+const last = years.at(-1)!;
+const vars = { first: first.year, last: last.year, first_value: billions(first.billions), last_value: billions(last.billions) };
+const yMax = Math.ceil(Math.max(...years.map((row) => row.billions)) / 100) * 100;
+const ticks = [];
+for (let value = 0; value <= yMax; value += 100) ticks.push({ value, label: String(value) });
+---
+
+<ColumnChart
+  title={plain(text.title, vars)}
+  subtitle={plain(text.subtitle, vars)}
+  aria={plain(text.aria, vars)}
+  noteHtml={`${rich(text.note)} ${sourceLine(data.source)}`}
+  series={[{ key: 'value', label: text.value }]}
+  rows={years.map((row) => ({
+    year: row.year,
+    values: { value: row.billions },
+    tip: { title: String(row.year), rows: [[text.value, `${billions(row.billions)} ${text.unit}`]] },
+  }))}
+  yMax={yMax}
+  ticks={ticks}
+  table={{
+    head: [{ label: copy.charts.year }, { label: text.value, num: true }],
+    rows: years.map((row) => [String(row.year), billions(row.billions)]),
+  }}
+/>

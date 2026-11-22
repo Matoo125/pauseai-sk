@@ -1,0 +1,284 @@
+{
+ "source": {
+  "name": "Epoch AI, Capabilities & benchmarking",
+  "url": "https://epoch.ai/benchmarks",
+  "licence": "CC BY 4.0",
+  "retrieved": "2026-11-22"
+ },
+ "measuredBy": {
+  "name": "METR",
+  "url": "https://metr.org/time-horizons/"
+ },
+ "results": [
+  {
+   "name": "gpt2-xl",
+   "org": "OpenAI",
+   "date": "2019-11-05",
+   "minutes": 0.0538
+  },
+  {
+   "name": "gpt-4-0314",
+   "org": "OpenAI",
+   "date": "2023-03-14",
+   "minutes": 3.99
+  },
+  {
+   "name": "gpt-3.5-turbo-instruct",
+   "org": "OpenAI",
+   "date": "2023-09-18",
+   "minutes": 0.599
+  },
+  {
+   "name": "gpt-4-1106-preview",
+   "org": "OpenAI",
+   "date": "2023-11-06",
+   "minutes": 4.04
+  },
+  {
+   "name": "gpt-4-0125-preview",
+   "org": "OpenAI",
+   "date": "2024-01-25",
+   "minutes": 5.37
+  },
+  {
+   "name": "claude-3-opus-20240229",
+   "org": "Anthropic",
+   "date": "2024-02-29",
+   "minutes": 3.95
+  },
+  {
+   "name": "gpt-4-turbo-2024-04-09",
+   "org": "OpenAI",
+   "date": "2024-04-09",
+   "minutes": 3.73
+  },
+  {
+   "name": "gpt-4o-2024-05-13",
+   "org": "OpenAI",
+   "date": "2024-05-13",
+   "minutes": 6.99
+  },
+  {
+   "name": "qwen2-72b-instruct",
+   "org": "Alibaba",
+   "date": "2024-06-07",
+   "minutes": 2.24
+  },
+  {
+   "name": "claude-3-5-sonnet-20240620",
+   "org": "Anthropic",
+   "date": "2024-06-20",
+   "minutes": 11.4
+  },
+  {
+   "name": "o1-preview-2024-09-12",
+   "org": "OpenAI",
+   "date": "2024-09-12",
+   "minutes": 20.3
+  },
+  {
+   "name": "qwen2.5-72b-instruct",
+   "org": "Alibaba",
+   "date": "2024-09-19",
+   "minutes": 5.17
+  },
+  {
+   "name": "claude-3-5-sonnet-20241022",
+   "org": "Anthropic",
+   "date": "2024-10-22",
+   "minutes": 20.5
+  },
+  {
+   "name": "o1-2024-12-17_medium",
+   "org": "OpenAI",
+   "date": "2024-12-17",
+   "minutes": 38.8
+  },
+  {
+   "name": "DeepSeek-V3",
+   "org": "DeepSeek",
+   "date": "2024-12-26",
+   "minutes": 18.5
+  },
+  {
+   "name": "DeepSeek-R1",
+   "org": "DeepSeek",
+   "date": "2025-01-20",
+   "minutes": 26.9
+  },
+  {
+   "name": "claude-3-7-sonnet-20250219",
+   "org": "Anthropic",
+   "date": "2025-02-24",
+   "minutes": 60.4
+  },
+  {
+   "name": "claude-3-7-sonnet-20250219_16K",
+   "org": "Anthropic",
+   "date": "2025-02-24",
+   "minutes": 56.1
+  },
+  {
+   "name": "DeepSeek-V3-0324",
+   "org": "DeepSeek",
+   "date": "2025-03-24",
+   "minutes": 23.1
+  },
+  {
+   "name": "o3-2025-04-16",
+   "org": "OpenAI",
+   "date": "2025-04-16",
+   "minutes": 120
+  },
+  {
+   "name": "o3-2025-04-16_medium",
+   "org": "OpenAI",
+   "date": "2025-04-16",
+   "minutes": 91.3
+  },
+  {
+   "name": "o4-mini-2025-04-16_medium",
+   "org": "OpenAI",
+   "date": "2025-04-16",
+   "minutes": 76.5
+  },
+  {
+   "name": "claude-opus-4-20250514",
+   "org": "Anthropic",
+   "date": "2025-05-22",
+   "minutes": 100
+  },
+  {
+   "name": "claude-opus-4-20250514_16K",
+   "org": "Anthropic",
+   "date": "2025-05-22",
+   "minutes": 85.6
+  },
+  {
+   "name": "claude-sonnet-4-20250514_16K",
+   "org": "Anthropic",
+   "date": "2025-05-22",
+   "minutes": 74.9
+  },
+  {
+   "name": "DeepSeek-R1-0528",
+   "org": "DeepSeek",
+   "date": "2025-05-28",
+   "minutes": 31.2
+  },
+  {
+   "name": "gemini-2.5-pro-preview-06-05",
+   "org": "Google DeepMind",
+   "date": "2025-06-05",
+   "minutes": 38.7
+  },
+  {
+   "name": "grok-4-0709",
+   "org": "xAI",
+   "date": "2025-07-09",
+   "minutes": 110
+  },
+  {
+   "name": "claude-opus-4-1-20250805_16K",
+   "org": "Anthropic",
+   "date": "2025-08-05",
+   "minutes": 114
+  },
+  {
+   "name": "claude-opus-4-1-20250805",
+   "org": "Anthropic",
+   "date": "2025-08-05",
+   "minutes": 100
+  },
+  {
+   "name": "gpt-oss-120b",
+   "org": "OpenAI",
+   "date": "2025-08-05",
+   "minutes": 42
+  },
+  {
+   "name": "gpt-5-2025-08-07_high",
+   "org": "OpenAI",
+   "date": "2025-08-07",
+   "minutes": 203
+  },
+  {
+   "name": "gpt-5-2025-08-07_medium",
+   "org": "OpenAI",
+   "date": "2025-08-07",
+   "minutes": 137
+  },
+  {
+   "name": "claude-sonnet-4-5-20250929_16K",
+   "org": "Anthropic",
+   "date": "2025-09-29",
+   "minutes": 122
+  },
+  {
+   "name": "kimi-k2-thinking",
+   "org": "Moonshot",
+   "date": "2025-11-06",
+   "minutes": 54.2
+  },
+  {
+   "name": "gemini-3-pro-preview",
+   "org": "Google DeepMind",
+   "date": "2025-11-18",
+   "minutes": 224
+  },
+  {
+   "name": "gpt-5.1-codex-max",
+   "org": "OpenAI",
+   "date": "2025-11-19",
+   "minutes": 224
+  },
+  {
+   "name": "claude-opus-4-5-20251101",
+   "org": "Anthropic",
+   "date": "2025-11-24",
+   "minutes": 293
+  },
+  {
+   "name": "claude-opus-4-5-20251101_16K",
+   "org": "Anthropic",
+   "date": "2025-11-24",
+   "minutes": 289
+  },
+  {
+   "name": "gpt-5.2-2025-12-11_high",
+   "org": "OpenAI",
+   "date": "2025-12-11",
+   "minutes": 352
+  },
+  {
+   "name": "claude-opus-4-6",
+   "org": "Anthropic",
+   "date": "2026-02-05",
+   "minutes": 719
+  },
+  {
+   "name": "gpt-5.3-codex",
+   "org": "OpenAI",
+   "date": "2026-02-05",
+   "minutes": 350
+  },
+  {
+   "name": "gemini-3.1-pro-preview",
+   "org": "Google DeepMind",
+   "date": "2026-02-19",
+   "minutes": 384
+  },
+  {
+   "name": "gpt-5.4-2026-03-05_xhigh",
+   "org": "OpenAI",
+   "date": "2026-03-05",
+   "minutes": 342
+  },
+  {
+   "name": "claude-mythos-preview-early",
+   "org": "Anthropic",
+   "date": "2026-04-07",
+   "minutes": 1040
+  }
+ ]
+}

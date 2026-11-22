@@ -11,80 +11,50 @@ interface TitledText {
   text: string;
 }
 
+/** The text of one chart; which keys it has depends on the chart (see sk.yaml). */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ChartText = Record<string, any>;
+
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
-  nav: Record<
-    'label' | 'data' | 'mission' | 'demands' | 'risks' | 'security' | 'questions' | 'sources' | 'about' | 'join',
-    string
-  >;
+  nav: Record<'label' | 'evidence' | 'demands' | 'questions' | 'about' | 'join', string>;
   hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string };
-  evidence: {
+  home_evidence: { heading: string; intro: string; more: string; quote: string; quote_source: string };
+  evidence_page: {
     heading: string;
-    intro: string;
-    more: string;
-    source_line: string;
-    compute: {
-      title: string;
-      subtitle: string;
-      legend_record: string;
-      legend_other: string;
-      note: string;
-      aria: string;
-      table_summary: string;
-      table_all: string;
-      columns: Record<'model' | 'org' | 'date' | 'flop' | 'confidence', string>;
-      tip_flop: string;
-      confidence: Record<string, string>;
+    lead: string;
+    description: string;
+    contents: string;
+    sources: string;
+    reading: {
+      heading: string;
+      intro: string;
+      kinds: Record<'report' | 'argument' | 'book', string>;
+      open: string;
+      disagree: string;
     };
-    sectors: {
-      title: string;
-      subtitle: string;
-      note: string;
-      aria: string;
-      table_summary: string;
-      year: string;
-      total: string;
-      series: Record<'industry' | 'mixed' | 'academia' | 'other', string>;
-    };
-    survey: { heading: string; items: { figure: string; text: string }[]; source: string };
   };
-  mission: { heading: string; paragraphs: string[]; quote: string; quote_source: string };
+  charts: {
+    source_line: string;
+    table_summary: string;
+    model: string;
+    org: string;
+    date: string;
+    year: string;
+    total: string;
+    horizon: ChartText;
+    compute: ChartText;
+    cybench: ChartText;
+    sectors: ChartText;
+    investment: ChartText;
+  };
   demands: { heading: string; intro: string; more: string; items: (TitledText & { basis?: string })[] };
-  risks: { heading: string; intro: string; read_more: string; items: (TitledText & { source?: string })[] };
   join: {
     heading: string;
     text: string;
     contact: string;
     statement: { heading: string; text: string; button: string; url: string; also: string };
-    form: Record<
-      | 'heading' | 'intro' | 'name' | 'name_placeholder' | 'email' | 'email_placeholder' | 'role'
-      | 'role_placeholder' | 'volunteer' | 'button' | 'sending' | 'done' | 'success'
-      | 'success_volunteer' | 'error' | 'privacy' | 'mail_subject',
-      string
-    >;
-  };
-  sources: {
-    title: string;
-    description: string;
-    heading: string;
-    intro: string;
-    kinds: Record<'report' | 'argument' | 'book', string>;
-    claim_label: string;
-    open: string;
-    data_note: string;
-    disagree: { heading: string; paragraphs: string[] };
-  };
-  security: {
-    chart: {
-      title: string;
-      subtitle: string;
-      legend_record: string;
-      legend_other: string;
-      note: string;
-      aria: string;
-      table_summary: string;
-      columns: Record<'model' | 'org' | 'date' | 'solved' | 'reported', string>;
-    };
+    form: Record<string, string>;
   };
   questions: { heading: string; lead: string; description: string; missing: string };
   footer: { about: string; pages: string; movement: string; contact: string; place: string; legal: string };
@@ -95,8 +65,8 @@ export const copy = parse(raw) as Copy;
 const escapeHtml = (text: string) =>
   text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** Slovak typography the editor shouldn't have to type: no line break before % or inside 2 778. */
-const tidy = (text: string) => text.replace(/(\d) (%|\d{3}\b)/g, '$1 $2');
+/** Slovak typography the editor shouldn't have to type: no line break inside 10 %, 2 778, 17 h or 290 mld. */
+const tidy = (text: string) => text.replace(/(\d) (%|\d{3}\b|(?:s|min|h)\b|mld\.|mil\.)/g, '$1\u00a0$2');
 
 function fillIn(text: string, vars: Vars): string {
   return text.replace(/\{(\w+)\}/g, (whole, key) => {
@@ -116,4 +86,10 @@ export function rich(text: string, vars: Vars = {}): string {
     /\[([^\]]+)\]\(([^)\s]+)\)/g,
     (_, label, href) => `<a href="${href}">${label}</a>`,
   );
+}
+
+/** The "Zdroj: …" line under a chart, from a data file's `source` block. */
+export function sourceLine(source: { name: string; url: string; licence: string; retrieved: string }): string {
+  const [y, m, d] = source.retrieved.split('-').map(Number);
+  return rich(copy.charts.source_line, { name: source.name, url: source.url, licence: source.licence, date: `${d}. ${m}. ${y}` });
 }
