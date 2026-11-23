@@ -7,7 +7,6 @@ export const formEndpoint = 'https://formspree.io/f/xppagjeo';
 /** The top menu. Absolute paths, so the same menu works on every page. */
 export const nav = [
   { href: '/informacie/', label: copy.nav.evidence },
-  { href: '/#poziadavky', label: copy.nav.demands },
   { href: '/otazky/', label: copy.nav.questions },
   { href: '/kto-sme/', label: copy.nav.about },
 ];
