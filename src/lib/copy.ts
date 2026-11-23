@@ -73,7 +73,10 @@ export interface Copy {
     form: Record<string, string>;
   };
   questions: { heading: string; lead: string; description: string; missing: string };
-  footer: { about: string; pages: string; movement: string; contact: string; place: string; legal: string };
+  footer: {
+    about: string; pages: string; movement: string; contact: string; place: string; legal: string;
+    feedback_heading: string; feedback: string; feedback_link: string;
+  };
 }
 
 export const copy = parse(raw) as Copy;

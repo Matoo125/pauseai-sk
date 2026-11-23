@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { copy, rich } from '../lib/copy';
-import { footerNav, joinHref, movement } from '../data/site';
+import { feedbackHref, footerNav, joinHref, movement, repoUrl } from '../data/site';
 
 const { footer, site } = copy;
 ---
@@ -32,6 +32,13 @@ const { footer, site } = copy;
         <li>{footer.place}</li>
       </ul>
     </div>
+    <div>
+      <h2>{footer.feedback_heading}</h2>
+      <p>{footer.feedback}</p>
+      <ul>
+        <li><a href={feedbackHref} rel="noopener">{footer.feedback_link}</a></li>
+      </ul>
+    </div>
   </div>
-  <p class="wrap footer-legal" set:html={rich(footer.legal, { year: new Date().getFullYear() })} />
+  <p class="wrap footer-legal" set:html={rich(footer.legal, { year: new Date().getFullYear(), repo: repoUrl })} />
 </footer>

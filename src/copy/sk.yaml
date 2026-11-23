@@ -353,8 +353,13 @@ footer:
   movement: Medzinárodné hnutie
   contact: Kontakt
   place: Bratislava, Slovensko
+  feedback_heading: Spätná väzba
+  feedback: >-
+    Vidíš chybu alebo s niečím nesúhlasíš? Daj nám vedieť.
+  feedback_link: Napísať pripomienku na GitHube
   # {year} = the current year
   legal: >-
-    © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov. Grafy používajú dáta
+    © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov a jeho
+    [zdrojový kód]({repo}) je otvorený. Grafy používajú dáta
     [Epoch AI](https://epoch.ai/data/ai-models) a [Our World in Data](https://ourworldindata.org/artificial-intelligence)
     pod licenciou CC BY 4.0.

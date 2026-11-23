@@ -1,24 +1,29 @@
 # PauseAI Slovensko — pauseai.sk
 
-Astro site: a campaign landing page with an evidence section drawn from public data.
+Source of [pauseai.sk](https://pauseai.sk): the website of PauseAI Slovensko, a volunteer
+initiative. An Astro site: a campaign landing page with an evidence section drawn from public data.
+
+**Found a mistake, or disagree with a claim?** [Open an issue](https://github.com/Matoo125/pauseai-sk/issues/new/choose)
+(Slovak or English), or write to [info@pauseai.sk](mailto:info@pauseai.sk). Pull requests are
+welcome; for anything bigger than a typo, open an issue first.
 
 ```sh
 bun install
-bun run dev      # http://localhost:4321 (or `bun run dev pauseai` from the repo root, port 8083)
+bun run dev      # http://localhost:4321
 bun run build    # → dist/
 bun run data     # refresh the chart data from Epoch AI
 ```
 
 ## How the site is organised
 
-Three pages and one building block:
+Four pages:
 
 - **/** — the pitch in one scroll: hero, evidence in brief, the three demands, sign-up.
 - **/informacie/** — the evidence, as a list of *claims*. A claim is one sentence we assert, the chart
   or figure behind it, a few lines of context including what the data doesn't show, and its
   sources. The reading list closes the page.
 - **/otazky/** — objections and answers.
-- **/kto-sme/** — who is behind the site; linked from the footer only.
+- **/kto-sme/** — who is behind the site.
 
 ## Where things are
 
@@ -67,4 +72,10 @@ All of the data is CC BY 4.0: keep the source line under each chart.
 
 ## Deploy
 
-`deploy pauseai` on the server (see `server-config/deploy/apps.yaml`): installs, builds, publishes `dist/`.
+The server checks `main` every five minutes and, when it changed, builds the site and publishes
+`dist/`. Whatever is merged into `main` goes live.
+
+## Licence
+
+Code: MIT (`LICENSE`). Texts and charts: CC BY 4.0. The rally photo, the book covers and the
+interview stills belong to others; see `LICENSE-content.md`.

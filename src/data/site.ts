@@ -15,6 +15,10 @@ export const footerNav = nav;
 
 export const joinHref = '/#pridaj-sa';
 
+/** The site's public repository: feedback goes to its issues. */
+export const repoUrl = 'https://github.com/Matoo125/pauseai-sk';
+export const feedbackHref = `${repoUrl}/issues/new/choose`;
+
 export const movement = [
   { href: 'https://pauseai.info', label: 'PauseAI Global' },
   { href: 'https://pause-ai.de', label: 'PauseAI Nemecko' },
