@@ -452,6 +452,23 @@ ol {
   font-variant-numeric: tabular-nums;
 }
 
+.plot .reference line {
+  stroke: var(--black);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.plot .reference text {
+  fill: var(--black);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
 .plot .dots-other circle {
   fill: #8f8d86;
   fill-opacity: 0.45;

@@ -3,6 +3,7 @@
 //   src/data/epoch.json    "Notable AI models" (training compute, who publishes)
 //   src/data/cybench.json  Cybench results from the benchmarking hub
 //   src/data/horizon.json  METR task time horizons, from the same hub
+//   src/data/benchmarks.json  FrontierMath, GPQA Diamond and Humanity's Last Exam, same hub
 // and from Our World in Data:
 //   src/data/investment.json  private investment in AI companies per year
 //
@@ -138,6 +139,12 @@ const fromZip = (file: string): string => {
 };
 const cybenchCsv = fromZip('cybench_external.csv');
 const horizonCsv = fromZip('metr_time_horizons_external.csv');
+const modelMetaCsv = fromZip('model_metadata.csv');
+const benchCsvs = {
+  frontiermath: fromZip('frontiermath_tiers_1_3_v2.csv'),
+  gpqa: fromZip('gpqa_diamond.csv'),
+  hle: fromZip('hle_external.csv'),
+};
 rmSync(scratch, { recursive: true });
 
 const benchSource = {
@@ -236,3 +243,36 @@ writeFileSync(
   ) + '\n',
 );
 console.log(`${investment.length} years of investment → ${path.relative(process.cwd(), INVESTMENT_OUT)}`);
+
+// ── Benchmarks scored as a share of questions: one point per model ──────────
+// Epoch lists each model once per reasoning setting (gpt-5_high, gpt-5_low, …);
+// the chart keeps the best setting of each model, under the model's own name.
+const BENCH_OUT = path.join(import.meta.dir, '../src/data/benchmarks.json');
+const groupOf = new Map(
+  parseCsv(modelMetaCsv)
+    .filter((r) => need(r, 'model_version') && need(r, 'model_group'))
+    .map((r) => [r.model_version, r.model_group]),
+);
+const BENCHMARKS = {
+  frontiermath: { column: 'Best score (across scorers)', url: 'https://epoch.ai/frontiermath' },
+  gpqa: { column: 'Best score (across scorers)', url: 'https://epoch.ai/benchmarks/gpqa-diamond' },
+  hle: { column: 'Accuracy', url: 'https://lastexam.ai/' },
+} as const;
+const benchmarks: Record<string, unknown> = {};
+for (const [key, { column, url }] of Object.entries(BENCHMARKS)) {
+  const best = new Map<string, { name: string; org: string; date: string; score: number }>();
+  for (const r of parseCsv(benchCsvs[key as keyof typeof benchCsvs])) {
+    const version = need(r, 'Model version');
+    const score = Number(need(r, column));
+    const date = need(r, 'Release date');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(score) || need(r, column) === '') continue;
+    const name = groupOf.get(version) ?? r['Name'] ?? version.replace(/_[a-z]+$/, '');
+    const seen = best.get(name);
+    if (!seen || score > seen.score) best.set(name, { name, org: need(r, 'Organization'), date, score: Number(score.toFixed(3)) });
+  }
+  const results = [...best.values()].sort((a, b) => a.date.localeCompare(b.date) || a.score - b.score);
+  if (results.length < 20) throw new Error(`Only ${results.length} ${key} results parsed — refusing to overwrite the data`);
+  benchmarks[key] = { url, results };
+}
+writeFileSync(BENCH_OUT, JSON.stringify({ source: benchSource, ...benchmarks }, null, 1) + '\n');
+console.log(`FrontierMath, GPQA Diamond, HLE → ${path.relative(process.cwd(), BENCH_OUT)}`);

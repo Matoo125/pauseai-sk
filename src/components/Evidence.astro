@@ -1,5 +1,6 @@
 ---
-// The landing page's evidence in brief: the task-horizon chart, what the Slovak
+// The landing page's evidence in brief: the task-horizon chart (linear axis, so the
+// doubling reads as a curve shooting up), what the Slovak
 // public thinks, and the experts' risk statement. The full set is on /informacie/.
 import HorizonChart from './charts/HorizonChart.astro';
 import ChartTips from './charts/ChartTips.astro';
@@ -16,7 +17,7 @@ const text = copy.home_evidence;
       <p>{text.intro}</p>
     </header>
 
-    <HorizonChart />
+    <HorizonChart linear />
 
     <div class="evidence-row">
       <div>

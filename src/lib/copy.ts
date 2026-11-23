@@ -17,7 +17,7 @@ export type ChartText = Record<string, any>;
 
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
-  nav: Record<'label' | 'evidence' | 'demands' | 'questions' | 'about' | 'join', string>;
+  nav: Record<'label' | 'evidence' | 'questions' | 'about' | 'join', string>;
   hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string };
   home_evidence: {
     heading: string;
@@ -52,11 +52,17 @@ export interface Copy {
     date: string;
     year: string;
     total: string;
+    score: string;
+    legend_record: string;
+    legend_other: string;
     horizon: ChartText;
     compute: ChartText;
     cybench: ChartText;
     sectors: ChartText;
     investment: ChartText;
+    frontiermath: ChartText;
+    gpqa: ChartText;
+    hle: ChartText;
   };
   demands: { heading: string; intro: string; more: string; items: (TitledText & { basis?: string })[] };
   join: {

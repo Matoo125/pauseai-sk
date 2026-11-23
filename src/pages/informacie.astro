@@ -10,6 +10,7 @@ import ChartTips from '../components/charts/ChartTips.astro';
 import HorizonChart from '../components/charts/HorizonChart.astro';
 import ComputeChart from '../components/charts/ComputeChart.astro';
 import CybenchChart from '../components/charts/CybenchChart.astro';
+import BenchmarkChart from '../components/charts/BenchmarkChart.astro';
 import SectorChart from '../components/charts/SectorChart.astro';
 import InvestmentChart from '../components/charts/InvestmentChart.astro';
 import { copy } from '../lib/copy';
@@ -20,6 +21,9 @@ const text = copy.evidence_page;
 const CHARTS = {
   horizon: { Chart: HorizonChart, narrow: false },
   compute: { Chart: ComputeChart, narrow: false },
+  frontiermath: { Chart: BenchmarkChart, props: { name: 'frontiermath' }, narrow: false },
+  gpqa: { Chart: BenchmarkChart, props: { name: 'gpqa' }, narrow: false },
+  hle: { Chart: BenchmarkChart, props: { name: 'hle' }, narrow: false },
   cybench: { Chart: CybenchChart, narrow: false },
   sectors: { Chart: SectorChart, narrow: true },
   investment: { Chart: InvestmentChart, narrow: true },
@@ -59,7 +63,7 @@ const reading = (await getCollection('zdroje')).sort(
         <h2>{entry.data.title}</h2>
         {charts.length > 0 && !tabbed && (
           <div class:list={['claim-charts', { 'claim-charts-pair': charts.length === 2 }]}>
-            {charts.map(({ Chart }) => <Chart />)}
+            {charts.map(({ Chart, props }) => <Chart {...props} />)}
           </div>
         )}
         {tabbed && (
@@ -78,9 +82,9 @@ const reading = (await getCollection('zdroje')).sort(
                 </button>
               ))}
             </div>
-            {charts.map(({ Chart, name }) => (
+            {charts.map(({ Chart, name, props }) => (
               <div class="tab-panel" role="tabpanel" id={`${entry.id}-panel-${name}`} aria-labelledby={`${entry.id}-tab-${name}`}>
-                <Chart />
+                <Chart {...props} />
               </div>
             ))}
           </div>

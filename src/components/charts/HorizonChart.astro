@@ -5,6 +5,12 @@ import data from '../../data/horizon.json';
 import { records, skDate, skDecimal, skDuration, yearOf } from '../../lib/chart';
 import { copy, plain, rich, sourceLine } from '../../lib/copy';
 
+interface Props {
+  /** Linear vertical axis: the doubling shows as a curve shooting up. Log by default. */
+  linear?: boolean;
+}
+const { linear = false } = Astro.props;
+
 const text = copy.charts.horizon;
 const { results } = data;
 const isRecord = records(results.map((r) => r.minutes));
@@ -21,11 +27,18 @@ const vars = {
   metr_url: data.measuredBy.url,
 };
 const hour = 60;
+// Linear: whole hours up to just above the record, in steps of 4 h (8 h on a phone).
+const top = Math.ceil(latest.minutes / hour / 4) * 4 * hour;
+const hourTicks = (step: number) => {
+  const ticks = [];
+  for (let m = 0; m <= top; m += step * hour) ticks.push({ value: m, label: m === 0 ? '0' : `${m / hour} h` });
+  return ticks;
+};
 ---
 
 <ScatterChart
   title={plain(text.title, vars)}
-  subtitle={plain(text.subtitle, vars)}
+  subtitle={`${plain(text.subtitle, vars)} ${linear ? text.axis_linear : text.axis_log}`}
   legendRecord={text.legend_record}
   legendOther={text.legend_other}
   aria={plain(text.aria, vars)}
@@ -40,16 +53,16 @@ const hour = 60;
     },
   }))}
   labels={{ [latest.name]: latest.name }}
-  log
-  yDomain={[0.03, 24 * hour]}
-  ticks={[
+  log={!linear}
+  yDomain={linear ? [0, top] : [0.03, 24 * hour]}
+  ticks={linear ? hourTicks(4) : [
     { value: 0.1, label: '6 s' },
     { value: 1, label: '1 min' },
     { value: 10, label: '10 min' },
     { value: hour, label: '1 h' },
     { value: 8 * hour, label: '8 h' },
   ]}
-  ticksNarrow={[{ value: 0.1, label: '6 s' }, { value: 1, label: '1 min' }, { value: hour, label: '1 h' }, { value: 8 * hour, label: '8 h' }]}
+  ticksNarrow={linear ? hourTicks(8) : [{ value: 0.1, label: '6 s' }, { value: 1, label: '1 min' }, { value: hour, label: '1 h' }, { value: 8 * hour, label: '8 h' }]}
   xDomain={[Number(first.date.slice(0, 4)), Math.ceil(yearOf(latest.date) + 0.3)]}
   xStep={[1, 2]}
   table={{

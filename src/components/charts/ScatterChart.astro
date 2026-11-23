@@ -34,11 +34,13 @@ interface Props {
   /** Years between x labels: [wide, narrow]. */
   xStep?: [number, number];
   table: { head: { label: string; num?: boolean }[]; rows: string[][] };
+  /** A horizontal comparison line, such as a human score. */
+  reference?: { value: number; label: string };
 }
 
 const {
   title, subtitle, legendRecord, legendOther, aria, noteHtml, points, labels = {}, log = false,
-  yDomain, ticks, ticksNarrow = ticks.filter((_, i) => i % 2 === 0), xDomain, xStep = [1, 1], table,
+  yDomain, ticks, ticksNarrow = ticks.filter((_, i) => i % 2 === 0), xDomain, xStep = [1, 1], table, reference,
 } = Astro.props;
 
 const isRecord = records(points.map((p) => p.value));
@@ -92,6 +94,12 @@ const variants = [
             ))}
             {v.years.map((year) => <text x={v.x(year)} y={v.h - 10} text-anchor="middle">{year}</text>)}
           </g>
+          {reference && (
+            <g class="reference">
+              <line x1={v.left} x2={v.w - v.right} y1={v.yAt(reference.value)} y2={v.yAt(reference.value)} />
+              <text x={v.left + 6} y={v.yAt(reference.value) - 7}>{reference.label}</text>
+            </g>
+          )}
           <g class="dots-other">
             {v.dots.filter((d) => !d.record).map((d) => <circle cx={d.cx} cy={d.cy} r="3.5" data-i={d.i} />)}
           </g>

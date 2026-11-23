@@ -34,7 +34,7 @@ const tvrdenia = defineCollection({
       title: z.string(),
       order: z.number(),
       // Charts to show, by name; see src/components/charts/.
-      charts: z.array(z.enum(['horizon', 'compute', 'cybench', 'sectors', 'investment'])).default([]),
+      charts: z.array(z.enum(['horizon', 'compute', 'frontiermath', 'gpqa', 'hle', 'cybench', 'sectors', 'investment'])).default([]),
       // Headline numbers shown in place of (or beside) a chart.
       figures: z.array(z.object({ figure: z.string(), text: z.string() })).default([]),
       // A YouTube video, shown as a still image until the visitor presses play.

@@ -112,6 +112,10 @@ charts:
   date: Zverejnené
   year: Rok
   total: Spolu
+  score: Úspešnosť
+  # Legend of the three test charts (FrontierMath, GPQA Diamond, Humanity's Last Exam).
+  legend_record: najlepší výsledok v čase vydania
+  legend_other: ostatné modely
 
   horizon:
     tab: Dĺžka úloh
@@ -119,7 +123,10 @@ charts:
     title: AI dnes sama dokončí úlohy, ktoré odborníkovi trvajú {last}. V roku {first_year} to bolo {first}
     subtitle: >-
       Dĺžka softvérových úloh, ktoré model dokončí s 50 % úspešnosťou, meraná časom, ktorý na ne
-      potrebuje odborník. Zvislá os je logaritmická.
+      potrebuje odborník.
+    # The landing page draws this chart with a linear axis, /informacie/ with a logarithmic one.
+    axis_log: Zvislá os je logaritmická.
+    axis_linear: Zvislá os je lineárna.
     legend_record: najlepší výsledok v čase vydania
     legend_other: ostatné modely
     note: >-
@@ -172,6 +179,55 @@ charts:
       Hodnoty sú v tabuľke pod grafom.
     value: Vyriešené úlohy
     reported: Výsledok uvádza
+
+  # The three test charts: {first_year} = earliest year in the data, {first} = best score by the
+  # end of that year, {last} = best score today, {model} = the model that holds it.
+  frontiermath:
+    tab: Matematika
+    title: Koncom roka {first_year} vyriešila AI {first} % náročných matematických úloh FrontierMath. Dnes {last} %
+    subtitle: >-
+      Podiel vyriešených úloh z testu FrontierMath (úrovne 1 až 3). Úlohy zostavili matematici
+      a ich zadania nie sú verejné, aby sa ich modely nemohli naučiť naspamäť.
+    note: >-
+      Výsledky meria Epoch AI sám. Vznik testu financovala firma OpenAI, ktorá má prístup k časti
+      úloh.
+    aria: >-
+      Bodový graf: podiel vyriešených úloh testu FrontierMath podľa dátumu vydania modelu.
+      Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}).
+      Hodnoty sú v tabuľke pod grafom.
+
+  gpqa:
+    tab: Vedecké otázky
+    title: V roku {first_year} odpovedala AI správne na {first} % odborných otázok z prírodných vied. Dnes na {last} %
+    subtitle: >-
+      Podiel správnych odpovedí v teste GPQA Diamond: 198 otázok z biológie, fyziky a chémie,
+      každá so štyrmi možnosťami. Otázky sú navrhnuté tak, aby sa odpoveď nedala jednoducho
+      vyhľadať na internete.
+    reference:
+      value: 69.7
+      label: odborníci s doktorátom (69,7 %)
+    note: >-
+      Hodnotu 69,7 % namerala OpenAI na odborníkoch s doktorátom, ktorých na test najala
+      ([Epoch AI]({url})). Náhodným tipovaním by model dosiahol 25 %.
+    aria: >-
+      Bodový graf: podiel správnych odpovedí v teste GPQA Diamond podľa dátumu vydania modelu.
+      Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}), odborníci
+      s doktorátom dosiahli 69,7 %. Hodnoty sú v tabuľke pod grafom.
+
+  hle:
+    tab: Posledná skúška
+    title: V roku {first_year} zvládla AI {first} % otázok testu Humanity's Last Exam. Dnes {last} %
+    subtitle: >-
+      Podiel správnych odpovedí v teste Humanity's Last Exam („Posledná skúška ľudstva“).
+      Otázky z desiatok odborov zostavili odborníci a ponechali tie, na ktoré najlepšie modely
+      v čase vzniku testu (2024 – 2025) nevedeli odpovedať.
+    note: >-
+      Výsledky uvádzajú [autori testu]({url}) a vývojári modelov, Epoch AI ich zbiera. Staršie modely boli
+      testované až po ich vydaní.
+    aria: >-
+      Bodový graf: podiel správnych odpovedí v teste Humanity's Last Exam podľa dátumu vydania
+      modelu. Najlepší výsledok vzrástol z {first} % v roku {first_year} na {last} % ({model}).
+      Hodnoty sú v tabuľke pod grafom.
 
   sectors:
     tab: Kto modely zverejňuje
