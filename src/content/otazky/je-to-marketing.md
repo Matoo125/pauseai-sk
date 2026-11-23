@@ -8,7 +8,7 @@ Mary Phuong z Google DeepMind: „Rozhodne by ste mali byť podozrievaví voči 
 pretože ma platí laboratórium.“
 
 Dve veci však do marketingu nezapadajú. O rizikách hovoria aj ľudia, ktorí z firiem odišli
-a nič nepredávajú. A varujú pred nimi nezávislí vedci, ako Yoshua Bengio či Geoffrey Hinton,
-ktorý kvôli tomu z Googlu odišiel. Rozhovory so
+a nič nepredávajú. A varujú pred nimi nezávislí vedci, napríklad Yoshua Bengio či Geoffrey Hinton,
+ktorý z Googlu odišiel, aby o nich mohol hovoriť slobodne. Rozhovory so
 súčasnými aj bývalými zamestnancami OpenAI, Google DeepMind a Anthropic sú na
 [frominside.ai](https://frominside.ai/) (citát je náš preklad).

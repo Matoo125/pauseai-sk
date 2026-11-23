@@ -29,7 +29,7 @@ sources:
 Tao Lin, ktorý vo firme Anthropic pracuje na bezpečnosti modelov, v rozhovore hovorí: „Považujem
 za veľmi pravdepodobné, že takmer všetci ľudia na Zemi sa stanú natrvalo nezamestnateľnými.“
 (náš preklad) Na otázku, či sa to stane do pätnástich mesiacov, odpovedal, že nie: medzi tým,
-čo AI dokáže, a tým, kedy ľudí skutočne nahradí, čaká veľký odstup, okrem iného preto, že na
+čo AI dokáže, a tým, kedy ľudí skutočne nahradí, bude veľký časový odstup, okrem iného preto, že na
 fyzickú prácu by boli potrebné miliardy robotov.
 
 Dva texty opisujú, ako by automatizácia práce mohla prebiehať:

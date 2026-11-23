@@ -3,7 +3,7 @@ question: Nerieši to už európsky AI Act?
 order: 5
 ---
 
-Čiastočne. [AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) ukladá výrobcom
+Čiastočne. [AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) ukladá poskytovateľom
 najvýkonnejších všeobecných modelov povinnosti, napríklad hodnotiť riziká a hlásiť vážne
 incidenty, ak chcú model ponúkať v Európskej únii.
 

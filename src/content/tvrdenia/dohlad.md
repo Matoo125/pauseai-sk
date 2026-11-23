@@ -22,11 +22,11 @@ neprispôsobili:
 - **Testovanie je čoraz ťažšie.** Medzinárodná správa o bezpečnosti AI upozorňuje, že modely
   čoraz častejšie rozlišujú medzi testom a skutočným nasadením, takže nebezpečné schopnosti môžu
   pred vydaním ostať neodhalené.
-- **Náskok chránených modelov sa zmenšuje.** Britský AI Security Institute v júli 2026 zmeral,
+- **Náskok uzavretých modelov sa zmenšuje.** Britský AI Security Institute v júli 2026 zmeral,
   že voľne stiahnuteľné modely zaostávajú v kybernetických schopnostiach za uzavretou špičkou
   o 4 až 7 mesiacov. Počas väčšiny roka 2025 to bolo 6 až 10 mesiacov.
 
-**Čo to neukazuje.** Dohľad nie je nulový. Európsky AI Act ukladá výrobcom najvýkonnejších
+**Čo to neukazuje.** Dohľad nie je nulový. Európsky AI Act ukladá poskytovateľom najvýkonnejších
 modelov povinnosti, viaceré štáty majú inštitúty, ktoré modely testujú, a firmy prijali
 dobrovoľné záväzky. Z toho, že vývoj robia firmy, tiež nevyplýva, že ho robia nezodpovedne.
 Chýba orgán, ktorého pravidlá by platili pre všetkých.

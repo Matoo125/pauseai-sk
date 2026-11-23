@@ -16,7 +16,7 @@ sources:
 - **Špionážna kampaň vedená AI.** V septembri 2025 zachytila firma Anthropic skupinu, ktorú
   s vysokou istotou pripisuje čínskemu štátu. Skupina zmanipulovala nástroj Claude Code tak, aby
   sa pokúsil preniknúť do približne tridsiatich organizácií, a v niekoľkých prípadoch uspela.
-  Podľa Anthropic vykonala AI 80 až 90 % práce.
+  Podľa Anthropicu vykonala AI 80 až 90 % práce.
 - **Ransomvér, ktorý si kód píše sám.** V auguste 2025 našli výskumníci ESET-u vzorku nazvanú
   PromptLock: ransomvér, ktorý si škodlivé skripty necháva generovať jazykovým modelom. Ukázalo
   sa, že ide o akademický prototyp z New York University, nie o nástroj zločincov. Postaviť ho

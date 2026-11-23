@@ -33,7 +33,7 @@ hero:
     - Nie nekontrolované preteky algoritmov.
   lead: >-
     PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
-    medzinárodný bezpečnostný dohľad a demokratickú kontrolu pred trénovaním najsilnejších modelov.
+    medzinárodný bezpečnostný dohľad a demokratickú kontrolu skôr, než sa začnú trénovať najsilnejšie modely.
   cta: Pridať sa
   cta_data: Pozrieť dáta
   note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
@@ -48,8 +48,8 @@ home_evidence:
     Nemusíš nám veriť na slovo. Toto sú verejné merania a prieskumy, z ktorých vychádzame.
     Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
   more: >-
-    Toto je len začiatok. Všetky tvrdenia s grafmi, zdrojmi a s tým, čo dáta neukazujú,
-    sú na stránke [Informácie](/informacie/).
+    Všetky tvrdenia s grafmi, so zdrojmi a s tým, čo dáta neukazujú, nájdeš na stránke
+    [Informácie](/informacie/).
   public:
     heading: Čo si myslí slovenská verejnosť
     figures:
@@ -79,8 +79,8 @@ home_evidence:
 evidence_page:
   heading: Informácie
   lead: >-
-    Tvrdenia, o ktoré opierame svoje požiadavky. Pri každom je graf alebo údaj, zdroje
-    a aj to, čo z dát nevyplýva.
+    Tvrdenia, o ktoré opierame požiadavky. Pri každom je graf alebo údaj, zdroje
+    a tiež to, čo z dát nevyplýva.
   description: Dáta, prieskumy a správy, o ktoré sa opiera PauseAI Slovensko, usporiadané podľa tvrdení.
   contents: Na tejto stránke
   sources: "Zdroje:"
@@ -118,8 +118,8 @@ charts:
     # {first}/{last} = durations like '3 s' and '17 h'   {first_year} = year   {months} = number
     title: AI dnes sama dokončí úlohy, ktoré odborníkovi trvajú {last}. V roku {first_year} to bolo {first}
     subtitle: >-
-      Dĺžka softvérových úloh, meraná časom, ktorý na ne potrebuje odborník, ktoré model dokončí
-      s 50 % úspešnosťou. Zvislá os je logaritmická.
+      Dĺžka softvérových úloh, ktoré model dokončí s 50 % úspešnosťou, meraná časom, ktorý na ne
+      potrebuje odborník. Zvislá os je logaritmická.
     legend_record: najlepší výsledok v čase vydania
     legend_other: ostatné modely
     note: >-
@@ -141,7 +141,7 @@ charts:
     legend_other: ostatné významné modely
     note: >-
       Rekord sa od konca roka 2012 zdvojnásobuje v priemere každých {months} mesiacov
-      (vlastný výpočet z prvej a poslednej hodnoty). Časť hodnôt sú odhady. V tabuľke sú len
+      (vlastný výpočet z prvej a poslednej hodnoty). Niektoré hodnoty sú odhady. V tabuľke sú len
       rekordy; všetkých {count} modelov je v [pôvodnom súbore CSV]({csv}).
     aria: >-
       Bodový graf: tréningové výpočty významných modelov AI od roku {from}. Rekord vzrástol
@@ -210,8 +210,8 @@ demands:
   items:
     - title: Medzinárodná agentúra pre dohľad nad AI
       text: >-
-        Po vzore Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny
-        orgán, ktorý audituje dátové centrá a monitoruje tréning modelov na hranici schopností.
+        Podľa vzoru Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny
+        orgán, ktorý audituje dátové centrá a sleduje tréning modelov na hranici schopností.
       basis: >-
         Orgán podobný IAEA navrhlo v roku 2023 vedenie OpenAI v texte
         [Governance of superintelligence](https://openai.com/index/governance-of-superintelligence/)
@@ -219,7 +219,7 @@ demands:
         [PauseAI](https://pauseai.info/proposal).
     - title: Podmienka garantovanej bezpečnosti
       text: >-
-        Vývoj a trénovanie novej generácie superinteligentných modelov musí byť pozastavené, kým
+        Vývoj a trénovanie novej generácie superinteligentných modelov musia byť pozastavené, kým
         vedecká komunita nepreukáže spoľahlivé metódy zarovnania (alignment) a kontroly.
       basis: >-
         Zákaz vývoja superinteligencie, kým nebude vedecký konsenzus, že je bezpečná a ovládateľná,
@@ -285,14 +285,14 @@ questions:
   heading: Otázky a námietky
   lead: >-
     Námietky, ktoré počúvame najčastejšie, a naše odpovede na ne. Kde sa dá, odkazujeme na zdroj,
-    aby si si odpoveď mohol overiť.
+    aby sa odpoveď dala overiť.
   description: Najčastejšie námietky proti pozastaveniu vývoja najvýkonnejšej AI a odpovede PauseAI Slovensko.
   missing: Chýba ti tu otázka? Napíš nám na [info@pauseai.sk](mailto:info@pauseai.sk).
 
 footer:
   about: >-
     PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI.
-    Presadzujeme bezpečnosť a demokratický dohľad nad pokročilou umelou inteligenciou.
+    Presadzujeme bezpečný vývoj pokročilej umelej inteligencie a demokratický dohľad nad ňou.
   pages: Na tomto webe
   movement: Medzinárodné hnutie
   contact: Kontakt

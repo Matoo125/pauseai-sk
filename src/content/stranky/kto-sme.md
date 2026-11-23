@@ -8,13 +8,14 @@ description: Kto stojí za PauseAI Slovensko, ako sme financovaní a ako nás ko
 
 ## Prečo to robíme
 
-Umelá inteligencia prináša obrovský potenciál v medicíne, vzdelávaní či vede. Zároveň však
-komerčné preteky tlačia vývojárov do vypúšťania stále silnejších modelov bez toho, aby rozumeli
-ich vnútornému fungovaniu.
+Umelá inteligencia môže veľmi pomôcť v medicíne, vzdelávaní aj vede. Komerčné preteky však
+tlačia firmy, aby vydávali stále silnejšie modely, hoci ani ich vývojári nerozumejú, ako tieto
+modely vnútri fungujú.
 
-V letectve, jadrovej energetike či farmácii je nemysliteľné nasadiť technológiu skôr, ako prejde
-prísnou certifikáciou. Pri najsilnejších AI systémoch takýto mechanizmus stále chýba. Nejde nám
-o odpor k pokroku. Ide o zodpovednosť voči spoločnosti.
+V letectve, jadrovej energetike či farmácii nikto nenasadí technológiu, kým neprejde prísnou
+certifikáciou. Pri najsilnejších AI systémoch taký mechanizmus stále chýba. Nie sme proti
+pokroku. Chceme, aby pre najsilnejšie AI systémy platili podobné pravidlá ako pre lietadlá
+či lieky.
 
 ## Ľudia
 

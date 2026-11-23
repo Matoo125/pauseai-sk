@@ -17,7 +17,7 @@ export const joinHref = '/#pridaj-sa';
 
 export const movement = [
   { href: 'https://pauseai.info', label: 'PauseAI Global' },
-  { href: 'https://pauseai-us.org', label: 'PauseAI USA' },
+  { href: 'https://pause-ai.de', label: 'PauseAI Nemecko' },
   { href: 'https://pauseai.uk', label: 'PauseAI UK' },
   { href: 'https://pauseai.cz', label: 'PauseAI Česko' },
 ];
