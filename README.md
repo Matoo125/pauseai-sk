@@ -27,12 +27,14 @@ The pages:
 - **/otazky/** — objections and answers.
 - **/kto-sme/** — who is behind the site.
 - **/spatna-vazba/** — a form for remarks about the site, for people without a GitHub account.
+- **/en/** — the landing page in English. Only this page is translated; the rest of the site is in Slovak.
 
 ## Where things are
 
 | To change… | Edit |
 |---|---|
 | Short text anywhere: headings, buttons, chart titles | `src/copy/sk.yaml` |
+| Text of the English landing page | `src/copy/en.yaml` |
 | A claim on `/informacie/` | its Markdown file in `src/content/tvrdenia/` |
 | An article on `/clanky/` | its Markdown file in `src/content/clanky/`; a new file becomes a new article, `draft: true` hides one |
 | A question on `/otazky/` | its Markdown file in `src/content/otazky/` |

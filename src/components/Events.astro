@@ -4,9 +4,12 @@ import { Image } from 'astro:assets';
 import room from '../assets/akcie/bratislava-2026-11-sala.jpg';
 import horizon from '../assets/akcie/bratislava-2026-11-casovy-horizont.jpg';
 import democracy from '../assets/akcie/bratislava-2026-11-demokracia.jpg';
-import { copy } from '../lib/copy';
+import { copyFor, type Lang } from '../lib/copy';
 
-const { events } = copy;
+interface Props {
+  lang?: Lang;
+}
+const { events } = copyFor(Astro.props.lang);
 const photos = [
   { src: room, alt: events.photos.room },
   { src: horizon, alt: events.photos.horizon },

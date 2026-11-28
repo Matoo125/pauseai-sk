@@ -1,0 +1,38 @@
+---
+// English landing page only: what we ask for, with further reading on pauseai.info.
+// It stands where the Slovak page has the claims and articles (InfoTeaser.astro).
+import { copyEn, rich } from '../lib/copy';
+
+const { about } = copyEn;
+---
+
+<section class="band band-tint" id="what-we-ask">
+  <div class="wrap">
+    <header class="band-head">
+      <h2>{about.heading}</h2>
+      <p>{about.intro}</p>
+    </header>
+    <div class="info-teaser">
+      <div class="about-ask">
+        <h3>{about.ask_heading}</h3>
+        {about.ask.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div>
+        <h3>{about.read_heading}</h3>
+        <ul class="info-rows">
+          {
+            about.links.map((link) => (
+              <li>
+                <a href={link.url} rel="noopener">
+                  <span>{link.title}</span>
+                  <small>{link.text}</small>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="about-slovak" set:html={rich(about.slovak)} />
+      </div>
+    </div>
+  </div>
+</section>

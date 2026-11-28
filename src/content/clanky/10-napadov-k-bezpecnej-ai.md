@@ -6,7 +6,7 @@ lead: >-
 teaser: >-
   Čo môžu urobiť štáty, čo Slovensko a čo ty: kurzy, stáže, pracovné ponuky a ďalšie kroky.
 date: 2026-11-28
-order: 2
+order: 3
 ---
 
 Žiadny z týchto nápadov sme nevymysleli. Pri každom uvádzame, kto ho navrhuje alebo kde sa dá

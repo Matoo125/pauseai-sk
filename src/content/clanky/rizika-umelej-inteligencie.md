@@ -150,5 +150,6 @@ bežnú reguláciu, o ktorej píšeme v článku
 Takmer všetky riziká z tohto zoznamu však rastú spolu so schopnosťami systémov. Schopnejší
 model je lepší podvodník, lepší hacker aj lepší poradca pri výrobe zbraní a ťažšie sa
 kontroluje. Preto žiadame pozastaviť tréning ešte výkonnejších systémov, kým nebudeme vedieť,
-ako tieto riziká zvládnuť ([Prečo pauza?](/otazky/#preco-pauza)). Čo sa dá urobiť už teraz, je
+ako tieto riziká zvládnuť ([Prečo pauza?](/otazky/#preco-pauza),
+[Ako chceme pauzu dosiahnuť](/clanky/ako-chceme-pauzu-dosiahnut/)). Čo sa dá urobiť už teraz, je
 v článku [10 nápadov k bezpečnej AI](/clanky/10-napadov-k-bezpecnej-ai/).

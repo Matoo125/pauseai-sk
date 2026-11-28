@@ -7,15 +7,19 @@ import '@fontsource-variable/roboto-slab/wght.css';
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
 import crowd from '../assets/hero-crowd.jpeg';
-import { copy } from '../lib/copy';
-
-const { site } = copy;
+import { copyFor, type Lang } from '../lib/copy';
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Lang;
 }
+const { lang = 'sk' } = Astro.props;
+const text = copyFor(lang);
+const { site } = text;
 const { title = site.title, description = site.description } = Astro.props;
+// Only the landing page has two language versions.
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/en/';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // Link preview for chats and social networks: the rally photo cut to 1200×630.
 const preview = await getImage({ src: crowd, width: 1200, height: 630, fit: 'cover', position: 'center', format: 'jpg', quality: 80 });
@@ -23,25 +27,27 @@ const previewUrl = new URL(preview.src, Astro.site);
 ---
 
 <!doctype html>
-<html lang="sk">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {isHome && <link rel="alternate" hreflang="sk" href={new URL('/', Astro.site)} />}
+    {isHome && <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#ff9416" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="sk_SK" />
+    <meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'sk_SK'} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:image" content={previewUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={copy.hero.photo_alt} />
+    <meta property="og:image:alt" content={text.hero.photo_alt} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>

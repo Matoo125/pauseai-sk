@@ -1,5 +1,5 @@
 // Settings that aren't prose. The words are in src/copy/sk.yaml.
-import { copy } from '../lib/copy';
+import { copy, type Lang } from '../lib/copy';
 
 /** Formspree form that receives the sign-ups. */
 export const formEndpoint = 'https://formspree.io/f/xppagjeo';
@@ -16,6 +16,10 @@ export const footerNav = nav;
 
 export const joinHref = '/#pridaj-sa';
 
+/** Only the landing page exists in English, at /en/. */
+export const homeHrefFor = (lang: Lang = 'sk') => (lang === 'en' ? '/en/' : '/');
+export const joinHrefFor = (lang: Lang = 'sk') => `${homeHrefFor(lang)}#pridaj-sa`;
+
 /** Invite link of the WhatsApp group (https://chat.whatsapp.com/…). Leave it empty to hide the WhatsApp links. */
 export const whatsappHref = 'https://chat.whatsapp.com/IWelMw0y2880Y1I7fc6Mnt';
 
@@ -28,8 +32,8 @@ export const issuesHref = `${repoUrl}/issues/new/choose`;
 export const feedbackHref = '/spatna-vazba/';
 
 export const movement = [
-  { href: 'https://pauseai.info', label: 'PauseAI Global' },
-  { href: 'https://pause-ai.de', label: 'PauseAI Nemecko' },
-  { href: 'https://pauseai.uk', label: 'PauseAI UK' },
-  { href: 'https://pauseai.cz', label: 'PauseAI Česko' },
+  { href: 'https://pauseai.info', label: 'PauseAI Global', en: 'PauseAI Global' },
+  { href: 'https://pause-ai.de', label: 'PauseAI Nemecko', en: 'PauseAI Germany' },
+  { href: 'https://pauseai.uk', label: 'PauseAI UK', en: 'PauseAI UK' },
+  { href: 'https://pauseai.cz', label: 'PauseAI Česko', en: 'PauseAI Czechia' },
 ];

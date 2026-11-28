@@ -239,6 +239,13 @@ ol {
   text-decoration: none;
 }
 
+/* The link to the other language version. */
+.topbar-lang {
+  padding-left: 22px;
+  border-left: 2px solid currentColor;
+  font-size: 1.05rem;
+}
+
 .topbar-link:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -1084,6 +1091,17 @@ ol {
   text-decoration-thickness: 2px;
 }
 
+/* The English landing page's own text in the same two columns (About.astro). */
+.about-ask p {
+  margin-top: 14px;
+  max-width: 34em;
+}
+
+.about-slovak {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
 .article-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -1449,6 +1467,12 @@ ol {
 
   .topbar-link {
     order: 2;
+    font-size: 1.125rem;
+  }
+
+  .topbar-lang {
+    padding-left: 0;
+    border-left: 0;
     font-size: 1.125rem;
   }
 

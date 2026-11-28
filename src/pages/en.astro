@@ -1,0 +1,19 @@
+---
+// The landing page in English. The rest of the site is in Slovak only; the text is in src/copy/en.yaml.
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Events from '../components/Events.astro';
+import Join from '../components/Join.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base lang="en">
+  <Hero lang="en" />
+  <main id="obsah">
+    <About />
+    <Events lang="en" />
+    <Join lang="en" />
+  </main>
+  <Footer lang="en" />
+</Base>

@@ -1,13 +1,17 @@
 ---
 import Topbar from './Topbar.astro';
-import { copy } from '../lib/copy';
-import { joinHref, thesisHref } from '../data/site';
+import { copyFor, type Lang } from '../lib/copy';
+import { joinHrefFor, thesisHref } from '../data/site';
 
-const { hero } = copy;
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'sk' } = Astro.props;
+const { hero } = copyFor(lang);
 ---
 
 <div class="placard">
-  <Topbar />
+  <Topbar lang={lang} />
 
   <section class="wrap hero">
     <h1>{hero.title.map((line) => <span>{line} </span>)}</h1>
@@ -16,11 +20,11 @@ const { hero } = copy;
         <p>{hero.lead}</p>
         <div class="hero-actions">
           <a class="button" href={thesisHref}>{hero.cta}</a>
-          <a class="text-link" href="/kto-sme/#praca">{hero.cta_about}</a>
+          {hero.cta_about && <a class="text-link" href="/kto-sme/#praca">{hero.cta_about}</a>}
         </div>
         <p class="hero-note">{hero.note}</p>
         <p class="hero-note hero-join">
-          {hero.movement} <a href={joinHref}>{hero.cta_join}</a>
+          {hero.movement} <a href={joinHrefFor(lang)}>{hero.cta_join}</a>
         </p>
       </div>
       <!-- Decorative: the plug animation by PauseAI Österreich, see src/scripts/plug.js. -->

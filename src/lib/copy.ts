@@ -1,8 +1,11 @@
-// The site's text lives in src/copy/sk.yaml. This loads it and turns the two
-// bits of markup the file allows — {placeholders} and [links](url) — into output.
+// The site's text lives in src/copy/sk.yaml; the English landing page /en/ has src/copy/en.yaml.
+// This loads them and turns the two bits of markup the files allow — {placeholders} and [links](url) — into output.
 
 import { parse } from 'yaml';
 import raw from '../copy/sk.yaml?raw';
+import rawEn from '../copy/en.yaml?raw';
+
+export type Lang = 'sk' | 'en';
 
 type Vars = Record<string, string | number>;
 
@@ -17,7 +20,7 @@ export type ChartText = Record<string, any>;
 
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
-  nav: Record<'label' | 'evidence' | 'articles' | 'questions' | 'about' | 'join', string>;
+  nav: Record<'label' | 'evidence' | 'articles' | 'questions' | 'about' | 'join' | 'switch', string>;
   hero: { title: string[]; lead: string; cta: string; cta_about: string; note: string; movement: string; cta_join: string; photo_alt: string };
   events: { heading: string; intro: string; photos: Record<'room' | 'horizon' | 'democracy', string>; caption: string };
   home_info: Record<'heading' | 'intro' | 'claims_heading' | 'claims_button' | 'articles_heading' | 'articles_button', string>;
@@ -77,6 +80,23 @@ export interface Copy {
 }
 
 export const copy = parse(raw) as Copy;
+
+/** The English landing page's own section, in place of the Slovak claims and articles. */
+export interface AboutText {
+  heading: string;
+  intro: string;
+  ask_heading: string;
+  ask: string[];
+  read_heading: string;
+  links: { title: string; text: string; url: string }[];
+  slovak: string;
+}
+
+/** en.yaml has only what the landing page shows, so don't read other sections from it. */
+export const copyEn = parse(rawEn) as Copy & { about: AboutText };
+
+/** The landing page's components take a `lang` and get their text here. */
+export const copyFor = (lang: Lang = 'sk'): Copy => (lang === 'en' ? copyEn : copy);
 
 const escapeHtml = (text: string) =>
   text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

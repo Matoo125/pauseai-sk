@@ -1,12 +1,13 @@
 ---
 // The landing page's pointer to what there is to read: the claims documented on /informacie/
-// and the articles on /clanky/, side by side.
+// and the first three articles from /clanky/, side by side.
 import { getCollection } from 'astro:content';
 import { copy } from '../lib/copy';
 
 const text = copy.home_info;
 const claims = (await getCollection('tvrdenia')).sort((a, b) => a.data.order - b.data.order);
-const articles = (await getCollection('clanky', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const articles = (await getCollection('clanky', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
 <section class="band band-tint" id="informacie-o-ai">

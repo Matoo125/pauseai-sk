@@ -7,7 +7,7 @@ teaser: >-
   Čo z AI Actu už platí, čo bolo odložené, kto má na AI dohliadať na Slovensku a čo regulácia
   nerieši.
 date: 2026-11-28
-order: 3
+order: 4
 ---
 
 ## Európska únia: AI Act

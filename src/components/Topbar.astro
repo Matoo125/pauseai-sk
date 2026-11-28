@@ -1,20 +1,30 @@
 ---
 // The orange strip with the logo and menu; the top of the placard on every page.
+// The English landing page has no menu, because the other pages exist only in Slovak.
 import Logo from './Logo.astro';
-import { copy } from '../lib/copy';
-import { joinHref, nav } from '../data/site';
+import { copyFor, type Lang } from '../lib/copy';
+import { homeHrefFor, joinHrefFor, nav } from '../data/site';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'sk' } = Astro.props;
+const text = copyFor(lang).nav;
+const other: Lang = lang === 'en' ? 'sk' : 'en';
 ---
 
 <header class="wrap topbar">
-  <Logo tone="on-orange" />
-  <nav aria-label={copy.nav.label}>
+  <Logo tone="on-orange" lang={lang} />
+  <nav aria-label={text.label}>
     {
-      nav.map((item) => (
-        <a class="topbar-link" href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
-          {item.label}
-        </a>
-      ))
+      lang === 'sk' &&
+        nav.map((item) => (
+          <a class="topbar-link" href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
     }
-    <a class="button button-small" href={joinHref}>{copy.nav.join}</a>
+    <a class="topbar-link topbar-lang" href={homeHrefFor(other)} lang={other} hreflang={other}>{text.switch}</a>
+    <a class="button button-small" href={joinHrefFor(lang)}>{text.join}</a>
   </nav>
 </header>

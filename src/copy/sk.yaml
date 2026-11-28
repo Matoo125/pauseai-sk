@@ -27,6 +27,8 @@ nav:
   questions: Otázky
   about: Kto sme
   join: Pridať sa
+  # The link to the other language version (the English landing page /en/).
+  switch: English
 
 # The top of the landing page presents the bachelor's thesis of our founder, Bianka Madarászová.
 hero:

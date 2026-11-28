@@ -1,29 +1,36 @@
 ---
 import Logo from './Logo.astro';
-import { copy, rich } from '../lib/copy';
-import { feedbackHref, footerNav, joinHref, movement, repoUrl, whatsappHref } from '../data/site';
+import { copyFor, rich, type Lang } from '../lib/copy';
+import { feedbackHref, footerNav, homeHrefFor, joinHrefFor, movement, repoUrl, whatsappHref } from '../data/site';
 
-const { footer, site } = copy;
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'sk' } = Astro.props;
+const { footer, site, nav } = copyFor(lang);
+const english = lang === 'en';
 ---
 
 <footer class="footer">
   <div class="wrap footer-grid">
     <div class="footer-about">
-      <Logo />
+      <Logo lang={lang} />
       <p>{footer.about}</p>
       <p set:html={rich(footer.partner)} />
     </div>
     <nav aria-label={footer.pages}>
       <h2>{footer.pages}</h2>
       <ul>
-        {footerNav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        <li><a href={joinHref}>{copy.nav.join}</a></li>
+        {/* The other pages exist only in Slovak, so the English footer lists them under their Slovak names. */}
+        {footerNav.map((item) => <li><a href={item.href} lang={english ? 'sk' : undefined}>{item.label}</a></li>)}
+        <li><a href={joinHrefFor(lang)}>{nav.join}</a></li>
+        <li><a href={homeHrefFor(english ? 'sk' : 'en')} lang={english ? 'sk' : 'en'}>{nav.switch}</a></li>
       </ul>
     </nav>
     <nav aria-label={footer.movement}>
       <h2>{footer.movement}</h2>
       <ul>
-        {movement.map((item) => <li><a href={item.href} rel="noopener">{item.label}</a></li>)}
+        {movement.map((item) => <li><a href={item.href} rel="noopener">{english ? item.en : item.label}</a></li>)}
       </ul>
     </nav>
     <div>
@@ -38,7 +45,7 @@ const { footer, site } = copy;
       <h2>{footer.feedback_heading}</h2>
       <p>{footer.feedback}</p>
       <ul>
-        <li><a href={feedbackHref}>{footer.feedback_link}</a></li>
+        <li><a href={english ? `mailto:${site.email}` : feedbackHref}>{footer.feedback_link}</a></li>
       </ul>
     </div>
   </div>

@@ -13,4 +13,5 @@ pravidlo, ktoré platí pre všetkých naraz: medzinárodnú dohodu o pozastaven
 najvýkonnejších všeobecných systémov AI, kým nebude jasné, že sa dajú vytvárať bezpečne a udržať
 pod demokratickou kontrolou.
 
-AI, ktorú dnes bežne používaš, sa pauza netýka.
+AI, ktorú dnes bežne používaš, sa pauza netýka. Ako sa k takej dohode dá dostať, opisujeme
+v článku [Ako chceme pauzu dosiahnuť](/clanky/ako-chceme-pauzu-dosiahnut/).

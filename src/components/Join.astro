@@ -1,10 +1,13 @@
 ---
 // Sign-up form (to Formspree) plus a pointer to the international statement,
 // which is signed on pauseai.info, not here.
-import { copy, rich } from '../lib/copy';
+import { copyFor, rich, type Lang } from '../lib/copy';
 import { formEndpoint, whatsappHref } from '../data/site';
 
-const { join } = copy;
+interface Props {
+  lang?: Lang;
+}
+const { join } = copyFor(Astro.props.lang);
 const { form, statement, whatsapp } = join;
 const messages = {
   sending: form.sending,

@@ -1,0 +1,169 @@
+# English text of the landing page /en/. Only the landing page is in English; the keys mirror
+# the ones in sk.yaml that the landing page uses, plus `about`, which exists only here.
+#
+#   {name}          a value the build fills in
+#   [text](url)     a link
+#   >-              starts a paragraph that runs over several lines
+
+site:
+  name: PauseAI Slovakia
+  title: PauseAI Slovakia — For a safe and democratic future of artificial intelligence
+  description: >-
+    A citizens' initiative in Slovakia calling for a temporary pause on training the most
+    powerful AI systems and for international oversight.
+  email: info@pauseai.sk
+  skip: Skip to content
+  logo_label: PauseAI Slovakia, home page
+
+nav:
+  label: Main navigation
+  join: Join us
+  # The link to the other language version.
+  switch: Slovensky
+
+hero:
+  title:
+    - Is AI extending our thinking?
+    - Or replacing it?
+  lead: >-
+    The bachelor's thesis of our founder, Bianka Madarászová, examines what language models do
+    to the cognitive abilities of the people who use them. The same tool can strengthen them or
+    weaken them, depending on how we work with it. The thesis offers advice on keeping your own
+    abilities.
+  cta: Read the thesis (PDF)
+  # Empty: the summary of the thesis exists only in Slovak.
+  cta_about: ''
+  note: >-
+    Is AI Extending or Replacing our Cognitive Abilities? Faculty of Arts, Comenius University,
+    2026. 45 pages, in English.
+  movement: PauseAI Slovakia is part of the worldwide PauseAI movement, founded in 2023.
+  cta_join: Join us.
+  photo_alt: >-
+    People at a PauseAI rally hold orange placards with the pause symbol and slogans against
+    uncontrolled AI development.
+
+# Exists only on the English page, in place of the Slovak section about claims and articles.
+about:
+  heading: What we ask for
+  intro: >-
+    The most powerful AI systems are being built faster than anyone understands them, and
+    nobody yet knows how to keep systems more capable than humans under control.
+  ask_heading: A pause, agreed internationally
+  ask:
+    - >-
+      We ask governments to agree on a temporary pause on training the most powerful general AI
+      systems, until we know how to build them safely and keep them under democratic control.
+    - >-
+      No company or country will slow down alone, because it would hand the lead to its
+      competitors. That is why the rule has to apply to everyone at once, with an international
+      body that checks it is kept.
+    - >-
+      The pause does not concern the AI tools you use today. It ends when a condition is met,
+      not on a date.
+  read_heading: Read more
+  links:
+    - title: The PauseAI proposal
+      text: What an international agreement would contain and how it could be verified.
+      url: https://pauseai.info/proposal
+    - title: Risks of AI
+      text: From harms we already see to the ones experts warn about.
+      url: https://pauseai.info/risks
+    - title: Questions and objections
+      text: Answers to what people ask most often.
+      url: https://pauseai.info/faq
+  slovak: >-
+    Our own articles, data and sources are in Slovak:
+    [Informácie](/informacie/), [Články](/clanky/), [Otázky](/otazky/), [Kto sme](/kto-sme/).
+
+events:
+  heading: We meet in person
+  intro: >-
+    You can read about artificial intelligence, but it is better to talk about it. We organise
+    talks and discussions that anyone can attend. Most of them are in Slovak or Czech.
+  photos:
+    room: >-
+      View from the back of a full lecture room. The audience at their desks watches a speaker
+      next to a screen showing a slide titled “AI nezpomaluje, naopak…”.
+    horizon: >-
+      A speaker stands by a screen with a slide on how fast the length of tasks AI can do on
+      its own is growing, with a time-horizon chart by METR.
+    democracy: >-
+      A speaker from PauseAI CZ stands in front of a screen with a slide from a talk on
+      democracy and artificial intelligence.
+  caption: Bratislava, 26 November 2026. An evening of talks with colleagues from PauseAI Czechia.
+
+join:
+  heading: Join us
+  text: >-
+    It takes less than 30 seconds and commits you to nothing. We will let you know about events,
+    campaigns and ways to get involved in Slovakia. We advocate the safe development of advanced
+    artificial intelligence and democratic oversight of it.
+  contact: >-
+    Contacts from the form go to the team of Slovak coordinators. If the form does not work or
+    you would rather write to us directly, [send us an e-mail](mailto:info@pauseai.sk).
+
+  whatsapp:
+    heading: Join our WhatsApp group
+    text: >-
+      The fastest way to reach us. The group is where we plan events and share AI news from
+      Slovakia and the world. The conversation is mostly in Slovak.
+    button: Open the WhatsApp group
+
+  statement:
+    heading: Sign the international statement
+    text: >-
+      The PauseAI movement calls on the world's governments to conclude an international treaty
+      pausing the training of the most powerful general AI systems, until we know how to build
+      them safely and keep them under democratic control. You sign it on the movement's website.
+    button: Sign at pauseai.info
+    url: https://pauseai.info/statement
+    also: >-
+      A similar call, the [Statement on Superintelligence](https://superintelligence-statement.org/),
+      has been signed by tens of thousands of people, including leading scientists.
+
+  form:
+    heading: Let's stay in touch
+    name: Full name
+    name_placeholder: e.g. Mária Horváthová
+    email: E-mail address
+    email_placeholder: you@example.com
+    phone: Phone number (optional)
+    phone_placeholder: e.g. +421 900 123 456
+    role: City or background (optional)
+    role_placeholder: e.g. Bratislava / student, parent, IT
+    volunteer: I would like to help as a volunteer or take part in local activities in Slovakia.
+    button: Join
+    sending: Sending…
+    done: Contact sent
+    # {name} = what the person typed
+    success: Thank you, {name}! We will be in touch.
+    success_volunteer: Thank you, {name}! We will be in touch with ways to help.
+    error: The contact could not be sent. Please try again or write to info@pauseai.sk.
+    privacy_label: What happens to my data?
+    privacy: >-
+      No spam. We use your details only to write or call you about the activities of PauseAI
+      Slovakia. You can ask us to delete them at any time at info@pauseai.sk.
+    # Subject of the e-mail the coordinators receive; it tells them the person used the English page.
+    mail_subject: Nový záujemca (anglická stránka) – PauseAI Slovensko
+
+footer:
+  about: >-
+    PauseAI Slovakia is an independent citizens' initiative connected to the international
+    PauseAI movement.
+  partner: >-
+    Partner organisation: [Efektívny altruizmus Slovensko](https://www.efektivnyaltruizmus.sk/)
+    (Effective Altruism Slovakia). Some members are active in both groups.
+  pages: On this site
+  movement: International movement
+  contact: Contact
+  place: Bratislava, Slovakia
+  whatsapp: WhatsApp group
+  feedback_heading: Feedback
+  feedback: >-
+    See a mistake or disagree with something? Let us know.
+  feedback_link: Write to us
+  # {year} = the current year
+  legal: >-
+    © {year} PauseAI Slovakia. The site is maintained by a community of volunteers and its
+    [source code]({repo}) is open. The header animation was created by
+    [PauseAI Österreich](https://pauseai.at/).
