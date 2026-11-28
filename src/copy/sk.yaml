@@ -83,7 +83,7 @@ home_info:
 # The page /clanky/ and the articles' own pages.
 articles:
   heading: Články
-  lead: Dlhšie texty o tom, čo sa dá robiť a ako je AI regulovaná.
+  lead: Dlhšie texty o rizikách AI, o tom, čo sa dá robiť, a o regulácii.
   description: Články PauseAI Slovensko o pauze vo vývoji AI, o regulácii a o tom, ako sa zapojiť.
   read: Čítať článok
   all: Všetky články
