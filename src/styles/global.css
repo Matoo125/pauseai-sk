@@ -1169,6 +1169,26 @@ ol {
   margin-top: 36px;
 }
 
+/* A photo in an article: in Markdown, the image and on the next line its caption in *italics*. */
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.prose p:has(> img) {
+  margin-top: 28px;
+}
+
+.prose p:has(> img) em {
+  display: block;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+
 .article-back {
   margin-top: clamp(40px, 6vw, 64px);
   padding-top: 18px;

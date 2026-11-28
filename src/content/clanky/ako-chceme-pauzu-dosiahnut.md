@@ -103,6 +103,24 @@ a koordinujú sa navzájom, aby tá istá požiadavka zaznela vo viacerých kraj
 Hnutie má aj hranice, ktoré si určilo samo: žiadne násilie, žiadne postoje k témam mimo pauzy
 a poctivosť v tom, čo nevieme.
 
+## V parlamentoch sa o tom už hovorí
+
+- **Praha, 11. novembra 2026.** PauseAI Česko usporiadalo v Poslaneckej snemovni okrúhly stôl
+  o vplyve AI na trh práce a spoločnosť. Zúčastnili sa na ňom českí aj zahraniční odborníci,
+  poslanci a riaditeľ PauseAI Global Maxime Fournes
+  ([PauseAI Česko](https://pauseai.cz/nase-cinnost)).
+- **Londýn, august 2025.** PauseAI UK zverejnilo list, ktorý podpísalo 60 britských poslancov
+  a členov Snemovne lordov naprieč stranami. Vyčítajú v ňom firme Google DeepMind, že model
+  Gemini 2.5 Pro vydala bez sľúbených informácií o bezpečnostnom testovaní. Google odpovedal,
+  že svoje záväzky plní
+  ([TIME](https://time.com/7313320/google-deepmind-gemini-ai-safety-pledge/)).
+
+![Zasadacia miestnosť britského parlamentu so zelenými tapetami a veľkým obrazom. Vpredu pózuje na spoločnú fotografiu asi dvadsať ľudí s oranžovými šnúrkami na krku, publikum v laviciach ich fotí.](../../assets/protesty/londyn-2026-11-parlament.jpg)
+*Podujatie PauseAI UK v britskom parlamente, november 2026.*
+
+K verejnej podpore patria aj pokojné zhromaždenia. Píšeme o nich v článku
+[Protest ako nástroj zmeny](/clanky/protest-ako-nastroj-zmeny/).
+
 ## Čo robíme na Slovensku
 
 Slovensko o pauze nerozhodne. Má však hlas v Európskej únii, ktorá prijala prvý veľký zákon
