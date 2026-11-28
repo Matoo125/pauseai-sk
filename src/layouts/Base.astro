@@ -6,7 +6,7 @@ import '@fontsource/saira-condensed/latin-ext-800.css';
 import '@fontsource-variable/roboto-slab/wght.css';
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
-import crowd from '../assets/akcie/bratislava-2026-11-publikum.jpg';
+import crowd from '../assets/hero-crowd.jpeg';
 import { copy } from '../lib/copy';
 
 const { site } = copy;
@@ -17,7 +17,7 @@ interface Props {
 }
 const { title = site.title, description = site.description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-// Link preview for chats and social networks: the hero photo cut to 1200×630.
+// Link preview for chats and social networks: the rally photo cut to 1200×630.
 const preview = await getImage({ src: crowd, width: 1200, height: 630, fit: 'cover', position: 'center', format: 'jpg', quality: 80 });
 const previewUrl = new URL(preview.src, Astro.site);
 ---

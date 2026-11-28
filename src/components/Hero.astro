@@ -1,12 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import crowd from '../assets/akcie/bratislava-2026-11-publikum.jpg';
 import Topbar from './Topbar.astro';
 import { copy } from '../lib/copy';
 import { joinHref, thesisHref } from '../data/site';
 
 const { hero } = copy;
-const { thesis } = hero;
 ---
 
 <div class="placard">
@@ -18,28 +15,20 @@ const { thesis } = hero;
       <div class="hero-text">
         <p>{hero.lead}</p>
         <div class="hero-actions">
-          <a class="button" href={joinHref}>{hero.cta}</a>
-          <a class="text-link" href="#data">{hero.cta_data}</a>
+          <a class="button" href={thesisHref}>{hero.cta}</a>
+          <a class="text-link" href="/kto-sme/#praca">{hero.cta_about}</a>
         </div>
         <p class="hero-note">{hero.note}</p>
-        <aside class="hero-feature" aria-labelledby="hero-feature-title">
-          <p class="hero-feature-label">{thesis.label}</p>
-          <h2 id="hero-feature-title">{thesis.title}</h2>
-          <p>{thesis.byline}</p>
-          <p class="hero-feature-links">
-            <a href={thesisHref}>{thesis.read}</a>
-            <a href="/kto-sme/#praca">{thesis.about}</a>
-          </p>
-        </aside>
+        <p class="hero-note hero-join">
+          {hero.movement} <a href={joinHref}>{hero.cta_join}</a>
+        </p>
       </div>
-      <Image
-        class="hero-photo"
-        src={crowd}
-        alt={hero.photo_alt}
-        widths={[480, 800, 1200]}
-        sizes="(max-width: 800px) 100vw, 560px"
-        loading="eager"
-      />
+      <!-- Decorative: the plug animation by PauseAI Österreich, see src/scripts/plug.js. -->
+      <div class="plug" aria-hidden="true"></div>
     </div>
   </section>
 </div>
+
+<script>
+  import '../scripts/plug.js';
+</script>

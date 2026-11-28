@@ -7,6 +7,7 @@ export const formEndpoint = 'https://formspree.io/f/xppagjeo';
 /** The top menu. Absolute paths, so the same menu works on every page. */
 export const nav = [
   { href: '/informacie/', label: copy.nav.evidence },
+  { href: '/clanky/', label: copy.nav.articles },
   { href: '/otazky/', label: copy.nav.questions },
   { href: '/kto-sme/', label: copy.nav.about },
 ];
@@ -15,8 +16,8 @@ export const footerNav = nav;
 
 export const joinHref = '/#pridaj-sa';
 
-/** Invite link of the WhatsApp group (https://chat.whatsapp.com/…). While empty, the site shows no WhatsApp links. */
-export const whatsappHref = '';
+/** Invite link of the WhatsApp group (https://chat.whatsapp.com/…). Leave it empty to hide the WhatsApp links. */
+export const whatsappHref = 'https://chat.whatsapp.com/IWelMw0y2880Y1I7fc6Mnt';
 
 /** Bianka Madarászová's bachelor's thesis; the file is in public/praca/. */
 export const thesisHref = '/praca/madaraszova-2026-ai-kognitivne-schopnosti.pdf';

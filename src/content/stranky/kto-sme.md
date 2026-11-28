@@ -49,6 +49,12 @@ Ak sa to zmení, uvedieme tu, kto nás podporuje.
 Sme súčasťou medzinárodného hnutia [PauseAI](https://pauseai.info), ktoré vzniklo v roku 2023.
 Obsah tohto webu pripravujeme sami a zodpovedáme zaň my.
 
+## Partnerská organizácia
+
+Našou partnerskou organizáciou je [Efektívny altruizmus Slovensko](https://www.efektivnyaltruizmus.sk/).
+Niektorí naši členovia pôsobia v oboch skupinách. Uvádzame to, aby bolo jasné, s kým sme
+prepojení. Za obsah tohto webu a za naše požiadavky zodpovedá PauseAI Slovensko.
+
 ## Kontakt
 
 Napíš nám na [info@pauseai.sk](mailto:info@pauseai.sk).

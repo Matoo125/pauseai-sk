@@ -23,32 +23,31 @@ site:
 nav:
   label: Hlavná navigácia
   evidence: Informácie
+  articles: Články
   questions: Otázky
   about: Kto sme
   join: Pridať sa
 
+# The top of the landing page presents the bachelor's thesis of our founder, Bianka Madarászová.
 hero:
   title:
-    - Budúcnosť tvoríme my.
-    - Nie nekontrolované preteky algoritmov.
+    - Rozširuje AI naše myslenie?
+    - Alebo ho nahrádza?
   lead: >-
-    PauseAI Slovensko spája vedcov, vývojárov, rodičov a občanov, ktorí žiadajú zodpovedné tempo,
-    medzinárodný bezpečnostný dohľad a demokratickú kontrolu skôr, než sa začnú trénovať najsilnejšie modely.
-  cta: Pridať sa
-  cta_data: Pozrieť dáta
-  note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
+    Bakalárska práca našej zakladateľky Bianky Madarászovej skúma, čo robia jazykové modely
+    s kognitívnymi schopnosťami ľudí, ktorí ich používajú. Ten istý nástroj ich môže posilňovať
+    aj oslabovať, podľa toho, ako s ním pracujeme. Práca radí, ako si vlastné schopnosti zachovať.
+  cta: Čítať prácu (PDF)
+  cta_about: O čom je
+  note: >-
+    Is AI Extending or Replacing our Cognitive Abilities? Filozofická fakulta Univerzity
+    Komenského, 2026. 45 strán, po anglicky.
+  movement: PauseAI Slovensko je súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
+  cta_join: Pridaj sa k nám.
+  # Description of the link-preview photo.
   photo_alt: >-
-    Plná učebňa počas prednášky v Bratislave. Ľudia sedia v laviciach chrbtom k fotoaparátu,
-    vpredu stoja prednášajúci pri plátne so snímkou PauseAI CZ.
-  # The box under the buttons: the bachelor's thesis of our founder.
-  thesis:
-    label: Z nášho tímu · bakalárska práca
-    title: Rozširuje alebo nahrádza umelá inteligencia naše kognitívne schopnosti?
-    byline: >-
-      Bianka Madarászová, zakladateľka PauseAI Slovensko. Filozofická fakulta Univerzity
-      Komenského, 2026.
-    read: Čítať prácu (PDF, anglicky)
-    about: O čom je
+    Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti
+    nekontrolovanému vývoju AI.
 
 # Photos from our events, on the landing page above the sign-up.
 events:
@@ -69,40 +68,27 @@ events:
       a umelej inteligencii.
   caption: Bratislava, 26. novembra 2026. Večer prednášok s kolegami z PauseAI Česko.
 
-# The evidence section of the landing page: one chart, what the Slovak public thinks, and a quote.
-home_evidence:
-  heading: Čo hovoria dáta
+# The landing page's section about what there is to read: the claims on /informacie/ (the list
+# is filled in from src/content/tvrdenia/) and the articles (from src/content/clanky/).
+home_info:
+  heading: Informácie o AI
   intro: >-
-    Nemusíš nám veriť na slovo. Toto sú verejné merania a prieskumy, z ktorých vychádzame.
-    Pri každom grafe je zdroj a tabuľka s hodnotami, aby sa dal overiť.
-  more: >-
-    Všetky tvrdenia s grafmi, so zdrojmi a s tým, čo dáta neukazujú, nájdeš na stránke
-    [Informácie](/informacie/).
-  public:
-    heading: Čo si myslí slovenská verejnosť
-    figures:
-      - figure: 89 %
-        text: >-
-          ľudí na Slovensku súhlasí, že roboty a umelá inteligencia sú technológie, ktoré si
-          vyžadujú starostlivé riadenie. Priemer Európskej únie je 84 %.
-      - figure: 79 %
-        text: >-
-          si myslí, že pre roboty a umelú inteligenciu zanikne viac pracovných miest, než vznikne.
-          Priemer Európskej únie je 66 %.
-    source: >-
-      [Špeciálny Eurobarometer 554](https://www.cec-managers.org/wp-content/uploads/2025/02/Artificial-Intelligence-and-the-future-of-work_SP554_factsheet_sk_en.pdf),
-      1 023 respondentov na Slovensku, jar 2024. Prieskum sa pýtal na AI a roboty v práci,
-      nie na pozastavenie vývoja.
-  # Our translation of the Center for AI Safety statement. Original:
-  # "Mitigating the risk of extinction from AI should be a global priority alongside other
-  # societal-scale risks such as pandemics and nuclear war."
-  quote: >-
-    „Zmiernenie rizika vyhynutia v dôsledku AI by malo byť globálnou prioritou popri iných
-    rizikách celospoločenského rozsahu, akými sú pandémie a jadrová vojna.“
-  quote_source: >-
-    [Vyhlásenie o riziku AI](https://www.safe.ai/work/statement-on-ai-risk), Center for AI Safety,
-    máj 2023 (náš preklad). Podpísali ho okrem iných Geoffrey Hinton, Yoshua Bengio,
-    Demis Hassabis a Sam Altman.
+    Nemusíš nám veriť na slovo. Zozbierali sme verejné merania, prieskumy a správy, z ktorých
+    vychádzame, a píšeme o tom, čo sa dá robiť.
+  claims_heading: Päť tvrdení s dátami
+  claims_button: Otvoriť Informácie
+  articles_heading: Články
+  articles_button: Všetky články
+
+# The page /clanky/ and the articles' own pages.
+articles:
+  heading: Články
+  lead: Dlhšie texty o tom, čo sa dá robiť a ako je AI regulovaná.
+  description: Články PauseAI Slovensko o pauze vo vývoji AI, o regulácii a o tom, ako sa zapojiť.
+  read: Čítať článok
+  all: Všetky články
+  # {date} = the day the article was published
+  published: Zverejnené {date}
 
 evidence_page:
   heading: Informácie
@@ -286,46 +272,9 @@ charts:
     value: Investície (mld. USD)
     unit: mld. $
 
-demands:
-  heading: Tri kroky pre bezpečnú budúcnosť
-  intro: Žiadnu z týchto požiadaviek sme nevymysleli. Pri každej uvádzame, kto ju navrhuje.
-  more: Námietky, ktoré počúvame najčastejšie, rozoberáme v [otázkach a odpovediach](/otazky/).
-  # `basis` says who proposes the demand; keep the links.
-  items:
-    - title: Medzinárodná agentúra pre dohľad nad AI
-      text: >-
-        Podľa vzoru Medzinárodnej agentúry pre atómovú energiu (IAEA) potrebujeme nezávislý globálny
-        orgán, ktorý audituje dátové centrá a sleduje tréning modelov na hranici schopností.
-      basis: >-
-        Orgán podobný IAEA navrhlo v roku 2023 vedenie OpenAI v texte
-        [Governance of superintelligence](https://openai.com/index/governance-of-superintelligence/)
-        a myšlienku verejne podporil generálny tajomník OSN António Guterres. Podrobný návrh má
-        [PauseAI](https://pauseai.info/proposal).
-    - title: Podmienka garantovanej bezpečnosti
-      text: >-
-        Vývoj a trénovanie novej generácie superinteligentných modelov musia byť pozastavené, kým
-        vedecká komunita nepreukáže spoľahlivé metódy zarovnania (alignment) a kontroly.
-      basis: >-
-        Zákaz vývoja superinteligencie, kým nebude vedecký konsenzus, že je bezpečná a ovládateľná,
-        žiada [Statement on Superintelligence](https://superintelligence-statement.org/) (2025).
-        Pozastavenie tréningu žiadal už otvorený list
-        [Pause Giant AI Experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) (2023)
-        a žiada ho [vyhlásenie PauseAI](https://pauseai.info/statement).
-    - title: Demokratická kontrola a certifikácia
-      text: >-
-        Nasadenie modelov do kritickej infraštruktúry a verejného priestoru musí podliehať
-        verejnému posúdeniu dopadov na prácu, demokraciu a bezpečnosť občanov.
-      basis: >-
-        Posudzovanie rizikových systémov pred uvedením na trh už zavádza európsky
-        [AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj). Licencie a nezávislé audity pre
-        najvýkonnejšie systémy navrhujú Yoshua Bengio, Geoffrey Hinton a ďalší v článku
-        [Managing extreme AI risks amid rapid progress](https://www.science.org/doi/10.1126/science.adn0117) (Science, 2024).
-
 join:
-  heading: Pridaj sa k PauseAI Slovensko
-  text: >-
-    Nechaj nám kontakt. Dáme ti vedieť o akciách, kampaniach a možnostiach, ako sa zapojiť
-    na Slovensku.
+  heading: Pridaj sa
+  # Shown in the same tooltip, after form.privacy.
   contact: >-
     Kontakty z formulára dostáva tím slovenských koordinátorov. Ak formulár nefunguje alebo nám
     chceš napísať priamo, [pošli nám e-mail](mailto:info@pauseai.sk).
@@ -352,11 +301,15 @@ join:
 
   form:
     heading: Zostaňme v kontakte
-    intro: Zaberie to menej než 30 sekúnd a k ničomu ťa to nezaväzuje.
+    intro: >-
+      Zaberie to menej než 30 sekúnd a k ničomu ťa to nezaväzuje. Dáme ti vedieť o akciách,
+      kampaniach a možnostiach, ako sa zapojiť na Slovensku.
     name: Meno a priezvisko
     name_placeholder: napr. Mária Horváthová
     email: E-mailová adresa
     email_placeholder: tvoj@email.sk
+    phone: Telefónne číslo (voliteľné)
+    phone_placeholder: napr. +421 900 123 456
     role: Mesto alebo zameranie (voliteľné)
     role_placeholder: napr. Bratislava / študent, rodič, IT
     volunteer: Mám záujem pomôcť ako dobrovoľník alebo sa zapojiť do lokálnych aktivít na Slovensku.
@@ -367,8 +320,10 @@ join:
     success: Ďakujeme, {name}! Ozveme sa ti.
     success_volunteer: Ďakujeme, {name}! Ozveme sa ti s možnosťami, ako pomôcť.
     error: Kontakt sa nepodarilo odoslať. Skús to znova alebo nám napíš na info@pauseai.sk.
+    # The small link under the button; clicking it shows the two texts about personal data.
+    privacy_label: Čo sa stane s mojimi údajmi?
     privacy: >-
-      Žiadny spam. Údaje použijeme len na to, aby sme ti písali o aktivitách PauseAI Slovensko.
+      Žiadny spam. Údaje použijeme len na to, aby sme ti písali alebo volali o aktivitách PauseAI Slovensko.
       O ich vymazanie môžeš kedykoľvek požiadať na info@pauseai.sk.
     # Subject of the e-mail the coordinators receive.
     mail_subject: Nový záujemca – PauseAI Slovensko
@@ -385,6 +340,9 @@ footer:
   about: >-
     PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI.
     Presadzujeme bezpečný vývoj pokročilej umelej inteligencie a demokratický dohľad nad ňou.
+  partner: >-
+    Partnerská organizácia: [Efektívny altruizmus Slovensko](https://www.efektivnyaltruizmus.sk/).
+    Niektorí členovia pôsobia v oboch skupinách.
   pages: Na tomto webe
   movement: Medzinárodné hnutie
   contact: Kontakt
@@ -399,4 +357,4 @@ footer:
     © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov a jeho
     [zdrojový kód]({repo}) je otvorený. Grafy používajú dáta
     [Epoch AI](https://epoch.ai/data/ai-models) a [Our World in Data](https://ourworldindata.org/artificial-intelligence)
-    pod licenciou CC BY 4.0.
+    pod licenciou CC BY 4.0. Animáciu v záhlaví vytvorilo [PauseAI Österreich](https://pauseai.at/).

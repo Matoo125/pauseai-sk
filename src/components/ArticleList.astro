@@ -1,0 +1,19 @@
+---
+// Every article in src/content/clanky/, as cards. Used on the landing page and on /clanky/.
+import { getCollection } from 'astro:content';
+import { copy } from '../lib/copy';
+
+const articles = (await getCollection('clanky', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+---
+
+<ul class="article-list">
+  {
+    articles.map((article) => (
+      <li>
+        <h3><a href={`/clanky/${article.id}/`}>{article.data.title}</a></h3>
+        <p>{article.data.teaser}</p>
+        <a class="article-list-more" href={`/clanky/${article.id}/`} aria-hidden="true" tabindex="-1">{copy.articles.read}</a>
+      </li>
+    ))
+  }
+</ul>

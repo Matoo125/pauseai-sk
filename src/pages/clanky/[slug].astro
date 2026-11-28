@@ -1,0 +1,23 @@
+---
+// One article from src/content/clanky/.
+import { getCollection, render } from 'astro:content';
+import Page from '../../components/Page.astro';
+import { copy, plain } from '../../lib/copy';
+
+export async function getStaticPaths() {
+  return (await getCollection('clanky', ({ data }) => !data.draft)).map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const date = article.data.date;
+const published = plain(copy.articles.published, { date: `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}` });
+---
+
+<Page heading={article.data.title} lead={article.data.lead}>
+  <article class="prose article">
+    <p class="article-date"><time datetime={date.toISOString().slice(0, 10)}>{published}</time></p>
+    <Content />
+    <p class="article-back"><a href="/clanky/">{copy.articles.all}</a></p>
+  </article>
+</Page>

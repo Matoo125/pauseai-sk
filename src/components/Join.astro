@@ -19,7 +19,6 @@ const messages = {
   <div class="wrap join">
     <div class="join-text join-head">
       <h2>{join.heading}</h2>
-      <p>{join.text}</p>
       {
         whatsappHref && (
           <div class="join-whatsapp">
@@ -31,12 +30,12 @@ const messages = {
       }
     </div>
 
-    <div class="join-text join-statement">
-      <h3>{statement.heading}</h3>
+    <details class="join-text join-statement">
+      <summary>{statement.heading}</summary>
       <p>{statement.text}</p>
       <a class="button button-orange" href={statement.url} rel="noopener">{statement.button}</a>
       <p class="join-small" set:html={rich(statement.also)} />
-    </div>
+    </details>
 
     <form id="join-form" class="form" action={formEndpoint} method="POST" data-messages={JSON.stringify(messages)}>
       <h3>{form.heading}</h3>
@@ -47,6 +46,9 @@ const messages = {
 
       <label for="join-email">{form.email}</label>
       <input id="join-email" name="email" type="email" autocomplete="email" placeholder={form.email_placeholder} required />
+
+      <label for="join-phone">{form.phone}</label>
+      <input id="join-phone" name="phone" type="tel" autocomplete="tel" placeholder={form.phone_placeholder} />
 
       <label for="join-role">{form.role}</label>
       <input id="join-role" name="role" type="text" placeholder={form.role_placeholder} />
@@ -60,8 +62,14 @@ const messages = {
 
       <button class="button" type="submit">{form.button}</button>
       <p class="form-status" role="status" hidden></p>
-      <p class="form-privacy">{form.privacy}</p>
-      <p class="form-privacy" set:html={rich(join.contact)} />
+      <!-- A tooltip that opens on click, so it also works on phones and its link can be followed. -->
+      <details class="form-tip">
+        <summary>{form.privacy_label}</summary>
+        <div class="form-tip-box">
+          <p>{form.privacy}</p>
+          <p set:html={rich(join.contact)} />
+        </div>
+      </details>
     </form>
   </div>
 </section>

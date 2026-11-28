@@ -1,0 +1,44 @@
+---
+// The landing page's pointer to what there is to read: the claims documented on /informacie/
+// and the articles on /clanky/, side by side.
+import { getCollection } from 'astro:content';
+import { copy } from '../lib/copy';
+
+const text = copy.home_info;
+const claims = (await getCollection('tvrdenia')).sort((a, b) => a.data.order - b.data.order);
+const articles = (await getCollection('clanky', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="band band-tint" id="informacie-o-ai">
+  <div class="wrap">
+    <header class="band-head">
+      <h2>{text.heading}</h2>
+      <p>{text.intro}</p>
+    </header>
+    <div class="info-teaser">
+      <div>
+        <h3>{text.claims_heading}</h3>
+        <ol class="info-rows info-rows-numbered">
+          {claims.map((claim) => <li><a href={`/informacie/#${claim.id}`}>{claim.data.title}</a></li>)}
+        </ol>
+        <a class="button" href="/informacie/">{text.claims_button}</a>
+      </div>
+      <div>
+        <h3>{text.articles_heading}</h3>
+        <ul class="info-rows">
+          {
+            articles.map((article) => (
+              <li>
+                <a href={`/clanky/${article.id}/`}>
+                  <span>{article.data.title}</span>
+                  <small>{article.data.teaser}</small>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="button" href="/clanky/">{text.articles_button}</a>
+      </div>
+    </div>
+  </div>
+</section>

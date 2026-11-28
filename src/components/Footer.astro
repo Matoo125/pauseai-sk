@@ -11,6 +11,7 @@ const { footer, site } = copy;
     <div class="footer-about">
       <Logo />
       <p>{footer.about}</p>
+      <p set:html={rich(footer.partner)} />
     </div>
     <nav aria-label={footer.pages}>
       <h2>{footer.pages}</h2>

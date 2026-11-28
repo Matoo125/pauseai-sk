@@ -15,6 +15,8 @@ their credit when you reuse it, as the charts do.
 
 | File | Owner |
 |---|---|
+| `src/assets/hero-crowd.jpeg` | the photographer of the PauseAI rally; not ours to relicense |
+| `src/scripts/plug.js` | the plug animation is by [PauseAI Österreich](https://pauseai.at/), adapted here with the author's approval |
 | `src/assets/akcie/*` | photos from our events, © PauseAI Slovensko; the people in them have not agreed to reuse elsewhere |
 | `public/praca/*` | the thesis is © Bianka Madarászová, published here with her permission |
 | `src/content/zdroje/covers/*` | the publishers named under each book on the site |

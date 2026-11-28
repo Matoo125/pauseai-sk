@@ -73,4 +73,21 @@ const stranky = defineCollection({
   }),
 });
 
-export const collections = { tvrdenia, zdroje, otazky, stranky };
+// Articles on /clanky/: one Markdown file per article; the file name is its address.
+const clanky = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/clanky' }),
+  schema: z.object({
+    title: z.string(),
+    // Shown under the title on the article's own page.
+    lead: z.string(),
+    // One or two sentences for the lists of articles.
+    teaser: z.string(),
+    date: z.coerce.date(),
+    // Position in the lists, lowest first.
+    order: z.number(),
+    // A draft is kept in the repository but not built: no page, no card in the lists.
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { tvrdenia, zdroje, otazky, stranky, clanky };

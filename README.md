@@ -16,12 +16,14 @@ bun run data     # refresh the chart data from Epoch AI
 
 ## How the site is organised
 
-Four pages:
+The pages:
 
-- **/** — the pitch in one scroll: hero, evidence in brief, the three demands, sign-up.
+- **/** — the pitch in one scroll: hero (the founder's thesis), one section pointing to the
+  evidence and the articles, event photos, sign-up.
 - **/informacie/** — the evidence, as a list of *claims*. A claim is one sentence we assert, the chart
   or figure behind it, a few lines of context including what the data doesn't show, and its
   sources. The reading list closes the page.
+- **/clanky/** — articles, one page each.
 - **/otazky/** — objections and answers.
 - **/kto-sme/** — who is behind the site.
 
@@ -29,12 +31,14 @@ Four pages:
 
 | To change… | Edit |
 |---|---|
-| Short text anywhere: headings, buttons, chart titles, the demands | `src/copy/sk.yaml` |
+| Short text anywhere: headings, buttons, chart titles | `src/copy/sk.yaml` |
 | A claim on `/informacie/` | its Markdown file in `src/content/tvrdenia/` |
+| An article on `/clanky/` | its Markdown file in `src/content/clanky/`; a new file becomes a new article, `draft: true` hides one |
 | A question on `/otazky/` | its Markdown file in `src/content/otazky/` |
 | The reading list | one Markdown file per book or report in `src/content/zdroje/` (covers in `covers/`) |
 | The about page | `src/content/stranky/kto-sme.md` |
-| Menu links, form endpoint, sister sites | `src/data/site.ts` |
+| Menu links, form endpoint, WhatsApp link, sister sites | `src/data/site.ts` |
+| Event photos | `src/assets/akcie/`, listed in `src/components/Events.astro` |
 | Colours, type, layout | `src/styles/global.css` |
 | Chart data | don't edit `src/data/*.json` by hand — run `bun run data` |
 
@@ -48,7 +52,7 @@ Restart `bun run dev` after adding a new folder of content.
 
 ## Sign-ups
 
-The form posts name, e-mail and an optional note to Formspree, which mails them to the coordinators.
+The form posts name, e-mail, an optional phone number and an optional note to Formspree, which mails them to the coordinators.
 It is a contact list, not a petition: the page sends people to pauseai.info to sign the movement's
 statement.
 
@@ -77,5 +81,5 @@ The server checks `main` every five minutes and, when it changed, builds the sit
 
 ## Licence
 
-Code: MIT (`LICENSE`). Texts and charts: CC BY 4.0. The event photos, the thesis, the book covers
-and the interview stills are not covered; see `LICENSE-content.md`.
+Code: MIT (`LICENSE`). Texts and charts: CC BY 4.0. The rally and event photos, the thesis, the book
+covers and the interview stills are not covered; see `LICENSE-content.md`.

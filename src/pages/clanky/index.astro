@@ -1,0 +1,12 @@
+---
+// /clanky/: the list of articles.
+import Page from '../../components/Page.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { copy } from '../../lib/copy';
+
+const text = copy.articles;
+---
+
+<Page heading={text.heading} lead={text.lead} description={text.description}>
+  <ArticleList />
+</Page>

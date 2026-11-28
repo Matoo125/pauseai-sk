@@ -17,19 +17,11 @@ export type ChartText = Record<string, any>;
 
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
-  nav: Record<'label' | 'evidence' | 'questions' | 'about' | 'join', string>;
-  hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string;
-    thesis: Record<'label' | 'title' | 'byline' | 'read' | 'about', string>;
-  };
+  nav: Record<'label' | 'evidence' | 'articles' | 'questions' | 'about' | 'join', string>;
+  hero: { title: string[]; lead: string; cta: string; cta_about: string; note: string; movement: string; cta_join: string; photo_alt: string };
   events: { heading: string; intro: string; photos: Record<'room' | 'horizon' | 'democracy', string>; caption: string };
-  home_evidence: {
-    heading: string;
-    intro: string;
-    more: string;
-    public: { heading: string; figures: { figure: string; text: string }[]; source: string };
-    quote: string;
-    quote_source: string;
-  };
+  home_info: Record<'heading' | 'intro' | 'claims_heading' | 'claims_button' | 'articles_heading' | 'articles_button', string>;
+  articles: Record<'heading' | 'lead' | 'description' | 'read' | 'all' | 'published', string>;
   evidence_page: {
     heading: string;
     lead: string;
@@ -67,10 +59,8 @@ export interface Copy {
     gpqa: ChartText;
     hle: ChartText;
   };
-  demands: { heading: string; intro: string; more: string; items: (TitledText & { basis?: string })[] };
   join: {
     heading: string;
-    text: string;
     contact: string;
     whatsapp: Record<'heading' | 'text' | 'button', string>;
     statement: { heading: string; text: string; button: string; url: string; also: string };
@@ -78,7 +68,7 @@ export interface Copy {
   };
   questions: { heading: string; lead: string; description: string; missing: string };
   footer: {
-    about: string; pages: string; movement: string; contact: string; place: string; legal: string;
+    about: string; partner: string; pages: string; movement: string; contact: string; place: string; legal: string;
     whatsapp: string; feedback_heading: string; feedback: string; feedback_link: string;
   };
 }
