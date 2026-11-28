@@ -20,8 +20,24 @@ pokroku. Chceme, aby pre najsilnejšie AI systémy platili podobné pravidlá ak
 ## Ľudia
 
 - Matej Vrzala
-- Bianka Madarászová
+- Bianka Madarászová, zakladateľka
 - Patrik Šimko
+
+<h2 id="praca">Bakalárska práca našej zakladateľky</h2>
+
+Bianka Madarászová napísala v roku 2026 na Katedre logiky a metodológie vied Filozofickej
+fakulty Univerzity Komenského bakalársku prácu *Is AI Extending or Replacing our Cognitive
+Abilities?* (Rozširuje alebo nahrádza umelá inteligencia naše kognitívne schopnosti?).
+Školiteľkou bola PhDr. Daniela Vacek, PhD.
+
+Práca skúma, čo robia veľké jazykové modely s kognitívnymi schopnosťami ľudí, ktorí ich
+používajú. Tvrdí, že zaužívané pojmy kognitívneho rozšírenia, kognitívneho vylepšenia
+a intelektuálnej augmentácie opisujú len systém človeka s nástrojom, nie to, čo sa deje so
+schopnosťami samotného človeka. Navrhuje preto sledovať, či konkrétny spôsob používania AI
+tieto schopnosti posilňuje, alebo oslabuje, a pripomína, že oboje sa môže diať naraz. Na záver
+ponúka praktické odporúčania, ako s AI pracovať tak, aby sme si vlastné schopnosti zachovali.
+
+[Prečítať si prácu (PDF, 45 strán, po anglicky)](/praca/madaraszova-2026-ai-kognitivne-schopnosti.pdf)
 
 ## Financovanie
 

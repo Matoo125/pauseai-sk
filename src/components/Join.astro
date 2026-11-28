@@ -2,10 +2,10 @@
 // Sign-up form (to Formspree) plus a pointer to the international statement,
 // which is signed on pauseai.info, not here.
 import { copy, rich } from '../lib/copy';
-import { formEndpoint } from '../data/site';
+import { formEndpoint, whatsappHref } from '../data/site';
 
 const { join } = copy;
-const { form, statement } = join;
+const { form, statement, whatsapp } = join;
 const messages = {
   sending: form.sending,
   done: form.done,
@@ -20,6 +20,15 @@ const messages = {
     <div class="join-text join-head">
       <h2>{join.heading}</h2>
       <p>{join.text}</p>
+      {
+        whatsappHref && (
+          <div class="join-whatsapp">
+            <h3>{whatsapp.heading}</h3>
+            <p>{whatsapp.text}</p>
+            <a class="button button-orange" href={whatsappHref} rel="noopener">{whatsapp.button}</a>
+          </div>
+        )
+      }
     </div>
 
     <div class="join-text join-statement">

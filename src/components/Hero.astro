@@ -1,11 +1,12 @@
 ---
 import { Image } from 'astro:assets';
-import crowd from '../assets/hero-crowd.jpeg';
+import crowd from '../assets/akcie/bratislava-2026-11-publikum.jpg';
 import Topbar from './Topbar.astro';
 import { copy } from '../lib/copy';
-import { joinHref } from '../data/site';
+import { joinHref, thesisHref } from '../data/site';
 
 const { hero } = copy;
+const { thesis } = hero;
 ---
 
 <div class="placard">
@@ -21,6 +22,15 @@ const { hero } = copy;
           <a class="text-link" href="#data">{hero.cta_data}</a>
         </div>
         <p class="hero-note">{hero.note}</p>
+        <aside class="hero-feature" aria-labelledby="hero-feature-title">
+          <p class="hero-feature-label">{thesis.label}</p>
+          <h2 id="hero-feature-title">{thesis.title}</h2>
+          <p>{thesis.byline}</p>
+          <p class="hero-feature-links">
+            <a href={thesisHref}>{thesis.read}</a>
+            <a href="/kto-sme/#praca">{thesis.about}</a>
+          </p>
+        </aside>
       </div>
       <Image
         class="hero-photo"

@@ -18,7 +18,10 @@ export type ChartText = Record<string, any>;
 export interface Copy {
   site: { name: string; title: string; description: string; email: string; skip: string; logo_label: string };
   nav: Record<'label' | 'evidence' | 'questions' | 'about' | 'join', string>;
-  hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string };
+  hero: { title: string[]; lead: string; cta: string; cta_data: string; note: string; photo_alt: string;
+    thesis: Record<'label' | 'title' | 'byline' | 'read' | 'about', string>;
+  };
+  events: { heading: string; intro: string; photos: Record<'room' | 'horizon' | 'democracy', string>; caption: string };
   home_evidence: {
     heading: string;
     intro: string;
@@ -69,13 +72,14 @@ export interface Copy {
     heading: string;
     text: string;
     contact: string;
+    whatsapp: Record<'heading' | 'text' | 'button', string>;
     statement: { heading: string; text: string; button: string; url: string; also: string };
     form: Record<string, string>;
   };
   questions: { heading: string; lead: string; description: string; missing: string };
   footer: {
     about: string; pages: string; movement: string; contact: string; place: string; legal: string;
-    feedback_heading: string; feedback: string; feedback_link: string;
+    whatsapp: string; feedback_heading: string; feedback: string; feedback_link: string;
   };
 }
 

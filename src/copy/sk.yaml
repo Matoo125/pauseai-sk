@@ -38,8 +38,36 @@ hero:
   cta_data: Pozrieť dáta
   note: Súčasť celosvetového hnutia PauseAI, ktoré vzniklo v roku 2023.
   photo_alt: >-
-    Ľudia na zhromaždení PauseAI držia oranžové transparenty so symbolom pauzy a nápismi proti
-    nekontrolovanému vývoju AI.
+    Plná učebňa počas prednášky v Bratislave. Ľudia sedia v laviciach chrbtom k fotoaparátu,
+    vpredu stoja prednášajúci pri plátne so snímkou PauseAI CZ.
+  # The box under the buttons: the bachelor's thesis of our founder.
+  thesis:
+    label: Z nášho tímu · bakalárska práca
+    title: Rozširuje alebo nahrádza umelá inteligencia naše kognitívne schopnosti?
+    byline: >-
+      Bianka Madarászová, zakladateľka PauseAI Slovensko. Filozofická fakulta Univerzity
+      Komenského, 2026.
+    read: Čítať prácu (PDF, anglicky)
+    about: O čom je
+
+# Photos from our events, on the landing page above the sign-up.
+events:
+  heading: Stretávame sa naživo
+  intro: >-
+    O umelej inteligencii sa dá čítať, ale lepšie sa o nej rozpráva. Organizujeme prednášky
+    a diskusie, na ktoré môže prísť každý.
+  # Descriptions of the photos for people who can't see them.
+  photos:
+    room: >-
+      Pohľad zozadu na plnú učebňu. Publikum v laviciach sleduje prednášajúceho pri plátne
+      so snímkou s nadpisom „AI nezpomaluje, naopak…“.
+    horizon: >-
+      Prednášajúci stojí pri plátne so snímkou o tom, ako rýchlo rastie dĺžka úloh, ktoré AI
+      zvládne samostatne, s grafom časového horizontu podľa METR.
+    democracy: >-
+      Prednášajúci z PauseAI CZ stojí pred plátnom so snímkou prednášky o demokracii
+      a umelej inteligencii.
+  caption: Bratislava, 26. novembra 2026. Večer prednášok s kolegami z PauseAI Česko.
 
 # The evidence section of the landing page: one chart, what the Slovak public thinks, and a quote.
 home_evidence:
@@ -302,6 +330,14 @@ join:
     Kontakty z formulára dostáva tím slovenských koordinátorov. Ak formulár nefunguje alebo nám
     chceš napísať priamo, [pošli nám e-mail](mailto:info@pauseai.sk).
 
+  # Shown only when the invite link is filled in (whatsappHref in src/data/site.ts).
+  whatsapp:
+    heading: Pridaj sa do našej WhatsApp skupiny
+    text: >-
+      Najrýchlejšia cesta k nám. V skupine sa dohadujeme na akciách a posielame si novinky
+      o AI zo Slovenska aj zo sveta.
+    button: Otvoriť WhatsApp skupinu
+
   statement:
     heading: Podpíš medzinárodné vyhlásenie
     text: >-
@@ -353,6 +389,7 @@ footer:
   movement: Medzinárodné hnutie
   contact: Kontakt
   place: Bratislava, Slovensko
+  whatsapp: WhatsApp skupina
   feedback_heading: Spätná väzba
   feedback: >-
     Vidíš chybu alebo s niečím nesúhlasíš? Daj nám vedieť.

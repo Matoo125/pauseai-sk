@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import { copy, rich } from '../lib/copy';
-import { feedbackHref, footerNav, joinHref, movement, repoUrl } from '../data/site';
+import { feedbackHref, footerNav, joinHref, movement, repoUrl, whatsappHref } from '../data/site';
 
 const { footer, site } = copy;
 ---
@@ -29,6 +29,7 @@ const { footer, site } = copy;
       <h2>{footer.contact}</h2>
       <ul>
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        {whatsappHref && <li><a href={whatsappHref} rel="noopener">{footer.whatsapp}</a></li>}
         <li>{footer.place}</li>
       </ul>
     </div>

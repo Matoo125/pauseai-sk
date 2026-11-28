@@ -293,6 +293,43 @@ ol {
   object-fit: cover;
   margin-bottom: -72px;
   position: relative;
+  align-self: end;
+}
+
+/* The thesis of our founder, under the hero's buttons. */
+.hero-feature {
+  max-width: 32rem;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 3px solid var(--black);
+}
+
+.hero-feature-label {
+  font-family: var(--display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-feature h2 {
+  margin-top: 6px;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  line-height: 1.12;
+  text-transform: none;
+}
+
+.hero-feature p + p,
+.hero-feature h2 + p {
+  margin-top: 10px;
+  font-size: 0.9375rem;
+}
+
+.hero-feature-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-weight: 600;
 }
 
 /* ── Bands ─────────────────────────────────────────────────────────────────── */
@@ -1061,6 +1098,30 @@ ol {
   color: var(--ink-soft);
 }
 
+/* ── Events ────────────────────────────────────────────────────────────────── */
+
+.events {
+  margin: 0;
+}
+
+.events-photos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.6vw, 20px);
+}
+
+.events-photos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.events figcaption {
+  margin-top: 14px;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
 /* ── Join ──────────────────────────────────────────────────────────────────── */
 
 /* Sign-up first: beside the heading on wide screens, right under it on narrow ones. */
@@ -1085,6 +1146,19 @@ ol {
 
 .join-text p {
   max-width: 36rem;
+  margin-top: 20px;
+}
+
+.join-whatsapp {
+  margin-top: 32px;
+}
+
+.join-whatsapp h3 {
+  color: var(--paper);
+  font-size: 1.75rem;
+}
+
+.join-whatsapp .button {
   margin-top: 20px;
 }
 
@@ -1279,6 +1353,14 @@ ol {
 
   .hero-photo {
     margin-bottom: -48px;
+  }
+
+  .hero-photo {
+    margin-top: 12px;
+  }
+
+  .events-photos {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .demands {

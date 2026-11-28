@@ -15,6 +15,12 @@ export const footerNav = nav;
 
 export const joinHref = '/#pridaj-sa';
 
+/** Invite link of the WhatsApp group (https://chat.whatsapp.com/…). While empty, the site shows no WhatsApp links. */
+export const whatsappHref = '';
+
+/** Bianka Madarászová's bachelor's thesis; the file is in public/praca/. */
+export const thesisHref = '/praca/madaraszova-2026-ai-kognitivne-schopnosti.pdf';
+
 /** The site's public repository: feedback goes to its issues. */
 export const repoUrl = 'https://github.com/Matoo125/pauseai-sk';
 export const feedbackHref = `${repoUrl}/issues/new/choose`;

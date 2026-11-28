@@ -77,5 +77,5 @@ The server checks `main` every five minutes and, when it changed, builds the sit
 
 ## Licence
 
-Code: MIT (`LICENSE`). Texts and charts: CC BY 4.0. The rally photo, the book covers and the
-interview stills belong to others; see `LICENSE-content.md`.
+Code: MIT (`LICENSE`). Texts and charts: CC BY 4.0. The event photos, the thesis, the book covers
+and the interview stills are not covered; see `LICENSE-content.md`.

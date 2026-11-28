@@ -1,0 +1,34 @@
+---
+// Photos from our own events. They are in src/assets/akcie/; their descriptions are in sk.yaml.
+import { Image } from 'astro:assets';
+import room from '../assets/akcie/bratislava-2026-11-sala.jpg';
+import horizon from '../assets/akcie/bratislava-2026-11-casovy-horizont.jpg';
+import democracy from '../assets/akcie/bratislava-2026-11-demokracia.jpg';
+import { copy } from '../lib/copy';
+
+const { events } = copy;
+const photos = [
+  { src: room, alt: events.photos.room },
+  { src: horizon, alt: events.photos.horizon },
+  { src: democracy, alt: events.photos.democracy },
+];
+---
+
+<section class="band" id="akcie">
+  <div class="wrap">
+    <header class="band-head">
+      <h2>{events.heading}</h2>
+      <p>{events.intro}</p>
+    </header>
+    <figure class="events">
+      <div class="events-photos">
+        {
+          photos.map((photo) => (
+            <Image src={photo.src} alt={photo.alt} widths={[400, 800, 1200]} sizes="(max-width: 860px) 100vw, 360px" />
+          ))
+        }
+      </div>
+      <figcaption>{events.caption}</figcaption>
+    </figure>
+  </div>
+</section>
