@@ -22,9 +22,10 @@ export const whatsappHref = 'https://chat.whatsapp.com/IWelMw0y2880Y1I7fc6Mnt';
 /** Bianka Madarászová's bachelor's thesis; the file is in public/praca/. */
 export const thesisHref = '/praca/madaraszova-2026-ai-kognitivne-schopnosti.pdf';
 
-/** The site's public repository: feedback goes to its issues. */
+/** The site's public repository. Feedback goes through the form on /spatna-vazba/; issues are the public alternative. */
 export const repoUrl = 'https://github.com/Matoo125/pauseai-sk';
-export const feedbackHref = `${repoUrl}/issues/new/choose`;
+export const issuesHref = `${repoUrl}/issues/new/choose`;
+export const feedbackHref = '/spatna-vazba/';
 
 export const movement = [
   { href: 'https://pauseai.info', label: 'PauseAI Global' },

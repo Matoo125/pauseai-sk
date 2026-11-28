@@ -26,6 +26,7 @@ The pages:
 - **/clanky/** — articles, one page each.
 - **/otazky/** — objections and answers.
 - **/kto-sme/** — who is behind the site.
+- **/spatna-vazba/** — a form for remarks about the site, for people without a GitHub account.
 
 ## Where things are
 
@@ -53,6 +54,7 @@ Restart `bun run dev` after adding a new folder of content.
 ## Sign-ups
 
 The form posts name, e-mail, an optional phone number and an optional note to Formspree, which mails them to the coordinators.
+The feedback form on `/spatna-vazba/` posts to the same Formspree form with a different subject.
 It is a contact list, not a petition: the page sends people to pauseai.info to sign the movement's
 statement.
 

@@ -89,6 +89,8 @@ articles:
   all: Všetky články
   # {date} = the day the article was published
   published: Zverejnené {date}
+  # At the end of each article. {url} = the feedback form, with the article filled in.
+  feedback: Našiel si v článku chybu alebo niečo zastarané? [Napíš nám]({url}).
 
 evidence_page:
   heading: Informácie
@@ -101,6 +103,8 @@ evidence_page:
   video_play: Prehrať video
   video_note: Video sa načíta z YouTube až po kliknutí.
   tabs_label: Grafy
+  # Under each claim. {url} = the feedback form, with the claim filled in.
+  feedback: Vidíš v tomto tvrdení chybu alebo ti chýba zdroj? [Napíš nám]({url}).
   reading:
     heading: Na čítanie
     intro: >-
@@ -337,6 +341,32 @@ questions:
   description: Najčastejšie námietky proti pozastaveniu vývoja najvýkonnejšej AI a odpovede PauseAI Slovensko.
   missing: Chýba ti tu otázka? Napíš nám na [info@pauseai.sk](mailto:info@pauseai.sk).
 
+# The page /spatna-vazba/.
+feedback:
+  heading: Spätná väzba
+  lead: >-
+    Vidíš chybu, chýba ti zdroj alebo s niečím nesúhlasíš? Napíš nám. Nepotrebuješ na to
+    žiadny účet.
+  description: Formulár na pripomienky k webu PauseAI Slovensko.
+  message: Tvoja pripomienka
+  message_placeholder: Čo je zle, čo chýba alebo s čím nesúhlasíš. Ak máš zdroj, pridaj odkaz.
+  page: Ktorej stránky alebo tvrdenia sa týka (voliteľné)
+  page_placeholder: napr. /informacie/ alebo graf o dĺžke úloh
+  email: E-mail, ak chceš odpoveď (voliteľné)
+  email_placeholder: tvoj@email.sk
+  button: Odoslať pripomienku
+  sending: Odosielam…
+  done: Pripomienka odoslaná
+  success: Ďakujeme. Pripomienku si prečítame a ak treba, web opravíme.
+  error: Pripomienku sa nepodarilo odoslať. Skús to znova alebo nám napíš na info@pauseai.sk.
+  privacy: >-
+    Pripomienky dostáva tím slovenských koordinátorov. E-mail použijeme len na odpoveď.
+  # {url} = the address for opening an issue
+  github: >-
+    Máš účet na GitHube? Pripomienku môžeš napísať aj verejne ako [issue]({url}).
+  # Subject of the e-mail the coordinators receive.
+  mail_subject: Pripomienka k webu – PauseAI Slovensko
+
 footer:
   about: >-
     PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI.
@@ -351,7 +381,7 @@ footer:
   feedback_heading: Spätná väzba
   feedback: >-
     Vidíš chybu alebo s niečím nesúhlasíš? Daj nám vedieť.
-  feedback_link: Napísať pripomienku na GitHube
+  feedback_link: Napísať pripomienku
   # {year} = the current year
   legal: >-
     © {year} PauseAI Slovensko. Web spravuje komunita dobrovoľníkov a jeho

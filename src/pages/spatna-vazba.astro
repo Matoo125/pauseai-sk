@@ -1,0 +1,79 @@
+---
+// /spatna-vazba/: a form for remarks about the site, for people without a GitHub account.
+// It posts to the same Formspree form as the sign-up, with its own subject line.
+import Page from '../components/Page.astro';
+import { copy, rich } from '../lib/copy';
+import { formEndpoint, issuesHref } from '../data/site';
+
+const text = copy.feedback;
+const messages = { sending: text.sending, done: text.done, success: text.success, error: text.error };
+---
+
+<Page heading={text.heading} lead={text.lead} description={text.description}>
+  <form id="feedback-form" class="form form-page" action={formEndpoint} method="POST" data-messages={JSON.stringify(messages)}>
+    <label for="feedback-message">{text.message}</label>
+    <textarea id="feedback-message" name="message" rows="7" placeholder={text.message_placeholder} required></textarea>
+
+    <label for="feedback-page">{text.page}</label>
+    <input id="feedback-page" name="page" type="text" placeholder={text.page_placeholder} />
+
+    <label for="feedback-email">{text.email}</label>
+    <input id="feedback-email" name="email" type="email" autocomplete="email" placeholder={text.email_placeholder} />
+
+    <input type="hidden" name="_subject" value={text.mail_subject} />
+    <!-- Left empty by people, filled in by spam robots; Formspree drops those messages. -->
+    <input class="form-trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <button class="button" type="submit">{text.button}</button>
+    <p class="form-status" role="status" hidden></p>
+    <p class="form-note">{text.privacy}</p>
+  </form>
+  <p class="evidence-more" set:html={rich(text.github, { url: issuesHref })} />
+</Page>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#feedback-form')!;
+  const status = form.querySelector<HTMLElement>('.form-status')!;
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const messages: Record<string, string> = JSON.parse(form.dataset.messages!);
+  const idle = button.textContent!;
+
+  // Fill in what the remark is about: the claim or article named in the link (?k=…),
+  // otherwise the page of this site the visitor came from.
+  const page = form.querySelector<HTMLInputElement>('#feedback-page')!;
+  const named = new URLSearchParams(location.search).get('k');
+  if (named) {
+    page.value = named;
+  } else {
+    try {
+      const from = new URL(document.referrer);
+      if (from.origin === location.origin && from.pathname !== location.pathname) page.value = from.pathname;
+    } catch {
+      // no referrer
+    }
+  }
+
+  const say = (kind: 'ok' | 'error', text: string) => {
+    status.hidden = false;
+    status.dataset.kind = kind;
+    status.textContent = text;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    button.disabled = true;
+    button.textContent = messages.sending;
+    status.hidden = true;
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!response.ok) throw new Error(String(response.status));
+      say('ok', messages.success);
+      form.reset();
+      button.textContent = messages.done;
+    } catch {
+      say('error', messages.error);
+      button.disabled = false;
+      button.textContent = idle;
+    }
+  });
+</script>

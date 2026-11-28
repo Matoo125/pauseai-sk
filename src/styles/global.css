@@ -1131,6 +1131,17 @@ ol {
   text-decoration-thickness: 2px;
 }
 
+.claim-feedback,
+.article-feedback {
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.article-feedback {
+  margin-top: clamp(32px, 5vw, 48px);
+}
+
 .article-date {
   font-size: 0.9375rem;
   color: var(--ink-soft);
@@ -1262,7 +1273,8 @@ ol {
 
 .form input[type='text'],
 .form input[type='email'],
-.form input[type='tel'] {
+.form input[type='tel'],
+.form textarea {
   display: block;
   width: 100%;
   margin-top: 6px;
@@ -1275,7 +1287,37 @@ ol {
   font-size: 1rem;
 }
 
-.form input::placeholder {
+.form textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* A form on a white page (/spatna-vazba/) instead of in the dark band. */
+.form-page {
+  max-width: 40rem;
+  padding: 0;
+}
+
+.form-page > label:first-child {
+  margin-top: 0;
+}
+
+.form.form-page .button {
+  width: auto;
+}
+
+.form input.form-trap {
+  display: none;
+}
+
+.form-note {
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
   color: #77756f;
 }
 

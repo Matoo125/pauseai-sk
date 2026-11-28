@@ -21,7 +21,7 @@ export interface Copy {
   hero: { title: string[]; lead: string; cta: string; cta_about: string; note: string; movement: string; cta_join: string; photo_alt: string };
   events: { heading: string; intro: string; photos: Record<'room' | 'horizon' | 'democracy', string>; caption: string };
   home_info: Record<'heading' | 'intro' | 'claims_heading' | 'claims_button' | 'articles_heading' | 'articles_button', string>;
-  articles: Record<'heading' | 'lead' | 'description' | 'read' | 'all' | 'published', string>;
+  articles: Record<'heading' | 'lead' | 'description' | 'read' | 'all' | 'published' | 'feedback', string>;
   evidence_page: {
     heading: string;
     lead: string;
@@ -31,6 +31,7 @@ export interface Copy {
     video_play: string;
     video_note: string;
     tabs_label: string;
+    feedback: string;
     reading: {
       heading: string;
       intro: string;
@@ -67,6 +68,7 @@ export interface Copy {
     statement: { heading: string; text: string; button: string; url: string; also: string };
     form: Record<string, string>;
   };
+  feedback: Record<string, string>;
   questions: { heading: string; lead: string; description: string; missing: string };
   footer: {
     about: string; partner: string; pages: string; movement: string; contact: string; place: string; legal: string;
