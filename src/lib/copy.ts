@@ -61,6 +61,7 @@ export interface Copy {
   };
   join: {
     heading: string;
+    text: string;
     contact: string;
     whatsapp: Record<'heading' | 'text' | 'button', string>;
     statement: { heading: string; text: string; button: string; url: string; also: string };

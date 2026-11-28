@@ -274,6 +274,10 @@ charts:
 
 join:
   heading: Pridaj sa
+  text: >-
+    Zaberie to menej než 30 sekúnd a k ničomu ťa to nezaväzuje. Dáme ti vedieť o akciách,
+    kampaniach a možnostiach, ako sa zapojiť na Slovensku. Presadzujeme bezpečný vývoj pokročilej
+    umelej inteligencie a demokratický dohľad nad ňou.
   # Shown in the same tooltip, after form.privacy.
   contact: >-
     Kontakty z formulára dostáva tím slovenských koordinátorov. Ak formulár nefunguje alebo nám
@@ -301,9 +305,6 @@ join:
 
   form:
     heading: Zostaňme v kontakte
-    intro: >-
-      Zaberie to menej než 30 sekúnd a k ničomu ťa to nezaväzuje. Dáme ti vedieť o akciách,
-      kampaniach a možnostiach, ako sa zapojiť na Slovensku.
     name: Meno a priezvisko
     name_placeholder: napr. Mária Horváthová
     email: E-mailová adresa
@@ -339,7 +340,6 @@ questions:
 footer:
   about: >-
     PauseAI Slovensko je nezávislá občianska iniciatíva spojená s medzinárodným hnutím PauseAI.
-    Presadzujeme bezpečný vývoj pokročilej umelej inteligencie a demokratický dohľad nad ňou.
   partner: >-
     Partnerská organizácia: [Efektívny altruizmus Slovensko](https://www.efektivnyaltruizmus.sk/).
     Niektorí členovia pôsobia v oboch skupinách.

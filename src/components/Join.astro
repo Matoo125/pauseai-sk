@@ -19,6 +19,7 @@ const messages = {
   <div class="wrap join">
     <div class="join-text join-head">
       <h2>{join.heading}</h2>
+      <p>{join.text}</p>
       {
         whatsappHref && (
           <div class="join-whatsapp">
@@ -39,7 +40,6 @@ const messages = {
 
     <form id="join-form" class="form" action={formEndpoint} method="POST" data-messages={JSON.stringify(messages)}>
       <h3>{form.heading}</h3>
-      <p class="form-intro">{form.intro}</p>
 
       <label for="join-name">{form.name}</label>
       <input id="join-name" name="name" type="text" autocomplete="name" placeholder={form.name_placeholder} required />
